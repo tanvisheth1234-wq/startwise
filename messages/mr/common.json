@@ -1,0 +1,85 @@
+{
+  "appName": "StartWise",
+  "tagline": "विचारपूर्वक सुरुवात करा. योग्य प्रकारे लॉन्च करा.",
+  "nav": {
+    "dashboard": "होम",
+    "validate": "तपासा",
+    "market": "बाजार",
+    "compliance": "परवाने",
+    "money": "पैसे",
+    "funding": "निधी",
+    "roadmap": "रोडमॅप",
+    "firstCustomers": "ग्राहक",
+    "launchPack": "लॉन्च पॅक",
+    "profile": "प्रोफाइल"
+  },
+  "screens": {
+    "start": "सुरुवात",
+    "login": "लॉग इन",
+    "intake": "कल्पना सांगा",
+    "profile": "प्रोफाइल कार्ड",
+    "dashboard": "प्लॅन डॅशबोर्ड",
+    "validate": "कल्पना तपासा",
+    "market": "बाजार तपासणी",
+    "compliance": "परवाने आणि नोंदणी",
+    "money": "पैशांचे नियोजन",
+    "funding": "निधी",
+    "roadmap": "रोडमॅप आणि ट्रॅकर",
+    "firstCustomers": "पहिले ग्राहक",
+    "launchPack": "लॉन्च पॅक",
+    "account": "खाते",
+    "admin": "अ‍ॅडमिन"
+  },
+  "header": {
+    "login": "लॉग इन",
+    "logout": "लॉग आउट",
+    "account": "खाते",
+    "language": "भाषा",
+    "home": "StartWise होम"
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "mr": "मराठी"
+  },
+  "guidance": "हे मार्गदर्शन आहे, कायदेशीर सल्ला नाही. अधिकृत पोर्टलवर खात्री करा.",
+  "comingSoon": "{screen} ({owner}): लवकरच येत आहे",
+  "actions": {
+    "save": "जतन करा",
+    "saving": "जतन होत आहे…",
+    "cancel": "रद्द करा",
+    "confirm": "निश्चित करा",
+    "edit": "बदला",
+    "delete": "काढून टाका",
+    "add": "जोडा",
+    "retry": "पुन्हा प्रयत्न करा",
+    "back": "मागे",
+    "next": "पुढे",
+    "close": "बंद करा",
+    "copy": "कॉपी करा",
+    "copied": "कॉपी झाले",
+    "skip": "वगळा",
+    "open": "उघडा",
+    "share": "शेअर करा",
+    "print": "प्रिंट करा",
+    "download": "डाउनलोड करा"
+  },
+  "states": {
+    "loading": "लोड होत आहे…",
+    "error": "काहीतरी चुकले. कृपया पुन्हा प्रयत्न करा.",
+    "empty": "इथे अजून काही नाही.",
+    "notFound": "हे पान सापडले नाही.",
+    "offline": "तुम्ही ऑफलाइन आहात असे दिसते. इंटरनेट तपासा आणि पुन्हा प्रयत्न करा."
+  },
+  "labels": {
+    "estimate": "अंदाज",
+    "aiDraft": "AI मसुदा: हवे तसे बदला",
+    "checkLocally": "स्थानिक पातळीवर तपासा",
+    "verified": "तपासलेले",
+    "verifiedOn": "{date} रोजी तपासले",
+    "source": "स्रोत",
+    "officialLink": "अधिकृत लिंक",
+    "required": "आवश्यक",
+    "optional": "पर्यायी"
+  }
+}

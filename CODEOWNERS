@@ -1,0 +1,30 @@
+# CODEOWNERS   (SHARED)
+# Replace @T1_GITHUB_USERNAME and @T2_GITHUB_USERNAME with your real GitHub usernames.
+# A SHARED change asks the other person to review. Ownership itself is enforced by `npm run check:owners`.
+
+# Everything defaults to both
+*                                   @T1_GITHUB_USERNAME @T2_GITHUB_USERNAME
+
+# T2 areas
+/app/admin/                         @T2_GITHUB_USERNAME
+/app/plan/[[]planId]/compliance/    @T2_GITHUB_USERNAME
+/app/plan/[[]planId]/money/         @T2_GITHUB_USERNAME
+/app/plan/[[]planId]/funding/       @T2_GITHUB_USERNAME
+/app/plan/[[]planId]/roadmap/       @T2_GITHUB_USERNAME
+/src/features/compliance/           @T2_GITHUB_USERNAME
+/src/features/money/                @T2_GITHUB_USERNAME
+/src/features/funding/              @T2_GITHUB_USERNAME
+/src/features/roadmap/              @T2_GITHUB_USERNAME
+/src/features/readiness/            @T2_GITHUB_USERNAME
+/src/features/sources/              @T2_GITHUB_USERNAME
+/src/features/admin/                @T2_GITHUB_USERNAME
+/data/rules/                        @T2_GITHUB_USERNAME
+/data/schemes/                      @T2_GITHUB_USERNAME
+/data/sources/                      @T2_GITHUB_USERNAME
+/data/tasks/                        @T2_GITHUB_USERNAME
+
+# T1 areas
+/src/lib/ai/                        @T1_GITHUB_USERNAME
+/src/features/intake/               @T1_GITHUB_USERNAME
+/src/features/validate/             @T1_GITHUB_USERNAME
+/src/features/launch-pack/          @T1_GITHUB_USERNAME

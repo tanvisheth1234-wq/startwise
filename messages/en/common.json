@@ -1,0 +1,85 @@
+{
+  "appName": "StartWise",
+  "tagline": "Start wise. Launch right.",
+  "nav": {
+    "dashboard": "Home",
+    "validate": "Validate",
+    "market": "Market",
+    "compliance": "Licences",
+    "money": "Money",
+    "funding": "Funding",
+    "roadmap": "Roadmap",
+    "firstCustomers": "Customers",
+    "launchPack": "Launch Pack",
+    "profile": "Profile"
+  },
+  "screens": {
+    "start": "Start",
+    "login": "Log in",
+    "intake": "Idea intake",
+    "profile": "Profile card",
+    "dashboard": "Plan dashboard",
+    "validate": "Validate",
+    "market": "Market check",
+    "compliance": "Compliance",
+    "money": "Money lab",
+    "funding": "Funding",
+    "roadmap": "Roadmap & tracker",
+    "firstCustomers": "First customers",
+    "launchPack": "Launch Pack",
+    "account": "Account",
+    "admin": "Admin"
+  },
+  "header": {
+    "login": "Log in",
+    "logout": "Log out",
+    "account": "Account",
+    "language": "Language",
+    "home": "StartWise home"
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "mr": "मराठी"
+  },
+  "guidance": "Guidance, not legal advice. Confirm on the official portal.",
+  "comingSoon": "{screen} ({owner}): coming soon",
+  "actions": {
+    "save": "Save",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add",
+    "retry": "Try again",
+    "back": "Back",
+    "next": "Next",
+    "close": "Close",
+    "copy": "Copy",
+    "copied": "Copied",
+    "skip": "Skip",
+    "open": "Open",
+    "share": "Share",
+    "print": "Print",
+    "download": "Download"
+  },
+  "states": {
+    "loading": "Loading…",
+    "error": "Something went wrong. Please try again.",
+    "empty": "Nothing here yet.",
+    "notFound": "We could not find this page.",
+    "offline": "You seem to be offline. Check your internet and try again."
+  },
+  "labels": {
+    "estimate": "Estimate",
+    "aiDraft": "AI draft: edit freely",
+    "checkLocally": "Check locally",
+    "verified": "Verified",
+    "verifiedOn": "Verified on {date}",
+    "source": "Source",
+    "officialLink": "Official link",
+    "required": "Required",
+    "optional": "Optional"
+  }
+}

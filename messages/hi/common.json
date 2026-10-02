@@ -1,0 +1,85 @@
+{
+  "appName": "StartWise",
+  "tagline": "समझदारी से शुरू करें। सही ढंग से लॉन्च करें।",
+  "nav": {
+    "dashboard": "होम",
+    "validate": "जाँचें",
+    "market": "बाज़ार",
+    "compliance": "लाइसेंस",
+    "money": "पैसा",
+    "funding": "फंडिंग",
+    "roadmap": "रोडमैप",
+    "firstCustomers": "ग्राहक",
+    "launchPack": "लॉन्च पैक",
+    "profile": "प्रोफ़ाइल"
+  },
+  "screens": {
+    "start": "शुरुआत",
+    "login": "लॉग इन",
+    "intake": "आइडिया बताएँ",
+    "profile": "प्रोफ़ाइल कार्ड",
+    "dashboard": "प्लान डैशबोर्ड",
+    "validate": "आइडिया जाँचें",
+    "market": "बाज़ार जाँच",
+    "compliance": "लाइसेंस और पंजीकरण",
+    "money": "पैसों की योजना",
+    "funding": "फंडिंग",
+    "roadmap": "रोडमैप और ट्रैकर",
+    "firstCustomers": "पहले ग्राहक",
+    "launchPack": "लॉन्च पैक",
+    "account": "खाता",
+    "admin": "एडमिन"
+  },
+  "header": {
+    "login": "लॉग इन",
+    "logout": "लॉग आउट",
+    "account": "खाता",
+    "language": "भाषा",
+    "home": "StartWise होम"
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "mr": "मराठी"
+  },
+  "guidance": "यह मार्गदर्शन है, कानूनी सलाह नहीं। आधिकारिक पोर्टल पर पुष्टि करें।",
+  "comingSoon": "{screen} ({owner}): जल्द आ रहा है",
+  "actions": {
+    "save": "सेव करें",
+    "saving": "सेव हो रहा है…",
+    "cancel": "रद्द करें",
+    "confirm": "पुष्टि करें",
+    "edit": "बदलें",
+    "delete": "हटाएँ",
+    "add": "जोड़ें",
+    "retry": "फिर से कोशिश करें",
+    "back": "वापस",
+    "next": "आगे",
+    "close": "बंद करें",
+    "copy": "कॉपी करें",
+    "copied": "कॉपी हो गया",
+    "skip": "छोड़ें",
+    "open": "खोलें",
+    "share": "शेयर करें",
+    "print": "प्रिंट करें",
+    "download": "डाउनलोड करें"
+  },
+  "states": {
+    "loading": "लोड हो रहा है…",
+    "error": "कुछ गड़बड़ हो गई। कृपया फिर से कोशिश करें।",
+    "empty": "अभी यहाँ कुछ नहीं है।",
+    "notFound": "यह पेज नहीं मिला।",
+    "offline": "लगता है आप ऑफ़लाइन हैं। इंटरनेट जाँचें और फिर कोशिश करें।"
+  },
+  "labels": {
+    "estimate": "अनुमान",
+    "aiDraft": "AI ड्राफ्ट: जैसे चाहें बदलें",
+    "checkLocally": "स्थानीय रूप से जाँचें",
+    "verified": "जाँचा गया",
+    "verifiedOn": "{date} को जाँचा गया",
+    "source": "स्रोत",
+    "officialLink": "आधिकारिक लिंक",
+    "required": "ज़रूरी",
+    "optional": "वैकल्पिक"
+  }
+}
