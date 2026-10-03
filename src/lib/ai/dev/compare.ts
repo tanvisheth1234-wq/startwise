@@ -39,7 +39,11 @@ function configs(): ProviderConfig[] {
 const short = (p: BusinessProfile) =>
   `${p.businessType} | ${p.city} | ${p.locality ?? "-"} | ${p.premises ?? "-"} | product="${p.product}" | missing=[${p.missingFields.join(",")}]`;
 
+// Free tier: 5 requests/min per model, so pace the calls.
+const pause = () => new Promise((r) => setTimeout(r, Number(process.env.COMPARE_PAUSE_MS ?? 7000)));
+
 async function check(name: string, fn: () => Promise<string>) {
+  await pause();
   const t = Date.now();
   try {
     console.log(`  ✔ ${name}: ${await fn()}  (${Date.now() - t} ms)`);
@@ -70,7 +74,7 @@ async function run(cfg: ProviderConfig) {
     console.log(`  ${ok ? "✔" : "✖"} Hinglish → home_food, Pune, home, missing budget/hours`);
   }
 
-  await check("nextFollowUp (mr)", async () => JSON.stringify(await ai.nextFollowUp(profiles[2] ?? profiles[0], "mr")));
+  await check("nextFollowUp (mr)", async () => { const p = profiles[2] ?? profiles[0]; if (!p) throw new Error("no profile parsed"); return JSON.stringify(await ai.nextFollowUp(p, "mr")); });
   await check("explainFromRecord (mr)", () => ai.explainFromRecord(RULE_TEXT, "mr"));
   await check("answerFromSources unrelated → null", async () =>
     JSON.stringify(await ai.answerFromSources("What is the GST rate on cakes?", [
