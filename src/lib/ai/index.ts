@@ -11,3 +11,4 @@ export const ai: AiApi = createAi(getProvider);
 export { AiInvalidOutput } from "./callJson";
 export { AiProviderError } from "./provider";
 export { redact } from "./redact";
+export { computeMissingFields, mergeProfile, MISSING_FIELD_ORDER } from "./profile";
