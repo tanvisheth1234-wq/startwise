@@ -1,1 +1,57 @@
-{}
+{
+  "title": "Tell us your idea",
+  "subtitle": "Speak or type. You can edit the words before we read them.",
+  "chatTitle": "A few quick questions",
+  "chatSubtitle": "Answer what you know. You can change everything on the next screen.",
+  "transcriptLabel": "Your idea",
+  "transcriptPlaceholder": "e.g. I want to start a home bakery in Pune, making cakes from my kitchen.",
+  "privacyNote": "Please do not share ID numbers, bank details or phone numbers.",
+  "confirm": "Confirm my idea",
+  "understanding": "Understanding your idea…",
+  "thinking": "Thinking…",
+  "answerLabel": "Your answer",
+  "answerPlaceholder": "Type your answer",
+  "send": "Send",
+  "skip": "Skip questions and see my profile",
+  "unsupported": "We support home food, tailoring/boutique and online reselling for now. Which is closest to your idea?",
+  "types": {
+    "home_food": "Home food",
+    "tailoring_boutique": "Tailoring / boutique",
+    "online_reselling": "Online reselling"
+  },
+  "chips": {
+    "home": "From home",
+    "shop": "From a shop",
+    "yes": "Yes",
+    "no": "No",
+    "b10k": "Up to ₹10,000",
+    "b25k": "₹10,000–25,000",
+    "b50k": "₹25,000–50,000",
+    "b1l": "₹50,000–1 lakh",
+    "h2": "2 hours",
+    "h4": "4 hours",
+    "h6": "6 hours",
+    "h8": "8+ hours"
+  },
+  "voice": {
+    "start": "Start speaking",
+    "stop": "Stop",
+    "hint": "Tap the mic and speak, or type below.",
+    "listening": "Listening… tap again when you finish.",
+    "recording": "Recording (up to 60 seconds)… tap to stop.",
+    "transcribing": "Turning your voice into text…",
+    "errors": {
+      "denied": "The microphone is blocked. Please allow it in your browser, or just type your idea below.",
+      "offline": "No internet connection. Check it and try again, or type your idea below.",
+      "nothing": "We did not hear anything. Try again closer to the phone, or type below.",
+      "noMic": "No microphone found. Please type your idea below.",
+      "unsupported": "Voice is not available in this browser. Please type your idea below.",
+      "failed": "Voice did not work this time. Please try again or type below."
+    }
+  },
+  "errors": {
+    "empty": "Please write a few words first.",
+    "ai": "We could not understand that just now. Please try again, or skip and fill the profile card yourself.",
+    "notDraft": "This plan is already confirmed."
+  }
+}

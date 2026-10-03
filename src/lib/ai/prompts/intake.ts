@@ -11,7 +11,7 @@ export function parseIdeaPrompt(text: string, lang: Lang, previous?: Partial<Bus
     "{",
     '  "stage": "new_idea" | "existing" | null,      // "existing" only if they already run it',
     '  "businessType": "home_food" | "tailoring_boutique" | "online_reselling" | "other" | null,',
-    '  "product": string | null,                     // what they sell, short, e.g. "custom cakes and cookies"',
+    '  "product": string | null,                     // what they sell, short, e.g. "custom cakes and cookies"; if only the kind of business is said, use its natural name, e.g. "home bakery" / "होम बेकरी"',
     '  "city": string | null,                         // ENGLISH spelling, e.g. "Pune"',
     '  "locality": string | null,                     // ENGLISH spelling, e.g. "Kothrud"',
     '  "premises": "home" | "shop" | null,',
