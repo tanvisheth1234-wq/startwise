@@ -64,9 +64,16 @@ function normalise(v: number[]): number[] {
 }
 
 // ---------------------------------------------------------------- Gemini
+const GEMINI_FALLBACKS = ["gemini-flash-lite-latest"];
+
+/** Rate-limited, overloaded or a retired model: worth trying another model. */
+const isRetryable = (status?: number) => status === 429 || status === 404 || (status !== undefined && status >= 500);
+
 function gemini(cfg: ProviderConfig): Provider {
   const base = "https://generativelanguage.googleapis.com/v1beta";
-  const model = cfg.model || "gemini-2.5-flash";
+  const model = cfg.model || "gemini-flash-latest"; // alias: always the current Flash model
+  // Free-tier quota is per model, and models get overloaded: on 429/5xx try the next one.
+  const models = [...new Set([model, ...GEMINI_FALLBACKS])];
   const embedModel = cfg.embedModel || "gemini-embedding-001";
   const headers = { "x-goog-api-key": cfg.apiKey };
   const timeout = cfg.timeoutMs ?? 30_000;
@@ -74,17 +81,28 @@ function gemini(cfg: ProviderConfig): Provider {
   type GenResponse = { candidates?: { content?: { parts?: { text?: string }[] } }[] };
   const textOf = (r: GenResponse) => (r.candidates?.[0]?.content?.parts ?? []).map((p) => p.text ?? "").join("");
 
+  async function generate(body: unknown, timeoutMs: number): Promise<GenResponse> {
+    let lastError: unknown;
+    for (const m of models) {
+      try {
+        return await postJson(`${base}/models/${m}:generateContent`, body, headers, timeoutMs);
+      } catch (e) {
+        lastError = e;
+        if (!(e instanceof AiProviderError && isRetryable(e.status))) throw e;
+      }
+    }
+    throw lastError;
+  }
+
   return {
     name: "gemini",
     async chat({ system, user, temperature, json }) {
-      const r: GenResponse = await postJson(
-        `${base}/models/${model}:generateContent`,
+      const r = await generate(
         {
           systemInstruction: { parts: [{ text: system }] },
           contents: [{ role: "user", parts: [{ text: user }] }],
           generationConfig: { temperature, ...(json ? { responseMimeType: "application/json" } : {}) },
         },
-        headers,
         timeout,
       );
       return textOf(r);
@@ -106,8 +124,7 @@ function gemini(cfg: ProviderConfig): Provider {
       return checkDims((r.embeddings ?? []).map((e) => normalise(e.values)));
     },
     async transcribe(audio, lang) {
-      const r: GenResponse = await postJson(
-        `${base}/models/${model}:generateContent`,
+      const r = await generate(
         {
           contents: [{
             role: "user",
@@ -118,7 +135,6 @@ function gemini(cfg: ProviderConfig): Provider {
           }],
           generationConfig: { temperature: 0 },
         },
-        headers,
         60_000,
       );
       return textOf(r).trim();
