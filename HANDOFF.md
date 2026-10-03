@@ -10,8 +10,11 @@ For whoever continues T1 work (and their AI coding assistant). Read this, then t
 | **T1-00 Phase 0** | ✅ Done and on `main` (see below) |
 | T1-01 AI layer | ✅ Code + 17 unit tests on `main`. ⏳ Live check needs a key: put `GEMINI_API_KEY` (or `AI_PROVIDER` + `AI_API_KEY`) in `.env.local`, run `npx tsx src/lib/ai/dev/compare.ts` |
 | T1-03 Start screen | ✅ Done (fits 360 px, works logged out) |
-| T1-02 | Mostly done in Phase 0 (switch + saved preference); finish while building screens |
-| T1-04 … T1-19 | Not started — **next: T1-04 voice, T1-05 intake, T1-06 profile card** |
+| T1-02 | Mostly done (switch, saved preference, all built screens in en/hi/mr) |
+| T1-04 Voice | ✅ Web Speech live transcript + MediaRecorder fallback + kind errors. ⏳ Test on a real Android phone (en/hi/mr) and in Firefox |
+| T1-05 Intake | ✅ Tested in a browser: Hinglish idea → 3 follow-ups → profile card; refresh keeps the chat |
+| T1-06 Profile card | ✅ Tested: inline errors, home→shop saved, confirm → dashboard + calls `roadmap.onProfileConfirmed` (**CP1 ready on T1 side**) |
+| T1-07 … T1-19 | Not started — **next: T1-07 dashboard, T1-08 assumptions/risk, T1-09 test sprint** |
 
 ### What Phase 0 already gives you
 
@@ -24,6 +27,13 @@ For whoever continues T1 work (and their AI coding assistant). Read this, then t
 - Stub `api.ts` for every module returning `src/fixtures/home-bakery.ts` data ("(FIXTURE)" text).
 - UI kit in `src/components/ui/` (Button, Card, Badge, Tabs, Slider, Sheet, EmptyState, Skeleton, GuidanceFooter, LanguageSwitch). `LanguageSwitch` already saves `users.preferredLanguage` via `src/features/account/actions.ts`, and login restores it (part of T1-02 done).
 - Plan layout with bottom nav; draft plans redirect to `/profile`.
+
+## Notes for whoever continues
+
+- **AI provider: Gemini** (`AI_PROVIDER=gemini`, `AI_MODEL=gemini-flash-latest`, `AI_EMBED_MODEL=gemini-embedding-001`). Free tier = 5 requests/min per model; `provider.ts` falls back to Flash-Lite on 429/5xx. Live check: `npx tsx src/lib/ai/dev/compare.ts`.
+- No AI SDK package: `src/lib/ai/provider.ts` uses plain `fetch` (so no `shared/ai-sdk` branch was needed).
+- The intake chat is saved in `plan_sections` with kind `intake`.
+- Code (not AI) decides `missingFields` and which follow-up to ask (`src/lib/ai/profile.ts`). Follow-ups only ask premises, locality, budget, hours; the card highlights the rest.
 
 ## Differences from the PDFs (important for your AI assistant)
 
