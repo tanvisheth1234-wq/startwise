@@ -12,7 +12,7 @@
     "vitest.config.mts",
     ".env.example",
     ".gitignore", ".gitattributes",
-    "README.md",
+    "README.md", "HANDOFF.md",
     "AGENTS.md",
     "CLAUDE.md",
     "next-env.d.ts",
