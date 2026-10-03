@@ -1,1 +1,92 @@
-{}
+{
+  "title": "Test your idea",
+  "subtitle": "Check what must be true, spot the risks, then test cheaply for 7 days before spending on licences or equipment.",
+  "editedByYou": "Edited by you",
+  "saved": "Saved",
+  "regenerate": "Make a new draft",
+  "drafting": "Writing a first draft…",
+  "confirmRegenerate": "You have edited this section. A new draft will replace your edits. Continue?",
+  "errors": {
+    "ai": "We could not write a draft just now. Please try again in a minute.",
+    "invalid": "Some items are empty or incomplete. Please fill them in or delete them.",
+    "overCap": "The 7-day test must cost ₹500 or less in total.",
+    "needsAssumptions": "Please create the assumptions first.",
+    "started": "Your test has already started.",
+    "needsConfirm": ""
+  },
+  "assumptions": {
+    "title": "What must be true",
+    "intro": "Your idea works only if these are true. Each one has a cheap way to check it.",
+    "create": "Write my assumptions",
+    "textLabel": "Assumption {n}",
+    "delete": "Delete assumption {n}",
+    "howToCheck": "How to check",
+    "add": "Add an assumption",
+    "kinds": {
+      "must_be_true": "Must be true",
+      "open_question": "Open question"
+    }
+  },
+  "risk": {
+    "title": "Feasibility and risks",
+    "intro": "Strengths, unknowns and risks, with the proof you need for each risk.",
+    "create": "Write my risk snapshot",
+    "strengths": "Strengths",
+    "unknowns": "Unknowns",
+    "add": "Add",
+    "delete": "Delete",
+    "riskLabel": "Risk",
+    "evidence": "Proof you need",
+    "noneInArea": "No risks here yet.",
+    "addRisk": "Add a risk",
+    "areas": {
+      "market": "Market",
+      "money": "Money",
+      "operations": "Operations",
+      "execution": "Execution"
+    }
+  },
+  "testPlan": {
+    "title": "Your 7-day test",
+    "intro": "One small action a day, costing ₹0–500 in total. You decide what counts as a GO.",
+    "create": "Plan my 7-day test",
+    "needsAssumptions": "Create assumptions first",
+    "start": "Start my 7-day test",
+    "startedOn": "Test started on {date}. Log your enquiries and orders each day.",
+    "scaledNote": "The first draft cost more than ₹500, so we lowered the costs. Please check them.",
+    "goLineTitle": "I will call it a GO if:",
+    "goOrdersBefore": "I get",
+    "goOrdersAfter": "orders in 7 days",
+    "enquiriesBefore": "and at least",
+    "enquiriesAfter": "enquiries",
+    "ordersTarget": "Orders target",
+    "enquiriesTarget": "Enquiries target",
+    "targetsHint": "Suggested: 10 enquiries and 3 orders. Change them to what feels right for you.",
+    "day": "Day {n}",
+    "experimentLabel": "Type of test for day {n}",
+    "actionLabel": "What to do on day {n}",
+    "cost": "Cost",
+    "total": "Total cost: ₹{total} of ₹{cap}",
+    "overCap": "please lower the costs",
+    "experiments": {
+      "interviews": "Talk to people",
+      "pre_orders": "Take pre-orders",
+      "pilot_offer": "Pilot offer",
+      "landing_page": "Simple web page",
+      "whatsapp_status": "WhatsApp status"
+    }
+  },
+  "templates": {
+    "title": "Ready-to-send messages",
+    "intro": "Copy and send these to friends, neighbours and local groups.",
+    "create": "Write my messages",
+    "needsAssumptions": "Create assumptions first",
+    "whatsapp": "WhatsApp message",
+    "shareWhatsapp": "Share on WhatsApp",
+    "poll": "Poll",
+    "pollQuestion": "Poll question",
+    "pollOption": "Option {n}",
+    "priceCard": "Price card",
+    "priceCardHint": "Fill in any ₹___ with your own prices before you share."
+  }
+}
