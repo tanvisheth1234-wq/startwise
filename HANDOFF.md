@@ -43,7 +43,7 @@ npm run dev        # http://localhost:3000
 The shared Supabase database is already migrated, so **do not** run `db:push` against it.
 (T2 uses their own Supabase project and runs `npm run db:push` there.)
 
-## Open items (not code)
+## Open items (not code) — Vercel items are deferred to the end (Day 7); skip them for now
 
 - [ ] Vercel: **redeploy once** (Deployments → ⋯ → Redeploy) so `NEXT_PUBLIC_APP_URL` is built in.
 - [ ] Vercel: Settings → Git → connect the GitHub repo so pushes to `main` auto-deploy.
