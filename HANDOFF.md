@@ -8,8 +8,10 @@ For whoever continues T1 work (and their AI coding assistant). Read this, then t
 | Task | State |
 | --- | --- |
 | **T1-00 Phase 0** | ✅ Done and on `main` (see below) |
-| T1-01 AI layer | ⏭ **Start here.** `src/lib/ai/index.ts` is still a stub returning fixtures |
-| T1-02 … T1-19 | Not started. All screens show "(T1): coming soon" placeholders |
+| T1-01 AI layer | ✅ Code + 17 unit tests on `main`. ⏳ Live check needs a key: put `GEMINI_API_KEY` (or `AI_PROVIDER` + `AI_API_KEY`) in `.env.local`, run `npx tsx src/lib/ai/dev/compare.ts` |
+| T1-03 Start screen | ✅ Done (fits 360 px, works logged out) |
+| T1-02 | Mostly done in Phase 0 (switch + saved preference); finish while building screens |
+| T1-04 … T1-19 | Not started — **next: T1-04 voice, T1-05 intake, T1-06 profile card** |
 
 ### What Phase 0 already gives you
 
