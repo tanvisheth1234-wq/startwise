@@ -1,1 +1,42 @@
-{}
+{
+  "modulesTitle": "Your plan",
+  "editProfile": "Edit profile",
+  "nextStep": {
+    "label": "Your next step",
+    "allDone": "All steps done. Well done!",
+    "error": "We could not load your next step. Please refresh."
+  },
+  "readiness": {
+    "title": "Launch readiness",
+    "aria": "Launch readiness {score} out of 100",
+    "noBlockers": "Nothing is blocking you right now.",
+    "error": "We could not load your readiness score."
+  },
+  "dueSoon": {
+    "title": "Due soon",
+    "due": "Due {date}",
+    "overdue": "Overdue"
+  },
+  "cards": {
+    "error": "Could not load. Please refresh.",
+    "validate": {
+      "notStarted": "Not started: test your idea in 7 days",
+      "running": "Test running: {enquiries} enquiries, {orders} orders",
+      "go": "GO: people are buying",
+      "noGo": "Not yet: adjust and test again"
+    },
+    "compliance": "{licences, plural, =0 {No licences found yet} one {{licences} licence} other {{licences} licences}}, {verified} verified",
+    "money": {
+      "empty": "Add your costs to see your numbers",
+      "noPrice": "Set a price to see break-even",
+      "breakEven": "Break-even {units} units/month · estimate"
+    },
+    "funding": "{count, plural, =0 {No schemes match yet} one {{count} scheme may match} other {{count} schemes may match}}",
+    "roadmap": "{done} of {total} tasks done",
+    "static": {
+      "market": "See nearby competition and prices",
+      "firstCustomers": "Plan your first 10 customers",
+      "launchPack": "Download your plan as a PDF"
+    }
+  }
+}
