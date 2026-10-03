@@ -14,7 +14,10 @@ For whoever continues T1 work (and their AI coding assistant). Read this, then t
 | T1-04 Voice | ✅ Web Speech live transcript + MediaRecorder fallback + kind errors. ⏳ Test on a real Android phone (en/hi/mr) and in Firefox |
 | T1-05 Intake | ✅ Tested in a browser: Hinglish idea → 3 follow-ups → profile card; refresh keeps the chat |
 | T1-06 Profile card | ✅ Tested: inline errors, home→shop saved, confirm → dashboard + calls `roadmap.onProfileConfirmed` (**CP1 ready on T1 side**) |
-| T1-07 … T1-19 | Not started — **next: T1-07 dashboard, T1-08 assumptions/risk, T1-09 test sprint** |
+| T1-07 Dashboard | ✅ Next step banner (visible without scrolling at 360 px), readiness ring, live module cards, due-soon strip; each card fails on its own |
+| T1-08 Assumptions + risk | ✅ Tested with real Gemini (en + mr): concrete Kothrud items, edits survive refresh, regenerate asks first |
+| T1-09 Test sprint + templates | ✅ Tested: 7 days, ≤ ₹500 (code-checked), targets 10/3 editable, WhatsApp copy + share, start date in IST |
+| T1-10 … T1-19 | Not started — **next: T1-10 result logger + go/no-go verdict, T1-11 Launch Pack** |
 
 ### What Phase 0 already gives you
 
