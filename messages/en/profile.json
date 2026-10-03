@@ -1,1 +1,52 @@
-{}
+{
+  "title": "What we understood",
+  "subtitle": "Check each detail. Tap any value to change it. Highlighted ones are still missing.",
+  "subtitleEdit": "Change any detail and save. Your plan updates to match.",
+  "youSaid": "You said:",
+  "addThis": "Please add",
+  "choose": "Choose one",
+  "yes": "Yes",
+  "no": "No",
+  "confirm": "Looks right, build my plan",
+  "saveChanges": "Save changes",
+  "fixErrors": "Please fix the highlighted fields.",
+  "saveFailed": "Saved, but we could not update your plan right now. Please try again.",
+  "fields": {
+    "stage": "Where are you now?",
+    "businessType": "Type of business",
+    "product": "What you sell",
+    "city": "City",
+    "locality": "Area / locality",
+    "premises": "Where you will work",
+    "sellsOnline": "Sell online too?",
+    "targetCustomer": "Main customers",
+    "budgetInr": "Budget to start (₹)",
+    "hoursPerDay": "Hours per day",
+    "expectedMonthlySalesInr": "Expected sales per month (₹)"
+  },
+  "hints": {
+    "rupees": "A rough number is fine.",
+    "optionalSales": "Optional. A guess helps us check which rules apply."
+  },
+  "stage": {
+    "new_idea": "New idea",
+    "existing": "Already running"
+  },
+  "premises": {
+    "home": "From home",
+    "shop": "From a shop"
+  },
+  "types": {
+    "home_food": "Home food",
+    "tailoring_boutique": "Tailoring / boutique",
+    "online_reselling": "Online reselling"
+  },
+  "errors": {
+    "required": "Please fill this in.",
+    "number": "Please enter a number.",
+    "nonNegative": "This cannot be negative.",
+    "hoursRange": "Please enter between 0 and 24 hours.",
+    "tooLong": "This is too long.",
+    "supportedType": "Please choose the closest type."
+  }
+}
