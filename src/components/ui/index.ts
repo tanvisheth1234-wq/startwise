@@ -11,3 +11,4 @@ export { Skeleton } from "./Skeleton";
 export { GuidanceFooter } from "./GuidanceFooter";
 export { LanguageSwitch } from "./LanguageSwitch";
 export { ComingSoon, type ScreenKey } from "./ComingSoon";
+export { PlanNav, type PlanNavItem } from "./PlanNav";
