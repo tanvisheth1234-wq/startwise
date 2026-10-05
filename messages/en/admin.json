@@ -1,1 +1,17 @@
-{}
+{
+  "title": "Team admin",
+  "metrics": {
+    "plans": "Plans started",
+    "confirmed": "Plans confirmed",
+    "tasksDone": "Tasks done",
+    "tested": "Ran a 7-day test"
+  },
+  "flags": "{count, plural, =0 {No open flags} one {{count} open flag} other {{count} open flags}}",
+  "noFlags": "Nothing flagged as outdated right now.",
+  "fixed": "Fixed",
+  "rejected": "Not an issue",
+  "records": "Rules and schemes to verify",
+  "recordsHint": "Open each official page, confirm the details, then set status to verified with today's date in src/knowledge/data.ts.",
+  "verified": "Verified",
+  "checkLocally": "Check locally"
+}
