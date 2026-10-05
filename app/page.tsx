@@ -17,7 +17,7 @@ export default async function StartPage() {
   const latest = plans.find((p) => p.status === "confirmed") ?? plans[0];
 
   return (
-    <main className="mx-auto max-w-md px-4 pb-12 pt-4">
+    <main className={latest?.status === "confirmed" ? "mx-auto max-w-md px-4 pb-12 pt-4" : "mx-auto max-w-6xl overflow-x-clip px-4 pb-12 pt-4 lg:px-8"}>
       {latest?.status === "confirmed" ? (
         <WelcomeBack planId={latest.id} title={latest.title} lang={lang} />
       ) : (

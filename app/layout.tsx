@@ -39,7 +39,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <NextIntlClientProvider>
           <MotionRoot>
           <header className="sticky top-0 z-30 border-b border-line/60 bg-cream/85 backdrop-blur-md print:hidden">
-            <div className="mx-auto flex max-w-3xl items-center gap-2 px-3 py-2">
+            <div className="mx-auto flex max-w-6xl items-center gap-2 px-3 py-2 lg:px-8">
               <Link href="/" aria-label={t("header.home")} className="flex min-h-11 items-center gap-2">
                 <Logo className="size-9" />
                 <span className="font-display text-xl font-extrabold text-forest">{t("appName")}</span>
