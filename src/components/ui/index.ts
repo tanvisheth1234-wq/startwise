@@ -14,3 +14,4 @@ export { ComingSoon, type ScreenKey } from "./ComingSoon";
 export { PlanNav, type PlanNavItem } from "./PlanNav";
 export { Logo } from "./Logo";
 export { Celebrate } from "./Celebrate";
+export { FadeUp, MotionRoot, PopIn, Stagger, StaggerItem, Tappable } from "./motion";
