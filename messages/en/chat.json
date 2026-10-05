@@ -1,0 +1,23 @@
+{
+  "title": "Let's talk",
+  "titleNamed": "Talking with {name}",
+  "askName": "Hi! 🙏 I'm so glad you're here. Before we start, what should I call you?",
+  "namePlaceholder": "Your name",
+  "askVoice": "Lovely to meet you, {name}! 😊 Should I speak my replies out loud, or just show them as text?",
+  "voiceSpeak": "🔊 Speak to me",
+  "voiceText": "💬 Just text",
+  "askIdea": "Perfect. Now tell me, {name}: what's the idea on your mind? It can be just a small thought. Speak or type, however you like.",
+  "placeholder": "Type or tap the mic…",
+  "listening": "Listening…",
+  "send": "Send",
+  "typing": "StartWise is typing",
+  "error": "Sorry, I missed that. Could you say it once more?",
+  "notSure": "Not sure yet",
+  "notesSaved": "{count, plural, one {Saved {count} thought to your notebook} other {Saved {count} thoughts to your notebook}}",
+  "makePlan": "Make my plan",
+  "orKeepTalking": "Or keep talking. I'm listening as long as you like.",
+  "speaking": "Speaking",
+  "silent": "Text only",
+  "voiceOn": "Turn on spoken replies",
+  "voiceOff": "Turn off spoken replies"
+}

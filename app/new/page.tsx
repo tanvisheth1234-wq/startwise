@@ -1,33 +1,22 @@
-// app/new/page.tsx   OWNER: T1 — Screen 2: Idea intake (voice/text + follow-ups)
+// app/new/page.tsx — the first conversation (name → speak or text → idea → warm chat → make my plan)
 import { redirect } from "next/navigation";
-import { getTranslations } from "next-intl/server";
-import { getIntakeState } from "@/features/intake/actions";
-import { IntakeFlow } from "@/features/intake/components/IntakeFlow";
+import { Conversation } from "@/features/intake/components/Conversation";
+import { loadConversation } from "@/features/intake/conversation";
 import { requireUser } from "@/lib/auth";
 
-export default async function NewPlanPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ text?: string; mode?: string; plan?: string }>;
-}) {
-  const { text = "", mode, plan } = await searchParams;
-  await requireUser("/new");
-  const t = await getTranslations("intake");
+export default async function NewPlanPage({ searchParams }: { searchParams: Promise<{ plan?: string }> }) {
+  const { plan } = await searchParams;
+  const user = await requireUser("/new");
 
   let initial = null;
   if (plan) {
-    initial = await getIntakeState(plan); // 404s if not yours
+    initial = await loadConversation(plan); // 404s if not hers
     if (!initial) redirect(`/plan/${plan}`); // already confirmed
-    if (initial.chat.done) redirect(`/plan/${plan}/profile`);
   }
 
   return (
-    <main className="mx-auto max-w-md space-y-4 px-4 py-5 pb-10">
-      <div className="space-y-1">
-        <h1 className="text-xl font-bold text-forest">{initial ? t("chatTitle") : t("title")}</h1>
-        <p className="text-sm text-muted">{initial ? t("chatSubtitle") : t("subtitle")}</p>
-      </div>
-      <IntakeFlow initial={initial} initialText={text.slice(0, 1000)} autoListen={mode === "voice" && !initial} />
+    <main className="mx-auto max-w-md px-4">
+      <Conversation initial={initial} knownName={user.isGuest ? undefined : user.name} />
     </main>
   );
 }
