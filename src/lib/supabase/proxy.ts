@@ -3,6 +3,8 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 const PROTECTED_PREFIXES = ["/plan", "/account", "/admin", "/new"];
+// These start a guest session automatically, so nobody has to log in before trying the app.
+const GUEST_PREFIXES = ["/plan", "/new", "/demo"];
 
 export async function updateSession(request: NextRequest) {
   // Pass the path to server components (the plan layout uses it to avoid redirect loops).
@@ -31,10 +33,17 @@ export async function updateSession(request: NextRequest) {
 
   // Do not run code between createServerClient and getClaims (Supabase guidance).
   const { data } = await supabase.auth.getClaims();
-  const signedIn = Boolean(data?.claims?.sub);
+  let signedIn = Boolean(data?.claims?.sub);
 
   const path = request.nextUrl.pathname;
-  if (!signedIn && PROTECTED_PREFIXES.some((p) => path === p || path.startsWith(p + "/"))) {
+  const matches = (list: string[]) => list.some((p) => path === p || path.startsWith(p + "/"));
+  if (!signedIn && matches(GUEST_PREFIXES)) {
+    // Anonymous sign-in sets the session cookies through setAll above.
+    const { error } = await supabase.auth.signInAnonymously();
+    signedIn = !error;
+  }
+
+  if (!signedIn && matches(PROTECTED_PREFIXES)) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/login";
     loginUrl.search = "";

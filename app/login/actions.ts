@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { Lang } from "@/contracts/profile";
 import { LOCALE_COOKIE } from "@/i18n/request";
-import { ensureUserRow } from "@/lib/auth";
+import { claimGuestPlans, ensureUserRow, getUser } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export type AuthState = { error?: "invalid" | "credentials" | "exists" | "weak" | "unknown"; checkEmail?: boolean };
@@ -27,8 +27,12 @@ async function currentLang(): Promise<Lang> {
   return parsed.success ? parsed.data : "en";
 }
 
-/** After login: create the users row once, then restore the saved language. */
-async function finishLogin(user: { id: string; email?: string }) {
+/** After login: create the users row once, move any guest plans over, then restore the saved language. */
+async function finishLogin(user: { id: string; email?: string }, guestId?: string) {
+  if (guestId) {
+    await ensureUserRow({ id: user.id, email: user.email ?? "" }, await currentLang());
+    await claimGuestPlans(guestId, user.id);
+  }
   const lang = await ensureUserRow({ id: user.id, email: user.email ?? "" }, await currentLang());
   (await cookies()).set(LOCALE_COOKIE, lang, { path: "/", maxAge: 60 * 60 * 24 * 365, sameSite: "lax" });
 }
@@ -37,11 +41,12 @@ export async function signIn(_prev: AuthState, formData: FormData): Promise<Auth
   const parsed = Credentials.safeParse({ email: formData.get("email"), password: formData.get("password") });
   if (!parsed.success) return { error: "invalid" };
 
+  const guest = await getUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase.auth.signInWithPassword(parsed.data);
   if (error || !data.user) return { error: "credentials" };
 
-  await finishLogin(data.user);
+  await finishLogin(data.user, guest?.isGuest ? guest.id : undefined);
   redirect(safeNext(formData.get("next")));
 }
 
@@ -51,6 +56,7 @@ export async function signUp(_prev: AuthState, formData: FormData): Promise<Auth
 
   const next = safeNext(formData.get("next"));
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  const guest = await getUser();
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase.auth.signUp({
     ...parsed.data,
@@ -61,6 +67,16 @@ export async function signUp(_prev: AuthState, formData: FormData): Promise<Auth
   // Email confirmation on: no session yet, the user must click the link.
   if (!data.session || !data.user) return { checkEmail: true };
 
-  await finishLogin(data.user);
+  await finishLogin(data.user, guest?.isGuest ? guest.id : undefined);
   redirect(next);
+}
+
+const GUEST_COOKIE = "sw_guest";
+
+/** Before a Google redirect: remember the guest id, so the callback can move her plans over. */
+export async function rememberGuest(): Promise<void> {
+  const guest = await getUser();
+  if (guest?.isGuest) {
+    (await cookies()).set(GUEST_COOKIE, guest.id, { path: "/", maxAge: 60 * 15, httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production" });
+  }
 }
