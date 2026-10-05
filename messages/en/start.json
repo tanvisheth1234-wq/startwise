@@ -5,7 +5,7 @@
   "or": "or",
   "typeLabel": "Type your idea",
   "placeholder": "e.g. I want to start a home bakery in Pune",
-  "continue": "Continue",
+  "continue": "Shape my idea",
   "samplesLabel": "Try an example:",
   "samples": {
     "bakery": {
@@ -23,5 +23,27 @@
   },
   "yourPlans": "Your plans",
   "statusDraft": "Draft",
-  "statusConfirmed": "Active"
+  "statusConfirmed": "Active",
+  "hello": "Namaste! 👋",
+  "hero": "What's on your mind?",
+  "heroSub": "Tell me your business idea in your own words, even if it's just a thought. I'll help you shape it into a real plan.",
+  "tapToSpeak": "Tap and speak",
+  "speakLangs": "English · हिन्दी · मराठी",
+  "orType": "or type it",
+  "how": {
+    "title": "How it works",
+    "s1": "Say your idea",
+    "s1d": "Speak or type, in any language",
+    "s2": "We shape it",
+    "s2d": "Costs, papers, a 7-day test",
+    "s3": "You launch",
+    "s3d": "Daily steps to your first customer"
+  },
+  "trust": "Free · No login needed to start · Guidance from official sources",
+  "demo": {
+    "cta": "See a live demo",
+    "sub": "Sunita's home bakery in Kothrud: a full plan in one tap",
+    "preparing": "Opening Sunita's bakery…",
+    "preparingSub": "Setting up a full demo plan just for you. This takes a few seconds."
+  }
 }
