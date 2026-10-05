@@ -24,6 +24,7 @@ export function GrowingPlant({
   labelSize,
   rememberAs,
   grewText,
+  fruit = false,
   className,
 }: {
   branches: PlantBranch[];
@@ -34,6 +35,8 @@ export function GrowingPlant({
   rememberAs?: string;
   /** e.g. "Your plant grew a new leaf: {step}" */
   grewText?: string;
+  /** Season 2: finished goals carry a fruit instead of only a leaf. */
+  fruit?: boolean;
   className?: string;
 }) {
   const ref = useRef<SVGSVGElement>(null);
@@ -166,6 +169,18 @@ export function GrowingPlant({
               )}
             </g>
 
+            {fruit && b.state === "done" && (
+              <motion.g
+                style={{ transformOrigin: `${end.x}px ${end.y + 10}px` }}
+                initial={{ scale: 0 }}
+                animate={go ? { scale: 1 } : undefined}
+                transition={{ type: "spring", stiffness: 260, damping: 12, delay: branchDelay(i, b.key) + 0.6 }}
+              >
+                <circle cx={end.x} cy={end.y + 12} r={11} fill={C.coral} />
+                <circle cx={end.x - 3.5} cy={end.y + 8} r={3.2} fill="#fff" opacity={0.55} />
+                <path d={`M${end.x} ${end.y + 1} q 3 -5 7 -5`} stroke={C.sage} strokeWidth={2.5} fill="none" strokeLinecap="round" />
+              </motion.g>
+            )}
             {fresh.includes(b.key) &&
               [0, 1].map((k) => (
                 <motion.circle

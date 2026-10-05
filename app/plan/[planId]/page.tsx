@@ -6,7 +6,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ChevronDown, LayoutGrid, Pencil } from "lucide-react";
 import { FadeUp, Skeleton } from "@/components/ui";
 import { Lang } from "@/contracts/profile";
-import { ExploreDoors, JourneyPath, TodayThree } from "@/features/dashboard/components/Home";
+import { ExploreDoors, IdeasCard, JourneyPath, TodayThree } from "@/features/dashboard/components/Home";
 import { FirstTour } from "@/features/dashboard/components/FirstTour";
 import { NextStepBanner } from "@/features/dashboard/components/NextStep";
 import { ReadinessCard } from "@/features/dashboard/components/Readiness";
@@ -26,7 +26,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ plan
 
   return (
     // Phone: one calm column. Laptop: her steps on the left, her growing plant on the right.
-    <div className="space-y-5 lg:grid lg:grid-flow-row-dense lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-x-8 lg:gap-y-5 lg:space-y-0 lg:[&>*]:col-start-1">
+    <div className="space-y-5 lg:grid lg:grid-flow-row-dense lg:grid-cols-[minmax(0,1fr)_380px] lg:grid-rows-[auto_auto_auto_auto_1fr] lg:gap-x-8 lg:gap-y-5 lg:space-y-0 lg:[&>*]:col-start-1">
       <FadeUp className="flex items-end justify-between gap-2">
         <div>
           <p className="text-sm font-semibold text-coral-600">{name ? t(`greetingNamed.${greeting}`, { name }) : t(`greeting.${greeting}`)}</p>
@@ -44,7 +44,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ plan
         </Suspense>
       </FadeUp>
 
-      <FadeUp delay={0.16} data-tour="journey" className="lg:col-start-2! lg:row-span-4 lg:row-start-1">
+      <FadeUp delay={0.16} data-tour="journey" className="lg:col-start-2! lg:row-span-5 lg:row-start-1">
         <div className="lg:sticky lg:top-24">
         <Suspense fallback={<Skeleton className="h-28 w-full rounded-3xl" />}>
           <JourneyPath planId={plan.id} lang={lang} />
@@ -58,8 +58,12 @@ export default async function DashboardPage({ params }: { params: Promise<{ plan
         </Suspense>
       </FadeUp>
 
+      <FadeUp delay={0.3}>
+        <IdeasCard />
+      </FadeUp>
+
       {/* Everything else, one tap away but out of the way. */}
-      <details className="group rounded-3xl border border-line/70 bg-white/70 shadow-soft">
+      <details className="group rounded-3xl border border-line/70 bg-white/70 shadow-soft lg:self-start">
         <summary className="flex min-h-16 cursor-pointer list-none items-center gap-3 px-4">
           <span className="grid size-10 place-items-center rounded-2xl bg-mint text-coral-600">
             <LayoutGrid className="size-5" aria-hidden />

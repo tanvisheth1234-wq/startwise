@@ -4,7 +4,8 @@
   "nextStep": {
     "label": "Your next step",
     "allDone": "All steps done. Well done!",
-    "error": "We could not load your next step. Please refresh."
+    "error": "We could not load your next step. Please refresh.",
+    "onPlant": "Step {n} of {total} on your plant: {station}"
   },
   "readiness": {
     "title": "Launch readiness",
@@ -57,9 +58,11 @@
     "grew": "Your plant grew a new leaf: {step}"
   },
   "today": {
-    "title": "Today's 3 things",
+    "title": "Small things, any time",
     "all": "All tasks ({done}/{total})",
-    "allDone": "You've done everything for now. Take a breath! 🎉"
+    "allDone": "You've done everything for now. Take a breath! 🎉",
+    "seeAll": "See all tasks",
+    "smallDone": "All small things done for now. Nice work!"
   },
   "doors": {
     "title": "Explore your plan",
@@ -143,5 +146,35 @@
     "text": "Hi! I'm starting my own business: {product}. I'd love your support. Message me if you'd like to order!",
     "saved": "Card saved. Share it on WhatsApp!",
     "by": "by {name}"
+  },
+  "grow": {
+    "title": "Season 2: Grow",
+    "seasonDone": "Your first season is complete!",
+    "next": "Next: {goal}",
+    "allDone": "You've grown a steady business. Keep going!",
+    "goals": {
+      "customers": "10 happy customers",
+      "repeat": "First repeat order",
+      "posts": "4 weeks of posts",
+      "month": "First month check",
+      "funding": "Funding ready"
+    },
+    "bloom": "Steady business",
+    "grew": "Your plant grew a new fruit: {step}"
+  },
+  "ideas": {
+    "title": "Ideas for you",
+    "sub": "Tap one and we'll talk it through together.",
+    "items": [
+      "How can I get my first 10 regular customers?",
+      "Give me a festival special idea for my business",
+      "How do I ask happy customers for a review?",
+      "Should I start an Instagram page? How?",
+      "How do I price a big bulk order?",
+      "Which government scheme could help me grow?",
+      "Write a thank-you message for my customers",
+      "How can I save time on my busiest day?",
+      "What should I do if sales are slow this week?"
+    ]
   }
 }
