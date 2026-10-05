@@ -49,7 +49,7 @@ export function LiveChatPreview({ className }: { className?: string }) {
   return (
     <div className={cn("relative mx-auto w-[300px]", className)} aria-hidden>
       {/* soft glow behind the phone */}
-      <div className="absolute -inset-10 rounded-full bg-gradient-to-br from-sun/40 via-coral/30 to-berry/30 blur-3xl" />
+      <div className="absolute -inset-16 rounded-full bg-gradient-to-br from-sun/30 via-coral/20 to-berry/20 blur-[90px]" />
       <motion.div
         initial={{ opacity: 0, y: 40, rotate: 4 }}
         animate={{ opacity: 1, y: 0, rotate: 2 }}
