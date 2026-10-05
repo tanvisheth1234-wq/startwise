@@ -14,7 +14,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx src/db/seed/index.ts",
     "check:owners": "node scripts/check-ownership.mjs",
-    "check": "npm run typecheck && npm run lint && npm run test && npm run check:owners"
+    "check": "npm run typecheck && npm run lint && npm run test && npm run check:owners",
+    "sources:ingest": "node scripts/ingest-sources.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -24,6 +25,7 @@
     "drizzle-orm": "^0.45.3",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.50.0",
+    "motion": "^12.43.0",
     "next": "16.3.8",
     "next-intl": "^4.14.9",
     "postgres": "^3.4.9",
