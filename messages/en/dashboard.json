@@ -53,7 +53,8 @@
       "papers": "Papers",
       "launch": "Launch",
       "customer": "First sale"
-    }
+    },
+    "grew": "Your plant grew a new leaf: {step}"
   },
   "today": {
     "title": "Today's 3 things",
@@ -132,5 +133,15 @@
       "title": "Talk to me anytime",
       "body": "Tap the Talk button whenever you're stuck or want to tell me something, like a sale or a worry."
     }
+  },
+  "share": {
+    "button": "Share my business",
+    "soon": "Launching soon",
+    "cta": "Message me to order",
+    "made": "Made with StartWise",
+    "progress": "{done} of {total} steps done",
+    "text": "Hi! I'm starting my own business: {product}. I'd love your support. Message me if you'd like to order!",
+    "saved": "Card saved. Share it on WhatsApp!",
+    "by": "by {name}"
   }
 }

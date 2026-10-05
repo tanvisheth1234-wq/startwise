@@ -11,10 +11,13 @@ import type { RoadmapTask } from "@/contracts/roadmap";
 import { taskHref } from "@/features/roadmap/api";
 import { TaskItem } from "@/features/roadmap/components/TaskItem";
 import { getMoney, getRoadmap, getValidation, settle } from "../server/data";
+import { getSection } from "@/features/validate/server/sections";
+import { requirePlan } from "@/lib/auth";
+import { ShareCard } from "./ShareCard";
 
 type Props = { planId: string; lang: Lang };
 
-type Station = { key: string; icon: LucideIcon; href: string; done: boolean };
+export type Station = { key: string; icon: LucideIcon; href: string; done: boolean };
 
 function stations(planId: string, tasks: RoadmapTask[], go: boolean, priced: boolean): Station[] {
   const doneKey = (k: string) => tasks.some((t) => t.key === k && t.status === "done");
@@ -30,13 +33,24 @@ function stations(planId: string, tasks: RoadmapTask[], go: boolean, priced: boo
   ];
 }
 
-export async function JourneyPath({ planId, lang }: Props) {
-  const t = await getTranslations("dashboard.journey");
+/** Where she is on the journey: shared by the plan home and the share card. */
+export async function journeyStations(planId: string, lang: Lang): Promise<Station[]> {
   const [tasks, v, m] = await Promise.all([settle(getRoadmap(planId, lang)), settle(getValidation(planId)), settle(getMoney(planId))]);
   const list = tasks.ok ? tasks.value : [];
   const go = v.ok && v.value.verdict === "go";
   const priced = m.ok && m.value !== null && (m.value.marginPerUnit ?? 0) > 0 && list.some((x) => x.key === "prepare.costs" && x.status === "done");
-  const all = stations(planId, list, go, priced);
+  return stations(planId, list, go, priced);
+}
+
+export async function JourneyPath({ planId, lang }: Props) {
+  const t = await getTranslations("dashboard.journey");
+  const ts = await getTranslations("dashboard.share");
+  const tr = await getTranslations("profile");
+  const [all, plan, founder] = await Promise.all([journeyStations(planId, lang), requirePlan(planId), getSection<{ name: string }>(planId, "founder", "en").catch(() => null)]);
+  const p = plan.profile;
+  const raw = p?.product || plan.title;
+  const product = raw.charAt(0).toUpperCase() + raw.slice(1);
+  const where = [p?.locality, p?.city].filter(Boolean).join(", ");
   const current = all.findIndex((s) => !s.done);
   // Her business as a plant: each step is a branch, the first sale is the flower.
   const parts: PlantBranch[] = all.map((s, i) => ({
@@ -52,7 +66,25 @@ export async function JourneyPath({ planId, lang }: Props) {
         <h2 className="font-display text-lg font-bold text-forest">{t("title")}</h2>
         <span className="text-xs font-semibold text-muted">{t("progress", { done: all.filter((s) => s.done).length, total: all.length })}</span>
       </div>
-      <GrowingPlant mode="progress" branches={parts.slice(0, -1)} bloom={parts[parts.length - 1]} className="mx-auto -mb-3 -mt-2 w-full max-w-[290px]" />
+      <GrowingPlant mode="progress" branches={parts.slice(0, -1)} bloom={parts[parts.length - 1]} rememberAs={`sw-plant-${planId}`} grewText={t.raw("grew") as string} className="mx-auto -mb-3 -mt-2 w-full max-w-[290px] lg:my-2 lg:max-w-[330px]" />
+      <div className="mt-4">
+        <ShareCard
+          label={ts("button")}
+          savedLabel={ts("saved")}
+          fileName={product.replace(/[^\p{L}\p{N}]+/gu, "-").slice(0, 40) || "my-business"}
+          data={{
+            soon: ts("soon"),
+            product,
+            by: founder?.content.name ? ts("by", { name: founder.content.name }) : "",
+            facts: [where && { label: tr("reveal.where"), value: where }, p?.premises && { label: tr("reveal.worksFrom"), value: tr(`premises.${p.premises}`) }].filter(Boolean) as { label: string; value: string }[],
+            cta: ts("cta"),
+            made: ts("made"),
+            leaves: all.slice(0, -1).map((s) => s.done),
+            bloom: Boolean(all[all.length - 1]?.done),
+            text: ts("text", { product }),
+          }}
+        />
+      </div>
     </section>
   );
 }
@@ -106,7 +138,7 @@ export async function ExploreDoors({ planId }: { planId: string }) {
   return (
     <section className="space-y-2">
       <h2 className="font-display text-lg font-bold text-forest">{t("title")}</h2>
-      <ul className="stagger grid grid-cols-2 gap-2">
+      <ul className="stagger grid grid-cols-2 gap-2 sm:grid-cols-3">
         {DOORS.map(({ key, route, icon: Icon, tone }) => (
           <li key={key}>
             <Link

@@ -3,9 +3,10 @@
 // is one part of the journey (test, costs, papers…). The flower at the top is the first customer.
 //   mode "intro"    → everything grows in turn when scrolled into view (welcome page).
 //   mode "progress" → her real plan: done branches are leaves, the current one is a bud, the rest are faint.
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useInView } from "motion/react";
+import { Celebrate } from "./Celebrate";
 
 export type PlantBranch = { key: string; label: string; href?: string; state: "done" | "current" | "todo" };
 
@@ -16,8 +17,58 @@ const LEAF = "M0 0 C 8 -11, 26 -11, 34 0 C 26 11, 8 11, 0 0 Z";
 
 const C = { sage: "#3f8a68", sageLight: "#7cc19c", coral: "#ec6a3c", coralDark: "#d9562a", sun: "#ffc24b", line: "#e6cdb9", cocoa: "#4a2c22", muted: "#9c8476", soil: "#6b4232", cream: "#fffaf4", water: "#6aa8e8" };
 
-export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { branches: PlantBranch[]; bloom: PlantBranch; mode: "intro" | "progress"; labelSize?: number; className?: string }) {
+export function GrowingPlant({
+  branches,
+  bloom,
+  mode,
+  labelSize,
+  rememberAs,
+  grewText,
+  className,
+}: {
+  branches: PlantBranch[];
+  bloom: PlantBranch;
+  mode: "intro" | "progress";
+  labelSize?: number;
+  /** Remembers which steps were done last visit (per plan), so a newly finished step grows in front of her. */
+  rememberAs?: string;
+  /** e.g. "Your plant grew a new leaf: {step}" */
+  grewText?: string;
+  className?: string;
+}) {
   const ref = useRef<SVGSVGElement>(null);
+  const [fresh, setFresh] = useState<string[]>([]);
+  const [cheer, setCheer] = useState(0);
+  const lastVisit = useRef<string[] | null | undefined>(undefined);
+  const doneKeys = [...branches, bloom].filter((b) => b.state === "done").map((b) => b.key).join(",");
+
+  // Compare with last visit: anything newly done gets its own growing moment and a little celebration.
+  useEffect(() => {
+    if (!rememberAs) return;
+    const now = doneKeys ? doneKeys.split(",") : [];
+    try {
+      // Read last visit only once, even if this effect runs again.
+      if (lastVisit.current === undefined) {
+        const saved = localStorage.getItem(rememberAs);
+        lastVisit.current = saved === null ? null : saved ? saved.split(",") : [];
+      }
+      localStorage.setItem(rememberAs, now.join(","));
+    } catch {
+      return;
+    }
+    const before = lastVisit.current;
+    if (before === null) return; // first visit: nothing to compare with
+    const grew = now.filter((k) => !before.includes(k));
+    if (grew.length === 0) return;
+    // Regrow the new leaf at once; cheer as it unfolds.
+    const t = setTimeout(() => setFresh(grew), 0);
+    const c = setTimeout(() => setCheer((n) => n + 1), 1900);
+    return () => {
+      clearTimeout(t);
+      clearTimeout(c);
+    };
+  }, [rememberAs, doneKeys]);
+  const freshLabel = [...branches, bloom].find((b) => fresh.includes(b.key))?.label;
   const go = useInView(ref, { once: true, amount: 0.35 });
   const router = useRouter();
   const intro = mode === "intro";
@@ -31,7 +82,7 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
   const currentIdx = branches.findIndex((b) => b.state !== "done");
   const stemTo = intro || currentIdx === -1 ? TOP + 12 : yAt(currentIdx) - 4;
   const stemDur = intro ? 1.3 : 0.9;
-  const branchDelay = (i: number) => (intro ? 1.0 + i * 0.32 : 0.7 + i * 0.18);
+  const branchDelay = (i: number, key?: string) => (intro ? 1.0 + i * 0.32 : key && fresh.includes(key) ? 1.6 : 0.7 + i * 0.18);
   const bloomDelay = branchDelay(n) + 0.2;
 
   const open = (b: PlantBranch) => b.href && router.push(b.href);
@@ -48,6 +99,8 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
       : {};
 
   return (
+    <>
+    {rememberAs && <Celebrate fire={cheer} message={freshLabel && grewText ? grewText.replace("{step}", freshLabel) : undefined} />}
     <svg ref={ref} viewBox="0 0 400 430" className={className} role="img" aria-label={[...branches, bloom].map((b) => b.label).join(", ")}>
       <defs>
         <linearGradient id="sw-pot" x1="0" x2="0" y1="0" y2="1">
@@ -87,9 +140,9 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
         const d = `M${X} ${y} Q ${X + side * 34} ${y - 2} ${end.x} ${end.y}`;
         const labelColor = intro ? C.cocoa : b.state === "done" ? C.sage : b.state === "current" ? C.coralDark : C.muted;
         return (
-          <g key={b.key} {...linkProps(b)}>
+          <g key={`${b.key}-${fresh.includes(b.key)}`} {...linkProps(b)}>
             {grown ? (
-              <motion.path d={d} stroke={C.sage} strokeWidth={5} strokeLinecap="round" fill="none" initial={{ pathLength: 0, opacity: 0 }} animate={go ? { pathLength: 1, opacity: 1 } : undefined} transition={{ duration: 0.45, delay: branchDelay(i) }} />
+              <motion.path d={d} stroke={C.sage} strokeWidth={5} strokeLinecap="round" fill="none" initial={{ pathLength: 0, opacity: 0 }} animate={go ? { pathLength: 1, opacity: 1 } : undefined} transition={{ duration: 0.45, delay: branchDelay(i, b.key) }} />
             ) : (
               <path d={d} stroke={C.line} strokeWidth={4} strokeLinecap="round" strokeDasharray="3 7" fill="none" />
             )}
@@ -104,8 +157,8 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
                   animate={go ? (!intro && b.state === "current" ? { scale: [0, 1.15, 0.9, 1.1, 1] } : { scale: 1 }) : undefined}
                   transition={
                     !intro && b.state === "current"
-                      ? { duration: 2.4, delay: branchDelay(i) + 0.35, repeat: Infinity, repeatType: "mirror" }
-                      : { type: "spring", stiffness: 220, damping: 12, delay: branchDelay(i) + 0.35 }
+                      ? { duration: 2.4, delay: branchDelay(i, b.key) + 0.35, repeat: Infinity, repeatType: "mirror" }
+                      : { type: "spring", stiffness: 220, damping: 12, delay: branchDelay(i, b.key) + 0.35 }
                   }
                 />
               ) : (
@@ -113,6 +166,20 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
               )}
             </g>
 
+            {fresh.includes(b.key) &&
+              [0, 1].map((k) => (
+                <motion.circle
+                  key={k}
+                  cx={end.x + side * 16}
+                  cy={end.y - 6}
+                  fill="none"
+                  stroke={C.sun}
+                  strokeWidth={4}
+                  initial={{ r: 4, opacity: 0 }}
+                  animate={{ r: [4, 38], opacity: [0.9, 0] }}
+                  transition={{ duration: 1.1, delay: 2.0 + k * 0.45, repeat: 2, repeatDelay: 0.6 }}
+                />
+              ))}
             {b.label && <motion.text
               x={end.x + side * 18}
               y={end.y - 20}
@@ -126,7 +193,7 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
               style={{ fontFamily: "var(--font-display)" }}
               initial={{ opacity: 0, y: 6 }}
               animate={go ? { opacity: 1, y: 0 } : undefined}
-              transition={{ duration: 0.4, delay: branchDelay(i) + 0.5 }}
+              transition={{ duration: 0.4, delay: branchDelay(i, b.key) + 0.5 }}
             >
               {!intro && b.state === "done" ? `✓ ${b.label}` : b.label}
             </motion.text>}
@@ -135,7 +202,7 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
       })}
 
       {/* the flower: first customer */}
-      <g {...linkProps(bloom)}>
+      <g key={`bloom-${fresh.includes(bloom.key)}`} {...linkProps(bloom)}>
         {intro || bloom.state === "done" ? (
           <motion.g
             style={{ transformOrigin: `${X}px ${TOP}px` }}
@@ -224,5 +291,6 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
         ))}
       </motion.g>
     </svg>
+    </>
   );
 }
