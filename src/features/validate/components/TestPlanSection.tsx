@@ -1,7 +1,9 @@
 "use client";
 // OWNER: T1 — #11 7-day test sprint (₹0–500, code-checked) with editable GO targets
 import { useFormatter, useTranslations } from "next-intl";
-import { CalendarCheck, Info, Rocket } from "lucide-react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { CalendarCheck, Check, Info, Pencil, Rocket } from "lucide-react";
 import { Badge, Button, cn } from "@/components/ui";
 import { Experiment, type TestPlan } from "@/contracts/sections";
 import { startSprint } from "../actions";
@@ -20,6 +22,8 @@ export function TestPlanSection({ planId, initial, ready }: { planId: string; in
   const total = d ? totalCost(d) : 0;
   const over = total > SPRINT_CAP_INR;
   const started = Boolean(s.section?.content.startDate);
+  const [editing, setEditing] = useState<number | null>(null);
+  const router = useRouter();
 
   const setDay = (i: number, patch: Partial<TestPlan["days"][number]>) =>
     s.setDraft((x) => ({ ...x, days: x.days.map((day, j) => (j === i ? { ...day, ...patch } : day)) }));
@@ -50,7 +54,12 @@ export function TestPlanSection({ planId, initial, ready }: { planId: string; in
             size="lg"
             variant="gold"
             disabled={s.busy || over}
-            onClick={() => s.startTransition(async () => { s.apply(await startSprint(planId, d)); })}
+            onClick={() => s.startTransition(async () => {
+              s.apply(await startSprint(planId, d));
+              // Show the "+1 enquiry / +1 order" tracker straight away, and take her to it.
+              router.refresh();
+              setTimeout(() => document.getElementById("sprint-tracker")?.scrollIntoView({ behavior: "smooth", block: "start" }), 600);
+            })}
           >
             <Rocket className="size-5" aria-hidden />
             {t("start")}
@@ -79,42 +88,66 @@ export function TestPlanSection({ planId, initial, ready }: { planId: string; in
             <label className="flex flex-wrap items-center gap-2 text-sm">
               {t("goOrdersBefore")}
               <input type="number" inputMode="numeric" min={0} value={d.targets.orders} onChange={(e) => setTarget("orders", e.target.value)}
-                aria-label={t("ordersTarget")} className={cn(fieldClass, "w-20 text-center font-bold")} />
+                aria-label={t("ordersTarget")} className={cn(fieldClass, "!w-16 shrink-0 text-center font-bold")} />
               {t("goOrdersAfter")}
             </label>
             <label className="flex flex-wrap items-center gap-2 text-sm">
               {t("enquiriesBefore")}
               <input type="number" inputMode="numeric" min={0} value={d.targets.enquiries} onChange={(e) => setTarget("enquiries", e.target.value)}
-                aria-label={t("enquiriesTarget")} className={cn(fieldClass, "w-20 text-center font-bold")} />
+                aria-label={t("enquiriesTarget")} className={cn(fieldClass, "!w-16 shrink-0 text-center font-bold")} />
               {t("enquiriesAfter")}
             </label>
             <p className="text-xs text-muted">{t("targetsHint")}</p>
           </div>
 
+          {/* Read like a plan; edit one day only when she wants to (no wall of form fields). */}
           <ol className="space-y-2">
-            {d.days.map((day, i) => (
-              <li key={day.day} className="space-y-2 rounded-xl border border-line p-3">
-                <div className="flex items-center justify-between gap-2">
-                  <Badge tone="green">{t("day", { n: day.day })}</Badge>
-                  <select
-                    aria-label={t("experimentLabel", { n: day.day })}
-                    value={day.experiment}
-                    onChange={(e) => setDay(i, { experiment: e.target.value as TestPlan["days"][number]["experiment"] })}
-                    className="min-h-9 rounded-lg border border-line bg-white px-2 text-xs font-semibold text-teal"
-                  >
-                    {EXPERIMENTS.map((x) => <option key={x} value={x}>{t(`experiments.${x}`)}</option>)}
-                  </select>
-                </div>
-                <textarea aria-label={t("actionLabel", { n: day.day })} value={day.action} rows={2} maxLength={300}
-                  onChange={(e) => setDay(i, { action: e.target.value })} className={growClass} />
-                <label className="flex items-center gap-2 text-sm text-muted">
-                  {t("cost")} ₹
-                  <input type="number" inputMode="numeric" min={0} max={SPRINT_CAP_INR} value={day.costInr}
-                    onChange={(e) => setDay(i, { costInr: Math.max(0, Math.round(Number(e.target.value) || 0)) })}
-                    className={cn(fieldClass, "w-24")} />
-                </label>
-              </li>
-            ))}
+            {d.days.map((day, i) =>
+              editing === i ? (
+                <li key={day.day} className="space-y-2 rounded-2xl border-2 border-coral/40 bg-white p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <Badge tone="green">{t("day", { n: day.day })}</Badge>
+                    <select
+                      aria-label={t("experimentLabel", { n: day.day })}
+                      value={day.experiment}
+                      onChange={(e) => setDay(i, { experiment: e.target.value as TestPlan["days"][number]["experiment"] })}
+                      className="min-h-9 rounded-lg border border-line bg-white px-2 text-xs font-semibold text-teal"
+                    >
+                      {EXPERIMENTS.map((x) => <option key={x} value={x}>{t(`experiments.${x}`)}</option>)}
+                    </select>
+                  </div>
+                  <textarea aria-label={t("actionLabel", { n: day.day })} value={day.action} rows={2} maxLength={300}
+                    onChange={(e) => setDay(i, { action: e.target.value })} className={growClass} />
+                  <div className="flex items-center justify-between gap-2">
+                    <label className="flex items-center gap-2 text-sm text-muted">
+                      {t("cost")} ₹
+                      <input type="number" inputMode="numeric" min={0} max={SPRINT_CAP_INR} value={day.costInr}
+                        onChange={(e) => setDay(i, { costInr: Math.max(0, Math.round(Number(e.target.value) || 0)) })}
+                        className={cn(fieldClass, "w-24")} />
+                    </label>
+                    <Button size="sm" variant="secondary" onClick={() => setEditing(null)}>
+                      <Check className="size-4" aria-hidden />
+                      {t("doneEditing")}
+                    </Button>
+                  </div>
+                </li>
+              ) : (
+                <li key={day.day} className="flex items-start gap-3 rounded-2xl border border-line/70 bg-white p-3">
+                  <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-mint text-center font-display text-xs font-bold leading-tight text-coral-600">
+                    {t("day", { n: day.day })}
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-xs font-semibold text-sage">{t(`experiments.${day.experiment}`)}{day.costInr > 0 ? ` · ₹${day.costInr}` : ""}</span>
+                    <span className="block text-sm text-ink">{day.action}</span>
+                  </span>
+                  {!started && (
+                    <button type="button" onClick={() => setEditing(i)} aria-label={t("editDay", { n: day.day })} className="grid size-9 shrink-0 place-items-center rounded-full text-muted hover:bg-mint">
+                      <Pencil className="size-4" aria-hidden />
+                    </button>
+                  )}
+                </li>
+              ),
+            )}
           </ol>
 
           <p className={cn("rounded-xl p-3 text-sm font-semibold", over ? "bg-danger/10 text-danger" : "bg-mint text-forest")}>
