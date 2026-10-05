@@ -1,14 +1,17 @@
 import type { HTMLAttributes } from "react";
 import { cn } from "./cn";
 
-export type BadgeTone = "green" | "teal" | "gold" | "grey" | "red";
+export type BadgeTone = "green" | "teal" | "gold" | "grey" | "red" | "berry" | "sky" | "sun";
 
 const tones: Record<BadgeTone, string> = {
-  green: "bg-mint text-forest",
-  teal: "bg-teal/10 text-teal",
-  gold: "bg-gold-light/40 text-[#6e5328]",
-  grey: "bg-gray-100 text-gray-700",
+  green: "bg-sage-light text-sage",
+  teal: "bg-sage-light text-sage",
+  gold: "bg-gold-light/60 text-coral-600",
+  grey: "bg-[#f3ece6] text-muted",
   red: "bg-danger/10 text-danger",
+  berry: "bg-berry-light text-berry",
+  sky: "bg-sky-light text-sky",
+  sun: "bg-sun-light text-[#8a5a00]",
 };
 
 export function Badge({ tone = "green", className, ...rest }: HTMLAttributes<HTMLSpanElement> & { tone?: BadgeTone }) {

@@ -36,13 +36,13 @@ export function Sheet({
         if (e.target === ref.current) onClose(); // click on backdrop
       }}
       className={cn(
-        "m-0 mt-auto w-full max-w-none rounded-t-2xl bg-white p-0 backdrop:bg-black/40",
-        "sm:m-auto sm:max-w-lg sm:rounded-2xl",
+        "m-0 mt-auto w-full max-w-none rounded-t-3xl bg-white p-0 backdrop:bg-forest/40 backdrop:backdrop-blur-sm",
+        "sm:m-auto sm:max-w-lg sm:rounded-3xl",
         className,
       )}
     >
       <div className="flex items-center justify-between border-b border-line px-4 py-2">
-        <h2 className="text-lg font-semibold text-forest">{title}</h2>
+        <h2 className="text-lg font-bold text-forest">{title}</h2>
         <button type="button" onClick={onClose} aria-label={closeLabel} className="grid min-h-11 min-w-11 place-items-center rounded-lg hover:bg-mint">
           <X className="size-5" aria-hidden />
         </button>

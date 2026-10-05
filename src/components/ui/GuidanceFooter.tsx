@@ -6,8 +6,8 @@ import { cn } from "./cn";
 export function GuidanceFooter({ className }: { className?: string }) {
   const t = useTranslations("common");
   return (
-    <p className={cn("mt-6 flex items-start gap-2 rounded-xl bg-gold-light/30 p-3 text-sm text-ink", className)}>
-      <Info className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
+    <p className={cn("mt-6 flex items-start gap-2 rounded-2xl bg-sun-light/70 p-3 text-sm text-ink", className)}>
+      <Info className="mt-0.5 size-4 shrink-0 text-[#b07800]" aria-hidden />
       <span>{t("guidance")}</span>
     </p>
   );

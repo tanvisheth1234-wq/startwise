@@ -11,7 +11,7 @@ export function Tabs({ items, initialKey, className }: { items: TabItem[]; initi
 
   return (
     <div className={className}>
-      <div role="tablist" className="flex gap-1 overflow-x-auto rounded-xl bg-mint p-1">
+      <div role="tablist" className="flex gap-1 overflow-x-auto rounded-2xl bg-mint p-1">
         {items.map((item) => {
           const selected = item.key === current?.key;
           return (
@@ -24,7 +24,7 @@ export function Tabs({ items, initialKey, className }: { items: TabItem[]; initi
               aria-controls={`${id}-panel-${item.key}`}
               onClick={() => setActive(item.key)}
               className={cn(
-                "min-h-11 flex-1 whitespace-nowrap rounded-lg px-3 text-sm font-semibold",
+                "min-h-11 flex-1 whitespace-nowrap rounded-xl px-3 text-sm font-semibold transition-colors",
                 selected ? "bg-white text-forest shadow-sm" : "text-muted hover:text-forest",
               )}
             >

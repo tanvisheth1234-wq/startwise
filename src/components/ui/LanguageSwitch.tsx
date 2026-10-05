@@ -18,7 +18,7 @@ export function LanguageSwitch({ className }: { className?: string }) {
   return (
     <label className={cn("relative inline-flex items-center", className)}>
       <span className="sr-only">{t("header.language")}</span>
-      <Languages className="pointer-events-none absolute left-2.5 size-4 text-forest" aria-hidden />
+      <Languages className="pointer-events-none absolute left-2.5 size-4 text-coral" aria-hidden />
       <select
         value={locale}
         disabled={pending}
@@ -29,7 +29,7 @@ export function LanguageSwitch({ className }: { className?: string }) {
             router.refresh();
           });
         }}
-        className="min-h-11 appearance-none rounded-xl border border-line bg-white py-1 pl-8 pr-3 text-sm font-semibold text-forest"
+        className="min-h-11 appearance-none rounded-full border border-line bg-white py-1 pl-8 pr-3 text-sm font-semibold text-forest shadow-soft"
       >
         {LANGS.map((l) => (
           <option key={l} value={l} lang={l}>

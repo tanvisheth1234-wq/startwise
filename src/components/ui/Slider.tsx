@@ -19,7 +19,7 @@ export function Slider({ label, value, min, max, step = 1, onChange, format, cla
     <div className={cn("space-y-1", className)}>
       <div className="flex items-baseline justify-between gap-2">
         <label htmlFor={id} className="text-sm font-medium text-ink">{label}</label>
-        <output htmlFor={id} className="text-sm font-semibold text-forest">{format ? format(value) : value}</output>
+        <output htmlFor={id} className="rounded-full bg-mint px-2.5 py-0.5 text-sm font-bold text-coral-600">{format ? format(value) : value}</output>
       </div>
       <input
         id={id}
@@ -29,7 +29,7 @@ export function Slider({ label, value, min, max, step = 1, onChange, format, cla
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="h-11 w-full cursor-pointer accent-teal"
+        className="h-11 w-full cursor-pointer accent-coral"
       />
     </div>
   );
