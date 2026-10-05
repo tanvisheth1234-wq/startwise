@@ -1,0 +1,41 @@
+{
+  "button": "Talk",
+  "open": "Talk to StartWise",
+  "title": "Talk to StartWise",
+  "close": "Close",
+  "hello": "Hi! I know your whole plan. Ask me anything, or tell me about a sale and I'll note it down.",
+  "s1": "What should I do today?",
+  "s2": "How much will I earn in a month?",
+  "s3": "Which papers do I need?",
+  "s4": "I sold 2 {item} for 400 today",
+  "handsFreeOn": "Hands-free on",
+  "handsFreeOff": "Hands-free off",
+  "thinking": "Thinking…",
+  "failed": "Sorry, I couldn't answer just now. Try again in a moment.",
+  "speak": "Speak",
+  "stop": "Stop",
+  "addedTask": "Added to your tasks",
+  "logged": "Logged in your sales diary",
+  "state": {
+    "idle": "Tap and talk to me",
+    "listening": "Listening… tap when you finish",
+    "hearing": "Catching your words…",
+    "thinking": "Thinking…",
+    "speaking": "Speaking… tap to stop"
+  },
+  "screens": {
+    "home": "Open Home",
+    "tasks": "Open Tasks",
+    "validate": "Open the 7-day test",
+    "money": "Open Money Lab",
+    "compliance": "Open Papers",
+    "funding": "Open Money help",
+    "market": "Open the map",
+    "marketing": "Open Marketing buddy",
+    "notebook": "Open Notebook",
+    "first-customers": "Open First customers",
+    "launch-pack": "Open Launch Pack",
+    "practice": "Open Practice room",
+    "orders": "Open Order book"
+  }
+}
