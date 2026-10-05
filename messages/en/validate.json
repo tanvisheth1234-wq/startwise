@@ -111,5 +111,38 @@
     "retest": "Adjust and test again",
     "pendingHint": "Tap the buttons each time someone asks or orders. {orders} orders means GO."
   },
-  "whyTitle": "Why this test? What must be true, and the risks"
+  "whyTitle": "Why this test? What must be true, and the risks",
+  "help": {
+    "button": "Help me do this",
+    "today": "Today",
+    "progress": "{done} of 7 days done",
+    "dayDone": "Day {n} done!",
+    "markDone": "Mark day {n} done",
+    "markUndone": "Mark day {n} not done",
+    "sheetTitle": "Day {n}: let's do it together",
+    "questionsTitle": "Ask these 5 questions",
+    "questions": [
+      "Would you buy {product}? Why or why not?",
+      "What do you use or buy today instead?",
+      "How much do you usually spend on it?",
+      "What would make you try it this week?",
+      "When I start taking orders, can I message you?"
+    ],
+    "practice": "Practise first with a pretend customer",
+    "posterTitle": "Make your picture",
+    "posterHint": "For your WhatsApp status, or print it as a flyer.",
+    "posterSoon": "Taking orders this week",
+    "price": "Your price (optional)",
+    "phone": "Your WhatsApp number (optional)",
+    "priceLabel": "Price",
+    "orderOn": "Order on WhatsApp",
+    "make": "Make my picture",
+    "messagesTitle": "Your ready messages",
+    "noMessages": "Write your ready messages first (just below this plan), then come back here.",
+    "offerTitle": "Your first-customer offer",
+    "offer": "Hi! I'm starting {product}. For my first few customers there's a special first-time price. Would you like to try it this week? Reply and I'll share the details.",
+    "remind": "Remind me every day",
+    "remindSaved": "Saved! Open the file to add 7 daily reminders (10 AM) to your calendar.",
+    "remindTitle": "StartWise · Day {n}: {kind}"
+  }
 }
