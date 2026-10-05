@@ -62,6 +62,20 @@ export function PopIn({ delay = 0, className, children }: { delay?: number; clas
   );
 }
 
+/** A line or bar that grows from the left to `to` (0 to 1), e.g. the filled part of the journey path. */
+export function GrowX({ to, delay = 0, className }: { to: number; delay?: number; className?: string }) {
+  return (
+    <motion.span
+      aria-hidden
+      initial={{ scaleX: 0 }}
+      animate={{ scaleX: Math.max(0, Math.min(1, to)) }}
+      transition={{ duration: 0.9, delay, ease: EASE }}
+      style={{ transformOrigin: "left" }}
+      className={className}
+    />
+  );
+}
+
 /** Wraps a tappable thing so it gently grows on hover and squishes on tap. */
 export function Tappable({ className, children }: { className?: string; children: ReactNode }) {
   return (
