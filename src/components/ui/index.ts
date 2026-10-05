@@ -12,3 +12,5 @@ export { GuidanceFooter } from "./GuidanceFooter";
 export { LanguageSwitch } from "./LanguageSwitch";
 export { ComingSoon, type ScreenKey } from "./ComingSoon";
 export { PlanNav, type PlanNavItem } from "./PlanNav";
+export { Logo } from "./Logo";
+export { Celebrate } from "./Celebrate";
