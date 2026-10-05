@@ -195,8 +195,11 @@ export function useSpeech(lang: Lang, onText: (text: string) => void) {
     rec.onend = () => {
       recognition.current = null;
       // Browser stopped (silence or error): stop the recording too, which sends it to Gemini.
-      if (recorder.current?.state === "recording") recorder.current.stop();
-      else {
+      // If the recorder is already stopping, its onstop finishes the job: going idle here would
+      // send the browser's rough words first and Gemini's clean words again (a double message).
+      if (recorder.current) {
+        if (recorder.current.state === "recording") recorder.current.stop();
+      } else {
         setStatus((s) => (s === "transcribing" ? s : "idle"));
         // With a recorder, Gemini may still find words the browser missed, so wait for it.
         if (!liveText.current && !canRecord()) setError((prev) => prev ?? "nothing");

@@ -81,7 +81,7 @@ export function SalesDiary({ planId, initial, item }: { planId: string; initial:
             rows={2}
             maxLength={400}
             placeholder={t("placeholder", { item: word })}
-            className="min-h-11 flex-1 resize-none p-2 text-base focus:outline-none"
+            className="min-h-11 flex-1 resize-none rounded-2xl p-2 text-base transition-colors focus:bg-mint/60 focus:outline-none"
           />
           <Button size="sm" onClick={submit} disabled={!text.trim() || pending} aria-label={t("add")}>
             {pending ? <Loader2 className="size-5 animate-spin" aria-hidden /> : <Send className="size-5" aria-hidden />}

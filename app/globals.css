@@ -88,10 +88,13 @@ h1, h2, h3, .font-display {
   letter-spacing: -0.01em;
 }
 
-/* Visible keyboard focus everywhere. */
-:focus-visible {
-  outline: 3px solid var(--color-sun);
-  outline-offset: 2px;
+/* Visible keyboard focus everywhere. In the base layer so a component can choose its own focus look
+   (e.g. the chat box glows as a whole instead of outlining the field inside it). */
+@layer base {
+  :focus-visible {
+    outline: 3px solid var(--color-sun);
+    outline-offset: 2px;
+  }
 }
 
 /* Staggered entrance for lists of cards. */

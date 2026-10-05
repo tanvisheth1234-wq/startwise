@@ -91,7 +91,7 @@ export function OrderBookView({ planId, initial, today, item }: { planId: string
           <p className="text-sm font-bold text-forest">{t("newOrder")}</p>
           <div className="flex items-start gap-2">
             <MicButton size="sm" status={speech.status} level={speech.level} onStart={() => speech.start(spoken)} onStop={speech.stop} />
-            <textarea value={spoken} onChange={(e) => setSpoken(e.target.value)} rows={2} placeholder={t("placeholder", { item: item ?? tc("items") })} className="min-h-11 flex-1 resize-none p-2 focus:outline-none" />
+            <textarea value={spoken} onChange={(e) => setSpoken(e.target.value)} rows={2} placeholder={t("placeholder", { item: item ?? tc("items") })} className="min-h-11 flex-1 resize-none rounded-2xl p-2 transition-colors focus:bg-mint/60 focus:outline-none" />
           </div>
           <div className="grid grid-cols-2 gap-2">
             <Button size="sm" onClick={fromVoice} disabled={!spoken.trim() || pending}>

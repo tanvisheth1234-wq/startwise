@@ -77,7 +77,7 @@ export function NotebookView({ planId, initial }: { planId: string; initial: Not
             rows={2}
             maxLength={600}
             placeholder={t("placeholder")}
-            className="min-h-11 flex-1 resize-none bg-transparent p-2 text-base focus:outline-none"
+            className="min-h-11 flex-1 resize-none rounded-2xl bg-transparent p-2 text-base transition-colors focus:bg-mint/60 focus:outline-none"
           />
           <Button size="sm" onClick={submit} disabled={!draft.trim() || listening || saving} aria-label={t("add")}>
             <Send className="size-5" aria-hidden />

@@ -47,7 +47,7 @@ export function WorryBox({ planId }: { planId: string }) {
               rows={2}
               maxLength={600}
               placeholder={t("placeholder")}
-              className="min-h-11 flex-1 resize-none p-2 text-base focus:outline-none"
+              className="min-h-11 flex-1 resize-none rounded-2xl p-2 text-base transition-colors focus:bg-mint/60 focus:outline-none"
             />
           </div>
           <Button

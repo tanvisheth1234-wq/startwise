@@ -40,6 +40,7 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
   const speech = useSpeech(lang, setText);
   const speaker = useSpeaker(lang);
   const endRef = useRef<HTMLDivElement>(null);
+  const lastSent = useRef({ text: "", at: 0 });
   const listening = speech.status === "listening" || speech.status === "recording";
   const last = messages[messages.length - 1];
   const lastSaid = (step === "idea" || step === "chat") && last?.role === "user" ? last.text : "";
@@ -53,6 +54,9 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
   const send = useCallback(async (raw: string, again = false) => {
     const said = raw.trim();
     if (!said || busy) return;
+    // Safety net: never send the same words twice within a few seconds (double taps, voice + typing).
+    if (!again && lastSent.current.text === said && Date.now() - lastSent.current.at < 8000) return;
+    lastSent.current = { text: said, at: Date.now() };
     setText("");
     setError(false);
     speaker.stop();
@@ -234,7 +238,7 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
             </div>
           )}
           <form
-            className="flex items-center gap-2 rounded-full border-2 border-line bg-white p-1.5 shadow-soft focus-within:border-coral/50"
+            className="flex items-center gap-2 rounded-full border-2 border-line bg-white p-1.5 shadow-soft transition-shadow focus-within:border-coral/60 focus-within:shadow-[0_0_0_4px_rgb(236_106_60/0.15)]"
             onSubmit={(e) => {
               e.preventDefault();
               void send(text);
