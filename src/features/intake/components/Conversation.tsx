@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { BookHeart, Loader2, Mic, Send, Sparkles, Square, Volume2, VolumeX } from "lucide-react";
+import { motion } from "motion/react";
 import { Logo, cn } from "@/components/ui";
 import type { Lang } from "@/contracts/profile";
 import { useSpeaker } from "@/features/talk/hooks/useSpeaker";
@@ -141,20 +142,26 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
 
       <ol className="flex-1 space-y-3 pb-4" aria-live="polite">
         {messages.map((m, i) => (
-          <li key={i} className={cn("flex animate-rise items-end gap-2", m.role === "user" ? "justify-end" : "justify-start")}>
+          <motion.li
+            key={i}
+            initial={{ opacity: 0, y: 12, x: m.role === "user" ? 16 : -16, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+            transition={{ type: "spring", stiffness: 320, damping: 26 }}
+            className={cn("flex items-end gap-2", m.role === "user" ? "justify-end" : "justify-start")}
+          >
             {m.role === "bot" && <Logo className="size-8" />}
             <p className={cn("max-w-[82%] whitespace-pre-wrap rounded-3xl px-4 py-3 text-[1.05rem] leading-relaxed shadow-soft", m.role === "user" ? "rounded-br-md bg-gradient-to-br from-coral to-coral-600 text-white" : "rounded-bl-md border border-line/70 bg-white text-ink")}>
               {m.text}
             </p>
-          </li>
+          </motion.li>
         ))}
         {busy && (
-          <li className="flex items-end gap-2">
+          <motion.li initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="flex items-end gap-2">
             <Logo className="size-8" />
             <p className="flex items-center gap-1 rounded-3xl rounded-bl-md border border-line/70 bg-white px-4 py-4" aria-label={t("typing")}>
               {[0, 1, 2].map((d) => <span key={d} className="size-2 animate-bounce rounded-full bg-coral/70" style={{ animationDelay: `${d * 150}ms` }} />)}
             </p>
-          </li>
+          </motion.li>
         )}
         {error && <li className="rounded-2xl bg-sun-light p-3 text-sm">{t("error")}</li>}
         {notesSaved > 0 && (
@@ -168,7 +175,7 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
       </ol>
 
       {step === "voice" && (
-        <div className="grid grid-cols-2 gap-2 pb-4">
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="grid grid-cols-2 gap-2 pb-4">
           <button type="button" onClick={() => void chooseVoice("speak")} className="flex min-h-16 flex-col items-center justify-center rounded-3xl bg-white font-display text-lg font-bold text-forest shadow-soft hover:bg-mint">
             <Volume2 className="size-6 text-coral" aria-hidden />
             {t("voiceSpeak")}
@@ -177,17 +184,26 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
             <VolumeX className="size-6 text-muted" aria-hidden />
             {t("voiceText")}
           </button>
-        </div>
+        </motion.div>
       )}
 
       {ready && step === "chat" && !busy && (
-        <div className="animate-pop space-y-2 pb-3">
-          <button type="button" onClick={makePlan} disabled={building} className="flex min-h-16 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-br from-coral to-coral-600 font-display text-xl font-bold text-white shadow-lift disabled:opacity-70">
+        <motion.div initial={{ opacity: 0, scale: 0.9, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 240, damping: 18 }} className="space-y-2 pb-3">
+          <motion.button
+            type="button"
+            onClick={makePlan}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            animate={building ? undefined : { boxShadow: ["0 8px 24px -8px rgba(236,106,60,0.45)", "0 10px 34px -6px rgba(236,106,60,0.75)", "0 8px 24px -8px rgba(236,106,60,0.45)"] }}
+            transition={{ boxShadow: { duration: 2.4, repeat: Infinity, ease: "easeInOut" } }}
+            disabled={building}
+            className="flex min-h-16 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-br from-coral to-coral-600 font-display text-xl font-bold text-white shadow-lift disabled:opacity-70"
+          >
             {building ? <Loader2 className="size-6 animate-spin" aria-hidden /> : <Sparkles className="size-6" aria-hidden />}
             {t("makePlan")}
-          </button>
+          </motion.button>
           <p className="text-center text-xs text-muted">{t("orKeepTalking")}</p>
-        </div>
+        </motion.div>
       )}
 
       {step !== "voice" && (
