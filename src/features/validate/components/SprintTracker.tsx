@@ -4,6 +4,7 @@ import { useRef, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { MessageCircleQuestion, PartyPopper, RotateCcw, ShoppingBag, TrendingUp } from "lucide-react";
 import { Celebrate, cn } from "@/components/ui";
+import { motion } from "motion/react";
 import type { SprintState } from "../server/results";
 import { logResult, restartSprint } from "../results";
 
@@ -42,7 +43,12 @@ export function SprintTracker({ planId, initial }: { planId: string; initial: Sp
 
   const bar = (value: number, target: number, tone: string) => (
     <div className="h-3 overflow-hidden rounded-full bg-mint">
-      <div className={cn("h-full rounded-full transition-all", tone)} style={{ width: `${Math.min(100, (value / Math.max(1, target)) * 100)}%` }} />
+      <motion.div
+        className={cn("h-full rounded-full", tone)}
+        initial={{ width: 0 }}
+        animate={{ width: `${Math.min(100, (value / Math.max(1, target)) * 100)}%` }}
+        transition={{ type: "spring", stiffness: 120, damping: 18 }}
+      />
     </div>
   );
 
@@ -56,41 +62,52 @@ export function SprintTracker({ planId, initial }: { planId: string; initial: Sp
       </div>
 
       <div className="grid grid-cols-2 gap-2">
-        <button type="button" onClick={() => add(1, 0)} className="flex min-h-24 flex-col items-center justify-center gap-1 rounded-3xl bg-sky-light font-bold text-sky active:scale-95">
+        <motion.button type="button" whileTap={{ scale: 0.92 }} onClick={() => add(1, 0)} className="flex min-h-24 flex-col items-center justify-center gap-1 rounded-3xl bg-sky-light font-bold text-sky">
           <MessageCircleQuestion className="size-7" aria-hidden />
           {t("plusEnquiry")}
-        </button>
-        <button type="button" onClick={() => add(0, 1)} className="flex min-h-24 flex-col items-center justify-center gap-1 rounded-3xl bg-gradient-to-br from-sun to-coral font-bold text-white shadow-lift active:scale-95">
+        </motion.button>
+        <motion.button type="button" whileTap={{ scale: 0.92 }} onClick={() => add(0, 1)} className="flex min-h-24 flex-col items-center justify-center gap-1 rounded-3xl bg-gradient-to-br from-sun to-coral font-bold text-white shadow-lift">
           <ShoppingBag className="size-7" aria-hidden />
           {t("plusOrder")}
-        </button>
+        </motion.button>
       </div>
 
       <div className="space-y-3">
         <div className="space-y-1">
           <p className="flex justify-between text-sm font-semibold text-forest">
             <span>{t("enquiries")}</span>
-            <span>{s.totals.enquiries} / {s.targets.enquiries}</span>
+            <motion.span key={s.totals.enquiries} initial={{ scale: 1.5, color: "#ec6a3c" }} animate={{ scale: 1, color: "#4a2c22" }} transition={{ type: "spring", stiffness: 300, damping: 15 }} className="inline-block">
+              {s.totals.enquiries} / {s.targets.enquiries}
+            </motion.span>
           </p>
           {bar(s.totals.enquiries, s.targets.enquiries, "bg-sky")}
         </div>
         <div className="space-y-1">
           <p className="flex justify-between text-sm font-semibold text-forest">
             <span>{t("orders")}</span>
-            <span>{s.totals.orders} / {s.targets.orders}</span>
+            <motion.span key={s.totals.orders} initial={{ scale: 1.5, color: "#ec6a3c" }} animate={{ scale: 1, color: "#4a2c22" }} transition={{ type: "spring", stiffness: 300, damping: 15 }} className="inline-block">
+              {s.totals.orders} / {s.targets.orders}
+            </motion.span>
           </p>
           {bar(s.totals.orders, s.targets.orders, "bg-gradient-to-r from-sun to-coral")}
         </div>
       </div>
 
       {v.verdict === "go" && (
-        <div className="animate-pop space-y-1 rounded-3xl bg-gradient-to-br from-sage to-teal-600 p-4 text-white">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.7, rotate: -3 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 14 }}
+          className="space-y-1 rounded-3xl bg-gradient-to-br from-sage to-teal-600 p-4 text-white"
+        >
           <p className="flex items-center gap-2 font-display text-2xl font-extrabold">
-            <PartyPopper className="size-7" aria-hidden />
+            <motion.span initial={{ rotate: -40, scale: 0 }} animate={{ rotate: [0, -15, 15, 0], scale: 1 }} transition={{ delay: 0.25, duration: 0.7 }} className="inline-flex">
+              <PartyPopper className="size-7" aria-hidden />
+            </motion.span>
             {t("go")}
           </p>
           <p>{t("goBody")}</p>
-        </div>
+        </motion.div>
       )}
       {v.verdict === "no_go" && (
         <div className="space-y-3 rounded-3xl bg-sun-light p-4">
