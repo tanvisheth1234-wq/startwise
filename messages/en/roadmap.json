@@ -30,5 +30,26 @@
     "pilot": "4 · First orders",
     "launch": "5 · Launch",
     "improve": "6 · Grow"
+  },
+  "stepDone": {
+    "costs": {
+      "label": "I've set my price",
+      "done": "Price set: Costs done",
+      "hint": "Tap this when your price covers your costs and you are happy with it.",
+      "cheer": "Costs done! Your plant grew."
+    },
+    "launch": {
+      "label": "I've told people I'm open",
+      "done": "Launched: people know you're open",
+      "hint": "Tap this once you've shared your first posts or WhatsApp message.",
+      "cheer": "Launch done! Your plant grew."
+    },
+    "undo": "Tap again to undo",
+    "month": {
+      "label": "I've checked my first month",
+      "done": "First month checked",
+      "hint": "After a month of sales, compare your real sales and costs with this plan, then tap.",
+      "cheer": "First month checked! A new fruit grew."
+    }
   }
 }

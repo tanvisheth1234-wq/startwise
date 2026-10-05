@@ -11,6 +11,7 @@ import { getProvider } from "@/lib/ai/provider";
 import { redact } from "@/lib/ai/redact";
 import { getSection, saveSection } from "@/features/validate/server/sections";
 import { todayInIndia } from "@/features/validate/lib/testPlan";
+import { roadmap } from "@/features/roadmap/api";
 import type { Diary } from "@/features/first-customers/actions";
 
 export type OrderStatus = "new" | "baking" | "ready" | "delivered";
@@ -51,6 +52,7 @@ export async function addOrder(planId: string, input: z.input<typeof NewOrder>):
   const order: Order = { ...o, id: crypto.randomUUID().slice(0, 8), status: "new", paid: o.advanceInr >= o.amountInr && o.amountInr > 0, createdAt: new Date().toISOString() };
   const next = { orders: [...book.orders, order] };
   await save(planId, next, user.id);
+  if (book.orders.length === 0) await roadmap.markTaskDoneByKey(planId, "pilot.first_orders").catch(() => {});
   return next;
 }
 
