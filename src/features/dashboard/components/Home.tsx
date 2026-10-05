@@ -5,7 +5,7 @@ import {
   BadgeIndianRupee, BookHeart, ClipboardList, Drama, FileDown, Calculator, FileText, Flag, FlaskConical, HandCoins, MapPinned, Megaphone, PartyPopper,
   Rocket, Store, Users, type LucideIcon,
 } from "lucide-react";
-import { cn } from "@/components/ui";
+import { GrowX, Stagger, StaggerItem, cn } from "@/components/ui";
 import type { Lang } from "@/contracts/profile";
 import type { RoadmapTask } from "@/contracts/roadmap";
 import { taskHref } from "@/features/roadmap/api";
@@ -45,13 +45,16 @@ export async function JourneyPath({ planId, lang }: Props) {
         <h2 className="font-display text-lg font-bold text-forest">{t("title")}</h2>
         <span className="text-xs font-semibold text-muted">{t("progress", { done: all.filter((s) => s.done).length, total: all.length })}</span>
       </div>
-      <ol className="relative flex items-start justify-between">
+      <Stagger as="ol" delay={0.2} gap={0.08} className="relative flex items-start justify-between">
         <span className="absolute left-6 right-6 top-6 border-t-[3px] border-dashed border-line" aria-hidden />
+        <span className="absolute left-6 right-6 top-6 h-[3px]" aria-hidden>
+          <GrowX to={(current === -1 ? all.length - 1 : current) / (all.length - 1)} delay={0.35} className="block h-full rounded-full bg-gradient-to-r from-sage to-coral" />
+        </span>
         {all.map((s, i) => {
           const Icon = s.done ? PartyPopper : i === all.length - 1 ? Flag : s.icon;
           const isCurrent = i === current;
           return (
-            <li key={s.key} className="relative z-10 flex w-16 flex-col items-center gap-1 text-center">
+            <StaggerItem as="li" key={s.key} className="relative z-10 flex w-16 flex-col items-center gap-1 text-center">
               <Link
                 href={s.href}
                 aria-current={isCurrent ? "step" : undefined}
@@ -65,10 +68,10 @@ export async function JourneyPath({ planId, lang }: Props) {
               <span className={cn("text-[11px] font-bold leading-tight", isCurrent ? "text-coral-600" : s.done ? "text-sage" : "text-muted")}>
                 {t(`stations.${s.key}`)}
               </span>
-            </li>
+            </StaggerItem>
           );
         })}
-      </ol>
+      </Stagger>
     </section>
   );
 }

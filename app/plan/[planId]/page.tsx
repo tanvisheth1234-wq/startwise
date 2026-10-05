@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ChevronDown, LayoutGrid, Pencil } from "lucide-react";
-import { Skeleton } from "@/components/ui";
+import { FadeUp, Skeleton } from "@/components/ui";
 import { Lang } from "@/contracts/profile";
 import { ExploreDoors, JourneyPath, TodayThree } from "@/features/dashboard/components/Home";
 import { FirstTour } from "@/features/dashboard/components/FirstTour";
@@ -26,7 +26,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ plan
 
   return (
     <div className="space-y-5">
-      <section className="flex items-end justify-between gap-2">
+      <FadeUp className="flex items-end justify-between gap-2">
         <div>
           <p className="text-sm font-semibold text-coral-600">{name ? t(`greetingNamed.${greeting}`, { name }) : t(`greeting.${greeting}`)}</p>
           <h1 className="text-2xl font-extrabold leading-tight text-forest first-letter:uppercase">{plan.profile?.product || plan.title}</h1>
@@ -35,23 +35,25 @@ export default async function DashboardPage({ params }: { params: Promise<{ plan
           <Pencil className="size-4" aria-hidden />
           {t("editProfile")}
         </Link>
-      </section>
+      </FadeUp>
 
-      <div data-tour="next">
+      <FadeUp delay={0.08} data-tour="next">
         <Suspense fallback={<Skeleton className="h-20 w-full rounded-3xl" />}>
           <NextStepBanner planId={plan.id} lang={lang} />
         </Suspense>
-      </div>
+      </FadeUp>
 
-      <div data-tour="journey">
+      <FadeUp delay={0.16} data-tour="journey">
         <Suspense fallback={<Skeleton className="h-28 w-full rounded-3xl" />}>
           <JourneyPath planId={plan.id} lang={lang} />
         </Suspense>
-      </div>
+      </FadeUp>
 
-      <Suspense fallback={<Skeleton className="h-40 w-full rounded-3xl" />}>
-        <TodayThree planId={plan.id} lang={lang} />
-      </Suspense>
+      <FadeUp delay={0.24}>
+        <Suspense fallback={<Skeleton className="h-40 w-full rounded-3xl" />}>
+          <TodayThree planId={plan.id} lang={lang} />
+        </Suspense>
+      </FadeUp>
 
       {/* Everything else, one tap away but out of the way. */}
       <details className="group rounded-3xl border border-line/70 bg-white/70 shadow-soft">
