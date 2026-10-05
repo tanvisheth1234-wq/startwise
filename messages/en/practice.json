@@ -1,0 +1,38 @@
+{
+  "title": "Practice room",
+  "subtitle": "Rehearse the conversations that make you nervous, out loud, with no one judging. Then get kind feedback.",
+  "roles": {
+    "bank": {
+      "title": "Ask the bank for a loan",
+      "sub": "A careful loan officer asks about your plan",
+      "name": "Mr. Kulkarni, loan officer"
+    },
+    "customer": {
+      "title": "Handle a customer who haggles",
+      "sub": "\"Why so costly? I can get it cheaper nearby!\"",
+      "name": "Mrs. Deshpande, neighbour"
+    },
+    "office": {
+      "title": "Win a bulk Diwali order",
+      "sub": "An office admin wants 40 gift boxes",
+      "name": "Ms. Rao, office admin"
+    }
+  },
+  "change": "Change",
+  "thinking": "Thinking…",
+  "coaching": "Your coach is reviewing…",
+  "failed": "Couldn't continue just now. Please try again in a moment.",
+  "speak": "Speak",
+  "stop": "Stop",
+  "listening": "Listening…",
+  "placeholder": "Speak or type your answer",
+  "send": "Send",
+  "finish": "End and get feedback",
+  "feedbackTitle": "Your coach says",
+  "stars": "{count} out of 5 stars",
+  "didWell": "You did well",
+  "tryNext": "Try next time",
+  "sayThis": "Next time, try saying:",
+  "again": "Practise again",
+  "great": "Brilliant! 🌟"
+}
