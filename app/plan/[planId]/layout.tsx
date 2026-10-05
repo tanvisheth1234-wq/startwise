@@ -36,7 +36,8 @@ export default async function PlanLayout({
 
   return (
     <div className="pb-40 print:pb-0">
-      <main className="mx-auto max-w-3xl px-4 py-4">{children}</main>
+      {/* The home and the first "here's your business" screen spread out on a laptop; tool pages stay a calm reading width. */}
+      <main className={`mx-auto px-4 py-4 ${pathname === base || pathname.startsWith(`${base}/profile`) ? "max-w-3xl lg:max-w-6xl lg:px-8" : "max-w-3xl"}`}>{children}</main>
       {plan.status !== "draft" && <PlanNav items={nav} label={plan.title} talkLabel={tt("button")} />}
       {plan.status !== "draft" && <TalkToStartWise planId={plan.id} item={await itemWord(plan.id, plan.profile?.businessType ?? "other", plan.language)} />}
     </div>

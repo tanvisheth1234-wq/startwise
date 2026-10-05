@@ -25,7 +25,8 @@ export default async function DashboardPage({ params }: { params: Promise<{ plan
   const greeting = hour < 12 ? "morning" : hour < 17 ? "afternoon" : "evening";
 
   return (
-    <div className="space-y-5">
+    // Phone: one calm column. Laptop: her steps on the left, her growing plant on the right.
+    <div className="space-y-5 lg:grid lg:grid-flow-row-dense lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-x-8 lg:gap-y-5 lg:space-y-0 lg:[&>*]:col-start-1">
       <FadeUp className="flex items-end justify-between gap-2">
         <div>
           <p className="text-sm font-semibold text-coral-600">{name ? t(`greetingNamed.${greeting}`, { name }) : t(`greeting.${greeting}`)}</p>
@@ -43,10 +44,12 @@ export default async function DashboardPage({ params }: { params: Promise<{ plan
         </Suspense>
       </FadeUp>
 
-      <FadeUp delay={0.16} data-tour="journey">
+      <FadeUp delay={0.16} data-tour="journey" className="lg:col-start-2! lg:row-span-4 lg:row-start-1">
+        <div className="lg:sticky lg:top-24">
         <Suspense fallback={<Skeleton className="h-28 w-full rounded-3xl" />}>
           <JourneyPath planId={plan.id} lang={lang} />
         </Suspense>
+        </div>
       </FadeUp>
 
       <FadeUp delay={0.24}>
