@@ -47,6 +47,20 @@ function CopyButton({ text }: { text: string }) {
   );
 }
 
+/** Copy, or open WhatsApp with the text ready to send. */
+export function ShareRow({ text }: { text: string }) {
+  const t = useTranslations("validate.templates");
+  return (
+    <div className="flex flex-wrap gap-2">
+      <CopyButton text={text} />
+      <a href={`https://wa.me/?text=${encodeURIComponent(text)}`} target="_blank" rel="noopener noreferrer" className={buttonClasses("primary", "sm")}>
+        <MessageCircle className="size-4" aria-hidden />
+        {t("shareWhatsapp")}
+      </a>
+    </div>
+  );
+}
+
 export function TemplatesSection({ planId, initial, ready }: { planId: string; initial: Section<Templates> | null; ready: boolean }) {
   const t = useTranslations("validate.templates");
   const s = useDraftSection<Templates>(planId, "templates", initial, false);
@@ -72,18 +86,7 @@ export function TemplatesSection({ planId, initial, ready }: { planId: string; i
             <h3 className="text-sm font-semibold text-forest">{t("whatsapp")}</h3>
             <textarea aria-label={t("whatsapp")} value={d.whatsappMessage} rows={5} maxLength={1000}
               onChange={(e) => s.setDraft((x) => ({ ...x, whatsappMessage: e.target.value }))} className={growClass} />
-            <div className="flex flex-wrap gap-2">
-              <CopyButton text={d.whatsappMessage} />
-              <a
-                href={`https://wa.me/?text=${encodeURIComponent(d.whatsappMessage)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={buttonClasses("primary", "sm", "bg-[#1f8f4e] hover:bg-[#187a42]")}
-              >
-                <MessageCircle className="size-4" aria-hidden />
-                {t("shareWhatsapp")}
-              </a>
-            </div>
+            <ShareRow text={d.whatsappMessage} />
           </section>
 
           <section className="space-y-2">
@@ -99,15 +102,15 @@ export function TemplatesSection({ planId, initial, ready }: { planId: string; i
                 </li>
               ))}
             </ul>
-            <CopyButton text={pollText} />
+            <ShareRow text={pollText} />
           </section>
 
           <section className="space-y-2">
             <h3 className="text-sm font-semibold text-forest">{t("priceCard")}</h3>
             <p className="text-xs text-muted">{t("priceCardHint")}</p>
             <textarea aria-label={t("priceCard")} value={d.priceCard} rows={5} maxLength={1000}
-              onChange={(e) => s.setDraft((x) => ({ ...x, priceCard: e.target.value }))} className={cn(growClass, "font-mono text-sm")} />
-            <CopyButton text={d.priceCard} />
+              onChange={(e) => s.setDraft((x) => ({ ...x, priceCard: e.target.value }))} className={growClass} />
+            <ShareRow text={d.priceCard} />
           </section>
         </div>
       )}

@@ -43,6 +43,7 @@ const TASKS: Record<DraftKind, string[]> = {
   templates: [
     "TASK: Ready-to-send messages for the founder's test sprint.",
     "whatsappMessage: a short friendly message (max 60 words) to send to neighbours and friends, inviting a pre-order or enquiry.",
+    "These messages go to CUSTOMERS: never mention a test, trial run, sprint, experiment or validation. Write as a small business that is starting soon (e.g. 'taking first orders this week').",
     "poll: a WhatsApp poll question with 3–4 options to learn what customers want.",
     "priceCard: plain text, 3–5 lines, one item per line. Use prices from the context if given; otherwise write ₹___ as a blank. Never invent prices.",
     'Return: { "whatsappMessage": string, "poll": { "question": string, "options": string[] }, "priceCard": string }',
