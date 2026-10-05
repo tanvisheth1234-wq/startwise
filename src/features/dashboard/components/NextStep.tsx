@@ -15,8 +15,8 @@ export async function NextStepBanner({ planId, lang }: { planId: string; lang: L
   }
   if (!r.value) {
     return (
-      <div className="flex items-center gap-3 rounded-2xl bg-forest p-4 text-white">
-        <PartyPopper className="size-6 shrink-0 text-gold-light" aria-hidden />
+      <div className="flex items-center gap-3 rounded-3xl bg-gradient-to-br from-sage to-teal-600 p-4 text-white shadow-soft">
+        <PartyPopper className="size-6 shrink-0 text-sun" aria-hidden />
         <p className="font-semibold">{t("allDone")}</p>
       </div>
     );
@@ -24,13 +24,13 @@ export async function NextStepBanner({ planId, lang }: { planId: string; lang: L
   return (
     <Link
       href={resolvePlanHref(planId, r.value.href)}
-      className="group flex min-h-20 items-center gap-3 rounded-2xl bg-forest p-4 text-white shadow-md hover:bg-forest-700"
+      className="group flex min-h-20 animate-pop items-center gap-3 rounded-3xl bg-gradient-to-br from-coral via-coral-600 to-berry p-4 text-white shadow-lift"
     >
       <div className="min-w-0 flex-1">
-        <p className="text-xs font-semibold uppercase tracking-wide text-gold-light">{t("label")}</p>
-        <p className="text-lg font-semibold leading-snug">{r.value.title}</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-white/80">{t("label")}</p>
+        <p className="font-display text-xl font-bold leading-snug">{r.value.title}</p>
       </div>
-      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-gold transition-transform group-hover:translate-x-0.5">
+      <span className="grid size-12 shrink-0 place-items-center rounded-full bg-white text-coral-600 transition-transform group-hover:translate-x-0.5">
         <ArrowRight className="size-5" aria-hidden />
       </span>
     </Link>

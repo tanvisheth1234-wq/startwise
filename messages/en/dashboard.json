@@ -1,6 +1,6 @@
 {
   "modulesTitle": "Your plan",
-  "editProfile": "Edit profile",
+  "editProfile": "Edit",
   "nextStep": {
     "label": "Your next step",
     "allDone": "All steps done. Well done!",
@@ -37,6 +37,100 @@
       "market": "See nearby competition and prices",
       "firstCustomers": "Plan your first 10 customers",
       "launchPack": "Download your plan as a PDF"
+    }
+  },
+  "greeting": {
+    "morning": "Good morning ☀️",
+    "afternoon": "Good afternoon 🌤️",
+    "evening": "Good evening 🌙"
+  },
+  "journey": {
+    "title": "Your journey",
+    "progress": "{done} of {total}",
+    "stations": {
+      "test": "Test",
+      "costs": "Costs",
+      "papers": "Papers",
+      "launch": "Launch",
+      "customer": "First sale"
+    }
+  },
+  "today": {
+    "title": "Today's 3 things",
+    "all": "All tasks ({done}/{total})",
+    "allDone": "You've done everything for now. Take a breath! 🎉"
+  },
+  "doors": {
+    "title": "Explore your plan",
+    "validate": {
+      "title": "Will people buy it?",
+      "sub": "7-day test"
+    },
+    "money": {
+      "title": "Will I make money?",
+      "sub": "Costs, price, break-even"
+    },
+    "compliance": {
+      "title": "What papers do I need?",
+      "sub": "Only what applies to you"
+    },
+    "funding": {
+      "title": "Can I get money help?",
+      "sub": "Loans and schemes"
+    },
+    "customers": {
+      "title": "First customers",
+      "sub": "Who to ask, what to say"
+    },
+    "marketing": {
+      "title": "Marketing buddy",
+      "sub": "What to post, and when"
+    },
+    "notebook": {
+      "title": "Idea notebook",
+      "sub": "Your messy thoughts, shaped"
+    },
+    "launchPack": {
+      "title": "Launch Pack",
+      "sub": "Your plan as a PDF"
+    },
+    "market": {
+      "title": "Who else sells nearby?",
+      "sub": "Map and usual prices"
+    },
+    "practice": {
+      "title": "Practice room",
+      "sub": "Rehearse with a bank or customer"
+    },
+    "orders": {
+      "title": "Order book",
+      "sub": "What's due, what's paid"
+    }
+  },
+  "greetingNamed": {
+    "morning": "Good morning, {name} ☀️",
+    "afternoon": "Good afternoon, {name} 🌤️",
+    "evening": "Good evening, {name} 🌙"
+  },
+  "moreTools": "More tools",
+  "moreToolsSub": "Money, papers, schemes, marketing, orders and more",
+  "tour": {
+    "label": "Quick tour",
+    "count": "{n} of {total}",
+    "skip": "Skip",
+    "nextBtn": "Next",
+    "done": "Got it!",
+    "next": {
+      "title": "This is your next step",
+      "body": "Just one thing to do at a time. Tap it and I'll show you exactly how."
+    },
+    "journey": {
+      "title": "This is your journey",
+      "body": "Five stops from idea to first sale. Each circle turns green as you finish it."
+    },
+    "talk": {
+      "title": "Talk to me anytime",
+      "body": "Tap the Talk button whenever you're stuck or want to tell me something, like a sale or a worry."
     }
   }
 }

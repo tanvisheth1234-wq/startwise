@@ -12,12 +12,18 @@ function Ring({ score, label }: { score: number; label: string }) {
   const c = 2 * Math.PI * r;
   return (
     <svg viewBox="0 0 80 80" className="size-24 shrink-0" role="img" aria-label={label}>
+      <defs>
+        <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#ffc24b" />
+          <stop offset="1" stopColor="#ec6a3c" />
+        </linearGradient>
+      </defs>
       <circle cx="40" cy="40" r={r} fill="none" stroke="var(--color-mint)" strokeWidth="9" />
       <circle
-        cx="40" cy="40" r={r} fill="none" stroke="var(--color-gold)" strokeWidth="9" strokeLinecap="round"
+        cx="40" cy="40" r={r} fill="none" stroke="url(#ring-grad)" strokeWidth="9" strokeLinecap="round"
         strokeDasharray={`${(score / 100) * c} ${c}`} transform="rotate(-90 40 40)"
       />
-      <text x="40" y="45" textAnchor="middle" className="fill-forest text-[18px] font-bold">{score}</text>
+      <text x="40" y="45" textAnchor="middle" className="fill-forest font-display text-[20px] font-extrabold">{score}</text>
     </svg>
   );
 }
@@ -33,7 +39,7 @@ export async function ReadinessCard({ planId, lang }: { planId: string; lang: La
     <Card className="flex items-start gap-4">
       <Ring score={score} label={t("aria", { score })} />
       <div className="min-w-0 flex-1 space-y-2">
-        <h2 className="font-semibold text-forest">{t("title")}</h2>
+        <h2 className="font-display text-lg font-bold text-forest">{t("title")}</h2>
         {blockers.length === 0 ? (
           <p className="text-sm text-muted">{t("noBlockers")}</p>
         ) : (
@@ -41,7 +47,7 @@ export async function ReadinessCard({ planId, lang }: { planId: string; lang: La
             {blockers.map((b) => (
               <li key={b.label + b.href}>
                 <Link href={resolvePlanHref(planId, b.href)} className="flex min-h-11 items-center gap-2 text-sm text-ink hover:text-forest">
-                  <AlertTriangle className="size-4 shrink-0 text-gold" aria-hidden />
+                  <AlertTriangle className="size-4 shrink-0 text-coral" aria-hidden />
                   <span className="flex-1">{b.label}</span>
                   <ChevronRight className="size-4 shrink-0 text-muted" aria-hidden />
                 </Link>
