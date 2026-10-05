@@ -4,99 +4,137 @@
 
 **Start wise. Launch right.**
 
-Speak a business idea in English, Hindi or Marathi, and get a tested, source-backed launch plan and a tracked path to your first customer.
+A warm, voice-first business saathi for first-time women founders. Tell it your idea in **English, Hindi or Marathi**, and it grows into a tested, source-backed plan, then walks with you to your first customer and beyond.
 
 **She Solves 3.0** · Web & Software Development · Domain: Entrepreneurship · **Team200OK**
 
-🔗 **Live app:** _coming soon (Vercel)_ · 🎬 **Example plan for judges:** `<live link>/demo` (opens Sunita's complete home-bakery plan, no login needed)
+🔗 **Live app:** _<add Vercel link>_ · 🎬 **Ready-made example for judges:** _<add Vercel link>_/demo (Sunita's home bakery, no login needed)
 
 </div>
 
 ---
 
+## Contents
+
+1. [Problem statement](#1-problem-statement)
+2. [Proposed solution](#2-proposed-solution)
+3. [Screenshots](#3-screenshots)
+4. [Features implemented](#4-features-implemented)
+5. [Tech stack](#5-tech-stack)
+6. [Installation & setup](#6-installation--setup)
+7. [How to run](#7-how-to-run)
+8. [Deployment](#8-deployment)
+9. [Project structure](#9-project-structure)
+10. [Known limitations](#10-known-limitations)
+11. [Future scope](#11-future-scope)
+12. [Team](#12-team)
+
+---
+
 ## 1. Problem statement
 
-Aspiring entrepreneurs, especially first-time women founders running home businesses, have ideas but **no trusted guide to launch them**. The early journey is scattered: checking the idea, working out costs and pricing, finding which licences apply, discovering funding schemes and organising daily tasks all happen in different places, mostly in English and full of jargon. Generic AI chat gives one-off answers that can be outdated or invented, and paid agents handle only one task. A founder can describe the business but has no single guided workflow that turns *a thought* into *a plan she can act on*.
+Aspiring entrepreneurs, especially first-time women founders starting from home, have ideas but **no trusted guide to launch them**. The early journey is scattered: checking whether people will buy, working out costs and a fair price, finding which licences apply, discovering funding schemes and remembering what to do each day all happen in different places, mostly in English and full of jargon. Generic AI chat gives one-off answers that can be outdated or invented, and paid agents handle only one task. She can describe her business, but has no single, kind, step-by-step guide that turns *a thought* into *a business she can run*.
 
 ## 2. Proposed solution
 
-StartWise is a **launch workspace, not a one-time chat answer**. It keeps the business profile, the numbers, the sources and the task list together, and it remembers progress.
+StartWise is a **launch companion, not a one-time chat answer**. It feels like talking to a friend, keeps everything about her business in one place, and remembers her progress.
 
-1. **Say the idea** by voice or text, in your own language
-2. **Answer at most 3 quick questions** by tapping choices
-3. **Test it** with a ₹0–500, 7-day experiment and get a GO / NO-GO verdict
-4. **Plan it**: only the licences that apply, live costs and break-even, matching schemes
-5. **Grow it**: a weekly marketing plan, a sales diary and first-customer tools
-6. **Take it away** as a Launch Pack PDF, and track every step
+1. **Talk about the idea**: a warm chat (voice or text, in her language) that asks questions specific to *her* idea, while a card beside it fills in her business live.
+2. **See her business**: "Here's your business" in plain words, and a first step.
+3. **Test before spending**: a 7-day, ₹0–500 test with a GO / NO-GO verdict, where every day has a **"Help me do this"** button that does the hard part for her.
+4. **Plan it**: costs and price, only the licences that apply, matching government schemes.
+5. **Launch and sell**: marketing plan, order book, sales diary, first customers.
+6. **Keep growing**: after her first sale, **Season 2** sets new goals, and fresh ideas start a new conversation every day. There is no dead end.
 
-> **Core principle:** *AI understands and explains; reviewed data and formulas decide.* Licences, scheme matches, every number and the GO / NO-GO verdict come from reviewed data and plain TypeScript formulas, so the same profile always gives the same answer. Every legal fact links to its official source with a verified status.
+Her progress is **a plant that grows**: StartWise (the watering can) waters her idea, each finished step grows a leaf, her first sale makes it bloom, and in Season 2 it bears fruit.
 
-Pilot scope: **Pune and Maharashtra**. Home food (home bakery) is built end to end; tailoring/boutique and online reselling are supported too.
+> **Core principle:** *AI understands and explains; reviewed data and formulas decide.* Licences, scheme matches, every number and the GO / NO-GO verdict come from reviewed data and plain TypeScript formulas, so the same profile always gives the same answer. Every legal fact links to its official source with a verified date.
+
+Pilot scope: **Pune and Maharashtra**. Any business idea is welcome (home food, tailoring, tuition, candles, reselling, salons…); food, tailoring and online reselling have the deepest reviewed data.
 
 ## 3. Screenshots
 
-| Start | Your business (Marathi) | Plan home |
-| :---: | :---: | :---: |
-| <img src="docs/screenshots/01-start.png" width="240"> | <img src="docs/screenshots/02-your-business-marathi.png" width="240"> | <img src="docs/screenshots/03-plan-home.png" width="240"> |
-| **Money Lab** | **What papers do I need?** | **Marketing buddy** |
-| <img src="docs/screenshots/04-money-lab.png" width="240"> | <img src="docs/screenshots/05-papers.png" width="240"> | <img src="docs/screenshots/06-marketing-buddy.png" width="240"> |
-| **7-day test: GO!** | **Idea notebook** | **Who sells nearby?** |
-| <img src="docs/screenshots/07-seven-day-test.png" width="240"> | <img src="docs/screenshots/08-notebook.png" width="240"> | <img src="docs/screenshots/09-nearby-map.png" width="240"> |
+| Welcome: the plant grows, the phone chats by itself | Chat, with the business filling in live |
+| :---: | :---: |
+| <img src="docs/screenshots/01-welcome.png" width="420"> | <img src="docs/screenshots/02-chat-live-card.png" width="420"> |
+| **Plan home: one next step, her plant beside it** | **Season 2: "Grow", with fruit goals and daily ideas** |
+| <img src="docs/screenshots/04-plan-home-plant.png" width="420"> | <img src="docs/screenshots/03-plan-home-season2.png" width="420"> |
+| **7-day test: tick each day, "Help me do this"** | **What papers do I need? Only what applies, with sources** |
+| <img src="docs/screenshots/06-seven-day-test.png" width="420"> | <img src="docs/screenshots/09-papers.png" width="420"> |
+| **Funding: matching schemes and a loan pitch** | **Marketing buddy: weekly posts with reminders** |
+| <img src="docs/screenshots/10-funding.png" width="420"> | <img src="docs/screenshots/11-marketing.png" width="420"> |
+
+| Plan home in Hindi | "Help me do this": 5 questions to ask | Money in Marathi | Her status picture, made in one tap | Talk: ideas become conversations |
+| :---: | :---: | :---: | :---: | :---: |
+| <img src="docs/screenshots/05-plan-home-hindi-phone.png" width="160"> | <img src="docs/screenshots/07-help-me-do-this.png" width="160"> | <img src="docs/screenshots/08-money-marathi-phone.png" width="160"> | <img src="docs/screenshots/12-status-picture.png" width="160"> | <img src="docs/screenshots/13-talk.png" width="160"> |
 
 ## 4. Features implemented
 
+### The first five minutes (a conversation, never a form)
+| Feature | What it does |
+| --- | --- |
+| **Warm front door** | "Namaste." and *"Which language do you prefer?"* (English · हिन्दी · मराठी). The StartWise plant grows on screen and a sample chat plays on a little phone, so she understands the idea at once. Fits on one screen, phone or laptop. |
+| **A real conversation** | Asks her name and whether to **speak replies aloud or just show text**, then explores *her* idea first: a tutor, a baker and a restaurant owner get different questions, never the obvious ones. Location and budget come later, with tap-to-answer chips. |
+| **Business taking shape (laptop)** | Beside the chat, a card fills itself in as StartWise understands her (idea, area, home or shop, who will buy, budget), with a soft light on each new fact and a tiny plant that grows. |
+| **Voice in three languages** | Live words while she speaks; Gemini transcribes the recording for accurate Hindi, Marathi and Hinglish. Replies can be read aloud. Typing always works. |
+| **Log in only when it matters** | Guests chat freely. Tapping **Make my plan** asks her to save it: **Continue with Google** or email + password. Her guest chat moves into her account. Logged-in founders get *"Welcome back"*. |
+| **Here's your business** | Her business in plain words (what, where, who for, budget), a first step, read-aloud, and "change something". |
+
+### Her plan
+| Feature | What it does |
+| --- | --- |
+| **One clear path** | The plan home shows **one next step**, and it always follows the step pulsing on her plant ("Step 2 of 5 on your plant: Costs"). Small any-time jobs sit apart; everything else waits under **More tools**. A 3-step tour on the first visit. |
+| **Her growing plant** | Test → Costs → Papers → Launch → First sale. Finished steps become leaves, the current one pulses, future ones are dashed. When she finishes a step and comes back, the new leaf grows in front of her: *"Your plant grew a new leaf"*. Every branch can be tapped. |
+| **Each step finished on its own page** | GO on the 7-day test · **"I've set my price"** on Money · **"I've got this"** on each licence · **"I've told people I'm open"** on Marketing · the first order in her order book is her first sale. |
+| **Season 2: Grow (no dead end)** | After her first sale, the banner says *"Your first season is complete. Next: 10 happy customers"*. The plant bears fruit for **10 happy customers, first repeat order, 4 weeks of posts, first-month check, funding ready**, each counted from her real data. |
+| **Ideas for you** | Three fresh questions every day ("Give me a festival special idea", "Write a thank-you message for my customers"…). One tap opens Talk with the question asked. |
+| **Share my business** | Turns her business and plant into a "Launching soon" picture for WhatsApp Status (Devanagari renders correctly). |
+| **Delightful waiting** | While the AI works, a sprout is watered and useful tips rotate in her language, instead of a spinner. |
+
+### Tools
 | Area | What works today |
 | --- | --- |
-| 🙏 **A warm first five minutes** | A friendly hello, then *"Which language do you prefer?"* (English · हिन्दी · मराठी). No forms, no sign-up wall. |
-| 💬 **A real conversation** | WhatsApp-style chat: it asks her name, whether to **speak replies aloud or show text**, then listens to her idea and asks **one question at a time that fits HER business** (a tutor, a baker and a restaurant owner each get different questions). It never asks the obvious, keeps talking as long as she likes, and saves her worries and ideas to her notebook. |
-| 🎙️ **Voice in three languages** | Live words while she speaks; Gemini transcribes the recording for accurate Hindi, Marathi and Hinglish. Replies can be spoken back (the phone's own voice, or Gemini's voice as a fallback). Typing always works. |
-| 🔐 **Log in when it matters** | Only when she taps **"Make my plan"**: **Continue with Google** or email + password, with *"Don't have an account? Sign up"*. Her guest chat moves into her account. Guests aren't remembered; logged-in founders get *"Welcome back, Anita 👋 · Continue your plan"*. |
-| 🧭 **A calm plan screen** | Only three things: **the next step**, a board-game **journey path** and **Today's 3 things** (with confetti). Everything else waits under **More tools**. A 3-step tour on the first visit. |
-| 🗣️ **Talk to StartWise** | The round mic in the middle of the bottom bar opens a hands-free voice assistant that answers **from her own plan** (tasks, money, licences, orders), opens the right screen, adds tasks and logs sales for her. |
-| 🧪 **Will people buy it?** | Assumptions and risk snapshot, a 7-day test (₹500 cap enforced in code), ready-to-send WhatsApp messages, poll and price card, **+1 enquiry / +1 order** tracker, automatic **GO / NO-GO** verdict and "adjust and retest". |
-| 💰 **Will I make money?** | Starting cost estimates **for her kind of business** (a tiffin service gets tiffin boxes and groceries, not ovens), clearly labelled as AI estimates; editable one-time, monthly and per-item costs, price and sales sliders, live profit and break-even, a suggested price range, best/likely/worst cases, a 90-day cash chart and loan need. All labelled *estimate*. |
-| 📄 **What papers do I need?** | **Verified against official sources on 4 Oct 2026** (FSSAI's April 2026 criteria: registration up to ₹1.5 crore turnover, ₹100/year; Udyam is free). A rule engine shows only the licences that apply (FSSAI registration, Udyam, labels; GST/state licence/shop registration only when scale or premises need them), each with a plain-language name, why, cost, time, a papers checklist, an "explain simply" panel, the official link, verified status and "this looks outdated". |
-| 🤝 **Can I get money help?** | Scheme matcher (MUDRA Shishu/Kishore, PMEGP, CMEGP, Stand-Up India, MAVIM, CGTMSE) with "why this?", papers needed and **women-focused schemes highlighted**, plus a **bank loan pitch** written from your own numbers. |
-| 🗺️ **Who sells nearby?** | Map of similar visible businesses around her area (OpenStreetMap), matched to her business (meals, bakeries, tuition, boutiques…), and reviewed Pune price ranges where we have them. |
-| 📝 **Idea notebook + Worry box** | Drop messy thoughts by voice; **"Shape my thoughts"** groups them (customers, product, money, worries, ideas) and suggests next steps that become tasks. The worry box answers fears calmly with one small step for today. |
-| 📣 **Marketing buddy** | A weekly WhatsApp status / Instagram plan with times, ready captions (English, Hinglish, Hindi, Marathi), photo tips, **"Remind me"** (Google Calendar), festival tips, local partnership ideas with ready messages, **brand-name ideas** and a shareable **WhatsApp price card** image. |
-| 📸 **Photo → product** | Snap what you sell: AI names it and writes the caption and hashtags; the **price comes from her own costs**; one tap puts her real photo on a WhatsApp price card. |
-| 🎭 **Practice room** | Rehearse out loud with an AI **bank officer**, a **haggling customer** or an **office buyer**, using her real plan, then get kind coaching feedback with stars. |
-| 📒 **Order book** | Say an order (*"Priya, 2 tiffins for Sunday 5 pm, 400, 100 advance"*) and it fills itself in; see what's due today, what's still to collect, and send WhatsApp confirmations. |
-| 🛍️ **First customers** | **Voice sales diary** ("Sold 2 cakes to Priya for 450 each" → ₹900 logged), monthly totals, a little customer list with WhatsApp follow-ups, and a free starter kit (WhatsApp Business, UPI QR, Google Business Profile). |
-| ✅ **Tasks** | Personal roadmap from templates and applicable licences, by stage or 30/60/90 days, with dependencies, notes, evidence links and "I'm stuck". |
-| 📦 **Launch Pack** | The whole plan as one A4 PDF in the chosen language (Devanagari prints correctly): profile, test results, licences, money, schemes, roadmap task sheet, plan starter and sources. |
-| 🔊 **Read-aloud** | Listen to explanations in Hindi, Marathi or English (hidden if the phone has no voice for that language). |
-| 🔒 **Trust & privacy** | Source + verified status on every rule; "Guidance, not legal advice" footer; no Aadhaar/PAN/bank details/photos collected; redaction before every AI call; each user sees only their own plans; **delete my data**. |
-| 🛠️ **Admin (team only)** | Flagged-outdated items to review, records still to verify, and success metrics. |
+| **Will people buy it?** | Assumptions and risk check, a 7-day test (₹500 cap enforced in code), her own GO line (saves itself), **+1 asked / +1 order** tracker and automatic **GO / NO-GO**. Each day can be ticked off, today is marked, and **"Help me do this"** gives 5 questions to ask, makes her status picture or flyer, or hands her a ready message. **"Remind me every day"** adds 10 AM calendar alarms. Ready WhatsApp message, poll and price card, all shareable. |
+| **Will I make money?** | Starting costs estimated for *her kind* of business (clearly labelled), editable one-time, monthly and per-item costs, price and sales sliders, live profit and break-even in her own unit ("tiffins", "students"), best/likely/worst cases, a 90-day cash chart and loan need. |
+| **What papers do I need?** | **Verified against official sources on 4 Oct 2026.** A rule engine shows only the licences that apply, each with a plain name, why, cost, time, a papers checklist, "explain it simply", the official link, verified date, source and "this looks outdated". Optional ones (Udyam) are marked *Recommended*. |
+| **Can I get money help?** | MUDRA, PMEGP, CMEGP, Stand-Up India, MAVIM, CGTMSE matched to her answers, with *why this?*, papers needed, women-focused schemes highlighted, and a **bank loan pitch** written from her own numbers. |
+| **Talk to StartWise** | A voice assistant (centre of the bottom bar) that knows her whole plan. It actually does things: writes the message she asks for (with Copy and WhatsApp), adds tasks, logs sales and opens the right screen. |
+| **Marketing buddy** | A weekly WhatsApp/Instagram plan with times, captions in English, Hinglish, Hindi or Marathi, photo tips, **Remind me** (Google Calendar), festival tips, local partnership ideas, brand-name ideas, a price-card image and **Photo → product** captions. |
+| **Order book** | Say an order (*"Priya, 2 tiffins Sunday 5 pm, 400, 100 advance"*) and it fills itself in; what's due today, what's still to collect, WhatsApp confirmations. |
+| **First customers** | Voice sales diary, monthly totals, a customer list with follow-ups, and a free starter kit (WhatsApp Business, UPI QR, Google Business Profile). |
+| **Idea notebook + Worry box** | Messy thoughts by voice; **Shape my thoughts** groups them and suggests next steps; the worry box answers fears calmly with one small step for today. |
+| **Practice room** | Rehearse out loud with an AI bank officer, a haggling customer or an office buyer, then get kind feedback. |
+| **Who sells nearby?** | A map of similar businesses around her (OpenStreetMap) and reviewed Pune price ranges. |
+| **Tasks, Launch Pack, Account** | Full task list with notes and "I'm stuck"; the whole plan as one A4 PDF in her language; language switch, log out and **delete my data**. |
+| **Trust & privacy** | Source and verified status on every rule; *Guidance, not legal advice*; no Aadhaar/PAN/bank details collected; redaction before every AI call; each user sees only her own plans. |
 
 ## 5. Tech stack
 
 | Layer | Technology |
 | --- | --- |
-| Frontend | **Next.js 16** (App Router, React 19, Server Actions), **TypeScript**, **Tailwind CSS 4**, lucide icons, Recharts, Leaflet |
-| Languages | **next-intl** with message files for English, Hindi, Marathi; Noto Sans Devanagari + Baloo 2 fonts |
-| Voice | Browser **Web Speech API** (live preview, en-IN / hi-IN / mr-IN) + **Gemini** audio transcription; spoken replies with the phone's **SpeechSynthesis** voice or **Gemini TTS** as a fallback |
-| Backend | Next.js server actions and route handlers (TypeScript) |
-| Database & auth | **Supabase** Postgres + Auth (JWT sessions; Google sign-in, email + password, anonymous guest sessions), **Drizzle ORM**, row-level security on, **pgvector** ready |
-| AI | **Google Gemini** (`gemini-flash-latest`, `gemini-flash-lite-latest`, `gemini-embedding-001`) via plain `fetch`, strict JSON output checked with **zod**, one retry, backup-key rotation |
-| Maps | OpenStreetMap tiles, Nominatim geocoding, Overpass API |
-| Testing | **Vitest** (rule engine, money formulas, verdict, AI guardrails) · ESLint · TypeScript |
-| Hosting | **Vercel** + Supabase |
+| Frontend | **Next.js 16** (App Router, React 19, Server Actions), **TypeScript**, **Tailwind CSS 4**, **Motion** (animations), lucide icons, Recharts, Leaflet |
+| Languages | **next-intl** with message files for English, Hindi and Marathi; Noto Sans, Noto Sans Devanagari and Baloo 2 fonts |
+| Voice | Browser **Web Speech API** (live preview) + **Gemini** audio transcription; spoken replies with the device voice or **Gemini TTS** |
+| Backend | Next.js server actions and route handlers |
+| Database & auth | **Supabase** Postgres + Auth (JWT sessions, Google sign-in, email + password, anonymous guest sessions), **Drizzle ORM**, row-level security on |
+| AI | **Google Gemini** (`gemini-flash-latest`, `gemini-flash-lite-latest`) via plain `fetch`, strict JSON checked with **zod**, automatic fallback to a second model and a backup key on rate limits or timeouts |
+| Maps | OpenStreetMap tiles, Nominatim, Overpass API |
+| Testing | **Vitest** (61 tests: rule engine, money formulas, verdict, reminders, language guardrails) · ESLint · TypeScript |
+| Hosting | **Vercel** + Supabase (all free tiers) |
 
 ### How the AI is used (and where it is not)
 
 | Task | Done by |
 | --- | --- |
-| Understand the spoken or typed idea → structured profile | AI (strict JSON) |
-| Which questions to ask, which licences apply, which schemes match | **Code + reviewed data** |
-| Costs, break-even, cash flow, readiness score, GO / NO-GO | **Code (formulas)** |
-| Plain-language explanations of rules | **Reviewed text** stored on each rule (3 languages) |
-| Assumptions, test plan, templates, captions, notebook shaping, worry answers, loan pitch wording | AI drafts, always editable |
+| Understand her words → structured business profile | AI (strict JSON) |
+| Which licences apply, which schemes match | **Code + reviewed data** |
+| Costs, break-even, cash flow, GO / NO-GO, plant progress | **Code (formulas)** |
+| Plain-language explanations of rules | **Reviewed text** (3 languages) |
+| Chat questions, test plan, messages, captions, loan pitch, notebook shaping, worry answers | AI drafts, always editable |
 
 ## 6. Installation & setup
 
-**Requirements:** Node.js 20.9+ and a free Supabase project. A free Gemini API key from [aistudio.google.com](https://aistudio.google.com/apikey).
+**Requirements:** Node.js 20.9+, a free [Supabase](https://supabase.com) project and a free Gemini API key from [aistudio.google.com](https://aistudio.google.com/apikey).
 
 ```bash
 git clone https://github.com/tanvisheth1234-wq/startwise.git
@@ -106,25 +144,26 @@ cp .env.example .env.local     # then fill in the values below
 npm run db:push                # creates the tables in your Supabase database
 ```
 
-**Google sign-in (optional):** create an OAuth *Web application* client in Google Cloud with the redirect URI `https://<your-project>.supabase.co/auth/v1/callback`, then paste its Client ID and secret in **Supabase → Authentication → Sign In / Providers → Google**.
-
-In **Supabase → Authentication → Sign In / Providers**, turn on **Allow anonymous sign-ins** (guests start without an account), and for local testing turn off **Confirm email**. Add `http://localhost:3000/login/callback` to the redirect URLs.
-
 ### Environment variables (`.env.local`)
 
 | Variable | What |
 | --- | --- |
-| `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase project URL and anon/publishable key |
-| `SUPABASE_SERVICE_ROLE_KEY` | Server only: used for delete-my-data |
-| `DATABASE_URL` | Postgres connection string (Supabase transaction pooler) |
+| `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase project URL and anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server only: used for "delete my data" |
+| `DATABASE_URL` | Postgres connection string (Supabase transaction pooler, port 6543) |
 | `AI_PROVIDER` | `gemini` |
 | `AI_API_KEY` | Gemini API key |
-| `AI_API_KEY_2` | Optional backup key (another free project), used automatically on rate limits |
+| `AI_API_KEY_2` | Optional backup key, used automatically on rate limits |
 | `AI_MODEL`, `AI_EMBED_MODEL` | `gemini-flash-latest`, `gemini-embedding-001` |
 | `ADMIN_EMAILS` | Comma-separated emails allowed to open `/admin` |
 | `NEXT_PUBLIC_APP_URL` | Base URL, e.g. `http://localhost:3000` |
 
-> Never commit `.env.local`. No test credentials are needed for evaluators: just open the app and start as a guest.
+### Supabase settings
+- **Authentication → Sign In / Providers:** turn on **Allow anonymous sign-ins** (guests start without an account) and **Email**. For quick testing, turn off **Confirm email**.
+- **Google sign-in (optional):** create an OAuth *Web application* client in Google Cloud with the redirect URI `https://<project>.supabase.co/auth/v1/callback`, then paste its Client ID and secret in **Providers → Google**.
+- **Authentication → URL Configuration:** add `http://localhost:3000/**` (and your live URL) to the redirect URLs.
+
+> **Credentials for evaluators:** none needed. Open the app and start as a guest, sign up with any email, or open **`/demo`** for a complete example plan. Never commit `.env.local`.
 
 ## 7. How to run
 
@@ -136,62 +175,66 @@ npm test           # unit tests
 npm run lint       # ESLint
 ```
 
-**Try it:** open the app → pick **मराठी** (or any language) → tell it your name → choose *speak* or *text* → say an idea like *"मला घरून डबा सर्विस सुरू करायची आहे"* → chat a little → **Make my plan** → sign up → explore. Or open **`/demo`** to jump straight into Sunita's complete example plan.
+**Try it:** open the app → pick **मराठी** (or any language) → tell it your name → choose *Speak* or *Just text* → describe an idea (e.g. *"मला घरून डबा सर्विस सुरू करायची आहे"*) → chat → **Make my plan** → sign up → follow the next step, and watch your plant grow. Or open **`/demo`** to jump straight into a complete plan.
 
-## 8. Project structure
+## 8. Deployment
+
+Deployed on **Vercel** (free) with **Supabase** (free).
+
+1. Import the GitHub repository in Vercel (framework: Next.js, default build settings).
+2. Add every variable from `.env.local` in **Vercel → Settings → Environment Variables**, with `NEXT_PUBLIC_APP_URL` set to the live URL.
+3. Deploy, then add `https://<live-url>/**` to **Supabase → Authentication → URL Configuration → Redirect URLs** so Google login returns to the live site.
+
+## 9. Project structure
 
 ```
 startwise/
 ├── app/                          # Next.js routes
-│   ├── page.tsx                  # Front door: hello + language choice, or "Welcome back"
-│   ├── new/                      # The first conversation (name → voice choice → idea → chat)
-│   ├── demo/                     # Sunita's complete example plan (for judges)
-│   ├── plan/[planId]/            # Plan home and every module screen
-│   │   ├── profile/              # "Here's your business"
-│   │   ├── validate/             # 7-day test + GO / NO-GO
-│   │   ├── money/  compliance/  funding/  market/
+│   ├── page.tsx                  # Front door: hello + language, or "Welcome back"
+│   ├── new/                      # The first conversation (+ live business card)
+│   ├── demo/                     # Complete example plan for judges
+│   ├── plan/[planId]/            # Plan home (plant, next step, ideas) and every tool
+│   │   ├── profile/  validate/  money/  compliance/  funding/  market/
 │   │   ├── roadmap/  notebook/  marketing/  first-customers/  orders/  practice/
 │   │   └── launch-pack/ (+ print/)
 │   ├── account/  login/  admin/
 │   └── api/voice/                # transcribe (speech → text) and speak (text → speech)
 ├── src/
-│   ├── knowledge/data.ts         # Reviewed rules, schemes, sources, tasks, cost & price estimates
-│   ├── features/<module>/        # One folder per module: api.ts, actions, components, lib (+ tests)
+│   ├── knowledge/data.ts         # Reviewed rules, schemes, sources, tasks, cost estimates
+│   ├── features/<module>/        # One folder per module: api, actions, components, lib (+ tests)
 │   │   ├── compliance/engine.ts  # Pure rule engine
 │   │   ├── money/lib/calc.ts     # Money formulas
-│   │   └── validate/lib/verdict.ts
-│   ├── lib/ai/                   # The only code that talks to the AI (guardrails, redaction, key rotation)
+│   │   ├── validate/lib/         # GO / NO-GO verdict, 7-day reminders
+│   │   └── dashboard/            # Plan home, plant progress, Season 2, share card
+│   ├── components/ui/            # Warm UI kit, GrowingPlant, animations
+│   ├── lib/ai/                   # The only code that talks to the AI (guardrails, redaction, fallbacks)
 │   ├── lib/auth/  lib/supabase/  # Sessions, guest accounts, data isolation
-│   ├── db/schema/                # Drizzle schema (13 tables, RLS on)
-│   ├── contracts/                # Shared types between modules
-│   └── components/ui/            # Warm UI kit
+│   ├── db/schema/                # Drizzle schema (RLS on)
+│   └── contracts/                # Shared types between modules
 ├── messages/{en,hi,mr}/          # Every on-screen word in three languages
 └── docs/screenshots/
 ```
 
-## 9. Known limitations
+## 10. Known limitations
 
-- FSSAI, Udyam, MUDRA and Stand-Up India were **verified on 4 Oct 2026**; GST, PMEGP, CMEGP, MAVIM and CGTMSE still show **"Check locally"** until confirmed; every record links to its official source.
-- **Google sign-in** is in Google's *testing* mode, so it works for the team's test accounts; everyone can sign up with email.
-- Pilot data covers **Pune / Maharashtra**; other cities show general rules only.
-- Uses **free Gemini tiers**: AI steps can take a few seconds and may slow down under heavy use (a backup key is rotated in automatically).
-- Live words while speaking work best in Chrome/Edge; other browsers still get the accurate Gemini transcript after recording.
-- The nearby map only shows businesses listed on OpenStreetMap; home sellers are often missing.
-- Guests aren't remembered between visits (like most apps); log in to keep a plan.
-- Spoken replies on laptops without a Hindi/Marathi voice use Gemini's voice and start after ~4 seconds; phones with built-in voices speak instantly.
+- FSSAI, Udyam, MUDRA and Stand-Up India were **verified on 4 Oct 2026**; GST, PMEGP, CMEGP, MAVIM and CGTMSE show **"Check locally"** until confirmed. Every record links to its official source.
+- **Google sign-in** is in Google's testing mode (works for the team's test accounts); everyone can sign up with email.
+- Pilot data covers **Pune / Maharashtra**; other cities get general rules.
+- Uses **free Gemini tiers**: AI steps take a few seconds (shown with a friendly waiting screen) and can slow down under heavy use; a backup model and key take over automatically.
+- Reminders are calendar files rather than push notifications (free and reliable on every phone).
+- Live words while speaking work best in Chrome/Edge; other browsers still get the accurate transcript after recording.
+- Guests aren't remembered between visits; logging in keeps a plan.
 
-## 10. Future scope
+## 11. Future scope
 
-- More cities and states (adding a city = adding reviewed data, not code) and more business types
-- Ask-a-question box answering only from official source pages (official texts and an ingestion script for pgvector are already in the repo)
-- Phone-number login with OTP
-- Document intelligence: read invoices, quotations or licences to pre-fill details
-- WhatsApp bot and reminders by SMS/WhatsApp; a mobile app (PWA)
+- More cities and states (adding a city means adding reviewed data, not code) and more business types
+- Phone-number login with OTP, and a mobile app (PWA) with push reminders
+- WhatsApp bot: talk to StartWise and log orders from WhatsApp
+- Ask-a-question box answering only from official source pages (texts and ingestion script already in the repo)
 - Mentor and expert connect (CA, legal aid, self-help groups) and local founder communities
-- Post-launch dashboard: sales, expenses, inventory and customers over time
-- Links to UPI/accounting tools and real-time scheme updates
+- Real-time scheme updates and links to UPI / accounting tools
 
-## 11. Team
+## 12. Team
 
 **Team200OK**: Twissha Shah · Yaadi Chhadva · Simrit Kaur Chhatwal · Tanvi Sheth
 
