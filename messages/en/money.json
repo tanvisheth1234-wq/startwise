@@ -1,1 +1,45 @@
-{}
+{
+  "title": "Will I make money?",
+  "subtitle": "Drag the sliders. Every number is a rough estimate you can change.",
+  "profitLabel": "Profit per month",
+  "losingEachSale": "Each sale costs more than its price. Raise the price or cut costs.",
+  "aboveBreakEven": "You cover your costs from {units} a month. 🎉",
+  "belowBreakEven": "You need {units} a month to cover costs: {more} more to go.",
+  "estimate": "Estimate",
+  "price": "Your price per item",
+  "priceHint": "Each one costs you about {cost}, so charge at least {low} {per} to keep a healthy profit. Check what others near you charge.",
+  "units": "Sales per month",
+  "unitsValue": "{count, plural, one {{count} item} other {{count} items}}",
+  "perItem": "You keep per item",
+  "breakEven": "Break-even",
+  "recover": "Get start-up money back",
+  "months": "{count, plural, one {{count} month} other {{count} months}}",
+  "scenariosTitle": "If things go…",
+  "scenario": {
+    "worst": "Slow",
+    "likely": "As planned",
+    "best": "Great"
+  },
+  "scenarioDetail": "{units} × {price}",
+  "cashTitle": "Your money over 90 days",
+  "cashHint": "Starting with your budget, after buying what you need. Below the red line means you'd run short.",
+  "week": "Week {n}",
+  "loanNeed": "You may need about {amount} more than your budget. See the money-help schemes.",
+  "noLoan": "Your budget covers the start and two months of costs. No loan needed. 👏",
+  "costsTitle": "Your costs",
+  "kind": {
+    "one_time": "One-time (to start)",
+    "monthly": "Every month",
+    "per_unit": "For each item you make"
+  },
+  "itemName": "Cost item",
+  "amount": "Amount in rupees",
+  "remove": "Remove",
+  "addLine": "Add a cost",
+  "aiEstimates": "These are AI estimates for a business like yours, just to get you started. Change any number to your real cost.",
+  "reEstimate": "Suggest costs for my business again",
+  "reEstimateConfirm": "Replace all your costs with fresh estimates? Any changes you made will be lost.",
+  "priceFor": "Your price per {unit}",
+  "perUnit": "per {unit}",
+  "perItemPlain": "per item"
+}
