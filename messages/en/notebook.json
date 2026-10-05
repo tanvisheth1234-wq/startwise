@@ -1,0 +1,40 @@
+{
+  "title": "Idea notebook",
+  "subtitle": "Drop any thought here, big or small. When you have a few, I'll help you shape them.",
+  "placeholder": "e.g. A customer asked if I can do a smaller size… What if I offer a weekly plan?",
+  "add": "Add note",
+  "shape": "Shape my thoughts",
+  "shaping": "Finding the shape in your thoughts…",
+  "shapedTitle": "Your thoughts, shaped",
+  "nextActions": "Small next steps",
+  "makeTask": "Make it a task",
+  "added": "Added ✓",
+  "addedToTasks": "Added to your tasks!",
+  "delete": "Delete note",
+  "emptyTitle": "Your notebook is empty",
+  "emptyBody": "Tap the mic and say whatever is on your mind. No need to be neat.",
+  "groups": {
+    "customers": "Customers",
+    "product": "Product",
+    "money": "Money",
+    "worries": "Worries",
+    "ideas": "New ideas"
+  },
+  "errors": {
+    "few": "Add at least 2 notes first.",
+    "ai": "Couldn't shape them just now. Please try again in a minute."
+  },
+  "worry": {
+    "title": "Worry box",
+    "subtitle": "Every founder has fears. Say yours out loud. You'll get a calm answer and one small step.",
+    "ex1": "What if nobody buys?",
+    "ex2": "What if my family thinks it's a waste?",
+    "ex3": "I'm scared of the paperwork",
+    "placeholder": "What's worrying you?",
+    "share": "Share my worry",
+    "thinking": "Thinking it through with you…",
+    "failed": "Couldn't answer just now. Please try again in a minute.",
+    "smallStep": "One small step for today",
+    "another": "Share another worry"
+  }
+}
