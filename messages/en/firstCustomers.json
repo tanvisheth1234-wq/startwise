@@ -1,1 +1,57 @@
-{}
+{
+  "title": "First customers",
+  "subtitle": "Log every sale by voice, keep track of who asked, and set up the free tools that bring orders.",
+  "diary": {
+    "title": "Sales diary",
+    "subtitle": "Just say it: \"Sold 2 {item} to Priya for 400\" or \"Spent 300 on supplies\".",
+    "placeholder": "Sold 2 {item} to Priya for 400…",
+    "add": "Add to diary",
+    "salesMonth": "Sales this month",
+    "orders": "Orders",
+    "spent": "Spent",
+    "firstSale": "Your FIRST sale! 🎉🎉",
+    "sale": "Ka-ching! 🪙",
+    "delete": "Delete",
+    "kinds": {
+      "sale": "Sale",
+      "expense": "Spent",
+      "enquiry": "Asked",
+      "unclear": "Note"
+    },
+    "customersTitle": "Your customers",
+    "customersHint": "Tap a status to change it. Follow up with people who asked but haven't ordered.",
+    "namePlaceholder": "Name, e.g. Priya (Kothrud)",
+    "addCustomer": "Add customer",
+    "noCustomers": "Customers you mention in the diary show up here.",
+    "status": {
+      "asked": "Asked",
+      "follow_up": "Follow up",
+      "ordered": "Ordered"
+    },
+    "followUp": "Send a follow-up on WhatsApp",
+    "followUpMessage": "Hi {name}! 😊 Just checking if you'd like to place an order this week. Happy to make it fresh for you!"
+  },
+  "kit": {
+    "title": "Your free starter kit",
+    "official": "Official page",
+    "privacy": "We never ask for or store your UPI ID, bank or phone details.",
+    "whatsapp": {
+      "title": "WhatsApp Business catalogue",
+      "s1": "Install WhatsApp Business (free) with your business number.",
+      "s2": "Add a profile photo, short description, area and hours.",
+      "s3": "Add 3–5 products to the catalogue with clear photos and prices."
+    },
+    "upi": {
+      "title": "UPI QR for payments",
+      "s1": "Open your bank's app or a UPI app you already use.",
+      "s2": "Find \"Receive money\" or \"My QR\" and download the QR.",
+      "s3": "Print it, stick it near your packing table, and add it to your WhatsApp catalogue."
+    },
+    "google": {
+      "title": "Google Business Profile",
+      "s1": "Go to business.google.com and sign in with Google.",
+      "s2": "Add your business name and area (you can hide your home address).",
+      "s3": "Add photos and ask your first happy customers for a review."
+    }
+  }
+}
