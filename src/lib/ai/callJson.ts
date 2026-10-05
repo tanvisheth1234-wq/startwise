@@ -10,8 +10,8 @@ export class AiInvalidOutput extends Error {
   }
 }
 
-export type JsonPrompt = { system: string; user: string };
-export type CallJsonOptions = { temperature: number; provider: Provider };
+export type JsonPrompt = { system: string; user: string; image?: { mime: string; data: string } };
+export type CallJsonOptions = { temperature: number; provider: Provider; fast?: boolean };
 
 /** Strips ```json fences and surrounding prose, then parses. Throws on bad JSON. */
 export function parseJsonLoose(raw: string): unknown {
@@ -41,14 +41,14 @@ function check<S extends z.ZodType>(schema: S, raw: string): { ok: true; data: z
 }
 
 export async function callJson<S extends z.ZodType>(schema: S, prompt: JsonPrompt, opts: CallJsonOptions): Promise<z.infer<S>> {
-  const first = await opts.provider.chat({ ...prompt, temperature: opts.temperature, json: true });
+  const first = await opts.provider.chat({ ...prompt, temperature: opts.temperature, json: true, fast: opts.fast });
   const a = check(schema, first);
   if (a.ok) return a.data;
 
   const retryUser =
     `${prompt.user}\n\n---\nYour previous answer was rejected: ${a.issues}.\n` +
     `Previous answer:\n${first.slice(0, 2000)}\n\nReturn ONLY corrected JSON with exactly the requested shape.`;
-  const second = await opts.provider.chat({ system: prompt.system, user: retryUser, temperature: opts.temperature, json: true });
+  const second = await opts.provider.chat({ system: prompt.system, user: retryUser, image: prompt.image, temperature: opts.temperature, json: true, fast: opts.fast });
   const b = check(schema, second);
   if (b.ok) return b.data;
 

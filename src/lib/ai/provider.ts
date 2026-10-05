@@ -3,7 +3,8 @@
 // Plain fetch (no SDK) for both Gemini and OpenAI.
 import type { Lang } from "@/contracts/profile";
 
-export type ChatOptions = { system: string; user: string; temperature: number; json: boolean };
+/** fast: small extraction jobs go to the quicker lite model first. */
+export type ChatOptions = { system: string; user: string; temperature: number; json: boolean; fast?: boolean; image?: { mime: string; data: string } };
 
 export interface Provider {
   readonly name: "gemini" | "openai";
@@ -11,11 +12,15 @@ export interface Provider {
   /** One vector of exactly EMBED_DIMS numbers per text. */
   embed(texts: string[]): Promise<number[][]>;
   transcribe(audio: Blob, lang: Lang): Promise<string>;
+  /** Text → spoken audio (WAV), for phones without a Hindi/Marathi voice. */
+  speak?(text: string, lang: Lang): Promise<Buffer>;
 }
 
 export type ProviderConfig = {
   name: "gemini" | "openai";
   apiKey: string;
+  /** Extra keys (other free-tier projects), tried in turn when one is rate-limited. */
+  backupKeys?: string[];
   model?: string;
   embedModel?: string;
   timeoutMs?: number;
@@ -44,6 +49,19 @@ async function postJson(url: string, body: unknown, headers: Record<string, stri
     throw new AiProviderError(`AI provider error ${res.status}: ${detail}`, res.status);
   }
   return res.json();
+}
+
+function transcribePrompt(lang: Lang): string {
+  const script = lang === "en"
+    ? "If the speaker mixes Hindi or Marathi with English (Hinglish), write it in Roman letters the way people type on WhatsApp, e.g. \"mujhe Pune mein home bakery start karni hai\"."
+    : `Write ${LANG_NAME[lang]} words in Devanagari script. Keep English words the speaker uses (like bakery, online, Instagram) in English.`;
+  return [
+    `Transcribe this voice note exactly as spoken. The speaker is most likely an Indian small-business founder speaking ${LANG_NAME[lang]}, possibly mixed with English.`,
+    script,
+    "Fix only obvious recognition slips; do not summarise, translate or add anything.",
+    "Write amounts like ₹5000 with digits. Keep place names (Pune, Kothrud, Baner) as said.",
+    "Return only the transcript. If nothing is said, return an empty string.",
+  ].join(" ");
 }
 
 async function blobToBase64(blob: Blob): Promise<string> {
@@ -75,17 +93,36 @@ function gemini(cfg: ProviderConfig): Provider {
   // Free-tier quota is per model, and models get overloaded: on 429/5xx try the next one.
   const models = [...new Set([model, ...GEMINI_FALLBACKS])];
   const embedModel = cfg.embedModel || "gemini-embedding-001";
-  const headers = { "x-goog-api-key": cfg.apiKey };
+  const keys = [...new Set([cfg.apiKey, ...(cfg.backupKeys ?? [])].filter(Boolean))];
   const timeout = cfg.timeoutMs ?? 30_000;
+  // Start with the key that last worked, so a rate-limited key is not hammered on every call.
+  let preferred = 0;
+  const keyOrder = () => keys.map((_, i) => (preferred + i) % keys.length);
+
+  /** Same request with each key in turn; moves on only on rate limits and outages. */
+  async function withKeys<T>(call: (headers: Record<string, string>) => Promise<T>): Promise<T> {
+    let lastError: unknown;
+    for (const i of keyOrder()) {
+      try {
+        const r = await call({ "x-goog-api-key": keys[i] });
+        preferred = i;
+        return r;
+      } catch (e) {
+        lastError = e;
+        if (!(e instanceof AiProviderError && isRetryable(e.status))) throw e;
+      }
+    }
+    throw lastError;
+  }
 
   type GenResponse = { candidates?: { content?: { parts?: { text?: string }[] } }[] };
   const textOf = (r: GenResponse) => (r.candidates?.[0]?.content?.parts ?? []).map((p) => p.text ?? "").join("");
 
-  async function generate(body: unknown, timeoutMs: number): Promise<GenResponse> {
+  async function generate(body: unknown, timeoutMs: number, fast = false): Promise<GenResponse> {
     let lastError: unknown;
-    for (const m of models) {
+    for (const m of fast ? [...models].reverse() : models) {
       try {
-        return await postJson(`${base}/models/${m}:generateContent`, body, headers, timeoutMs);
+        return await withKeys((headers) => postJson(`${base}/models/${m}:generateContent`, body, headers, timeoutMs));
       } catch (e) {
         lastError = e;
         if (!(e instanceof AiProviderError && isRetryable(e.status))) throw e;
@@ -96,20 +133,21 @@ function gemini(cfg: ProviderConfig): Provider {
 
   return {
     name: "gemini",
-    async chat({ system, user, temperature, json }) {
+    async chat({ system, user, temperature, json, fast, image }) {
       const r = await generate(
         {
           systemInstruction: { parts: [{ text: system }] },
-          contents: [{ role: "user", parts: [{ text: user }] }],
+          contents: [{ role: "user", parts: [...(image ? [{ inlineData: { mimeType: image.mime, data: image.data } }] : []), { text: user }] }],
           generationConfig: { temperature, ...(json ? { responseMimeType: "application/json" } : {}) },
         },
         timeout,
+        fast,
       );
       return textOf(r);
     },
     async embed(texts) {
       if (texts.length === 0) return [];
-      const r: { embeddings?: { values: number[] }[] } = await postJson(
+      const r: { embeddings?: { values: number[] }[] } = await withKeys((headers) => postJson(
         `${base}/models/${embedModel}:batchEmbedContents`,
         {
           requests: texts.map((text) => ({
@@ -120,7 +158,7 @@ function gemini(cfg: ProviderConfig): Provider {
         },
         headers,
         timeout,
-      );
+      ));
       return checkDims((r.embeddings ?? []).map((e) => normalise(e.values)));
     },
     async transcribe(audio, lang) {
@@ -130,7 +168,7 @@ function gemini(cfg: ProviderConfig): Provider {
             role: "user",
             parts: [
               { inlineData: { mimeType: audio.type || "audio/webm", data: await blobToBase64(audio) } },
-              { text: `Transcribe this audio exactly as spoken. The speaker most likely uses ${LANG_NAME[lang]} (possibly mixed with English). Write Hindi and Marathi in Devanagari script. Return only the transcript, nothing else. If nothing is said, return an empty string.` },
+              { text: transcribePrompt(lang) },
             ],
           }],
           generationConfig: { temperature: 0 },
@@ -139,8 +177,45 @@ function gemini(cfg: ProviderConfig): Provider {
       );
       return textOf(r).trim();
     },
+    async speak(text, _lang) {
+      const body = {
+        // Only the words: TTS models read any instruction text out loud too.
+        contents: [{ parts: [{ text }] }],
+        generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Kore" } } } },
+      };
+      let lastError: unknown;
+      for (const m of TTS_MODELS) {
+        try {
+          const r: { candidates?: { content?: { parts?: { inlineData?: { mimeType: string; data: string } }[] } }[] } =
+            await withKeys((headers) => postJson(`${base}/models/${m}:generateContent`, body, headers, 30_000));
+          const audio = r.candidates?.[0]?.content?.parts?.find((p) => p.inlineData)?.inlineData;
+          if (!audio) throw new AiProviderError("No audio returned", 502);
+          const bytes = Buffer.from(audio.data, "base64");
+          if (audio.mimeType.includes("wav")) return bytes;
+          const rate = Number(/rate=(\d+)/.exec(audio.mimeType)?.[1] ?? 24000);
+          return pcmToWav(bytes, rate);
+        } catch (e) {
+          lastError = e;
+          if (!(e instanceof AiProviderError && (isRetryable(e.status) || e.status === 502))) throw e;
+        }
+      }
+      throw lastError;
+    },
   };
 }
+
+/** Raw 16-bit PCM (mono) → a playable WAV file. */
+export function pcmToWav(pcm: Buffer, sampleRate = 24000): Buffer {
+  const h = Buffer.alloc(44);
+  h.write("RIFF", 0); h.writeUInt32LE(36 + pcm.length, 4); h.write("WAVE", 8);
+  h.write("fmt ", 12); h.writeUInt32LE(16, 16); h.writeUInt16LE(1, 20); h.writeUInt16LE(1, 22);
+  h.writeUInt32LE(sampleRate, 24); h.writeUInt32LE(sampleRate * 2, 28); h.writeUInt16LE(2, 32); h.writeUInt16LE(16, 34);
+  h.write("data", 36); h.writeUInt32LE(pcm.length, 40);
+  return Buffer.concat([h, pcm]);
+}
+
+// Fastest first; all on the free tier.
+const TTS_MODELS = ["gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts", "gemini-2.5-flash-preview-tts"];
 
 // ---------------------------------------------------------------- OpenAI
 function openai(cfg: ProviderConfig): Provider {
@@ -207,6 +282,7 @@ export function getProvider(): Provider {
     cached = createProvider({
       name: process.env.AI_PROVIDER === "openai" ? "openai" : "gemini",
       apiKey: process.env.AI_API_KEY ?? "",
+      backupKeys: [process.env.AI_API_KEY_2, process.env.AI_API_KEY_3].filter((k): k is string => Boolean(k)),
       model: process.env.AI_MODEL || undefined,
       embedModel: process.env.AI_EMBED_MODEL || undefined,
     });
