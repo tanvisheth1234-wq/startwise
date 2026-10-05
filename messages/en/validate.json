@@ -1,5 +1,5 @@
 {
-  "title": "Test your idea",
+  "title": "Will people buy it?",
   "subtitle": "Check what must be true, spot the risks, then test cheaply for 7 days before spending on licences or equipment.",
   "editedByYou": "Edited by you",
   "saved": "Saved",
@@ -74,7 +74,9 @@
       "pilot_offer": "Pilot offer",
       "landing_page": "Simple web page",
       "whatsapp_status": "WhatsApp status"
-    }
+    },
+    "doneEditing": "Done",
+    "editDay": "Edit day {n}"
   },
   "templates": {
     "title": "Ready-to-send messages",
@@ -88,5 +90,26 @@
     "pollOption": "Option {n}",
     "priceCard": "Price card",
     "priceCardHint": "Fill in any ₹___ with your own prices before you share."
-  }
+  },
+  "sprint": {
+    "title": "Track your test",
+    "daysLeft": "{count, plural, one {{count} day left} other {{count} days left}}",
+    "plusEnquiry": "+1 person asked",
+    "plusOrder": "+1 order!",
+    "enquiries": "People who asked",
+    "orders": "Orders",
+    "firstOrder": "Your first order! 🎉",
+    "anotherOrder": "Another order! 🧁",
+    "goYay": "It's a GO! 🚀",
+    "go": "GO! People are buying",
+    "goBody": "Your test hit the order target. Planning is unlocked: work out your costs and papers next.",
+    "noGo": "Not yet, and that's useful to know",
+    "reasons": {
+      "interest_not_buying": "People are interested but not buying yet. Try a different price, a smaller size, or a sample offer, then test again.",
+      "low_interest": "Not many people asked. Try a sharper niche (something only you offer) or a different area, then test again."
+    },
+    "retest": "Adjust and test again",
+    "pendingHint": "Tap the buttons each time someone asks or orders. {orders} orders means GO."
+  },
+  "whyTitle": "Why this test? What must be true, and the risks"
 }
