@@ -79,14 +79,14 @@ describe("profile merge (code, not AI)", () => {
     expect(mergeProfile(undefined, { hoursPerDay: 30 }, "en").hoursPerDay).toBe(24);
   });
 
-  it("asks at most 4 follow-ups for the bakery idea", () => {
+  it("asks at most 3 follow-ups for the bakery idea", () => {
     let p = mergeProfile(undefined, { businessType: "home_food", product: "cakes", city: "Pune" }, "en");
     const answers = [{ premises: "home" as const }, { locality: "Kothrud" }, { budgetInr: 30000 }, { hoursPerDay: 4 }];
     let asked = 0;
     while (nextFollowUpField(p)) {
       p = mergeProfile(p, answers[asked++], "en");
     }
-    expect(asked).toBe(4);
+    expect(asked).toBe(3);
   });
 });
 

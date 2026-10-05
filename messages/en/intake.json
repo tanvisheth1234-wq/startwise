@@ -6,7 +6,7 @@
   "transcriptLabel": "Your idea",
   "transcriptPlaceholder": "e.g. I want to start a home bakery in Pune, making cakes from my kitchen.",
   "privacyNote": "Please do not share ID numbers, bank details or phone numbers.",
-  "confirm": "Confirm my idea",
+  "confirm": "That's my idea",
   "understanding": "Understanding your idea…",
   "thinking": "Thinking…",
   "answerLabel": "Your answer",
@@ -37,9 +37,9 @@
     "start": "Start speaking",
     "stop": "Stop",
     "hint": "Tap the mic and speak, or type below.",
-    "listening": "Listening… tap again when you finish.",
-    "recording": "Recording (up to 60 seconds)… tap to stop.",
-    "transcribing": "Turning your voice into text…",
+    "listening": "I'm listening… tap the button when you're done.",
+    "recording": "I'm listening… tap the button when you're done.",
+    "transcribing": "Writing down your words…",
     "errors": {
       "denied": "The microphone is blocked. Please allow it in your browser, or just type your idea below.",
       "offline": "No internet connection. Check it and try again, or type your idea below.",
@@ -53,5 +53,13 @@
     "empty": "Please write a few words first.",
     "ai": "We could not understand that just now. Please try again, or skip and fill the profile card yourself.",
     "notDraft": "This plan is already confirmed."
-  }
+  },
+  "questions": {
+    "yourCity": "your city",
+    "premises": "Lovely idea! Will you run it from home, or from a shop?",
+    "locality": "Which area of {city} are you in? It helps me find customers near you.",
+    "budgetInr": "Roughly how much can you spend to get started? A guess is fine.",
+    "hoursPerDay": "How many hours a day can you give to it?"
+  },
+  "understandingHint": "Reading your idea and picking out what matters. This takes a few seconds."
 }

@@ -15,8 +15,8 @@ export const MISSING_FIELD_ORDER = [
   "expectedMonthlySalesInr",
 ] as const;
 
-/** Follow-ups only ask these (keeps the bakery idea to at most 4 questions). The card highlights the rest. */
-export const FOLLOW_UP_FIELDS = ["premises", "locality", "budgetInr", "hoursPerDay"] as const;
+/** Follow-ups only ask these (never more than 3 questions). The "your business" card shows the rest. */
+export const FOLLOW_UP_FIELDS = ["premises", "locality", "budgetInr"] as const;
 
 const clampInt = (n: number | null | undefined) => (n == null || !Number.isFinite(n) ? null : Math.max(0, Math.round(n)));
 const clampHours = (n: number | null | undefined) =>

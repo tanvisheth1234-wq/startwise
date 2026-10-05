@@ -3,7 +3,10 @@
 import type { BusinessProfile } from "@/contracts/profile";
 
 export type QuickReply = { id: string; field: QuickField; value: string | number | boolean };
-export type QuickField = "premises" | "sellsOnline" | "budgetInr" | "hoursPerDay";
+export type QuickField = "premises" | "sellsOnline" | "budgetInr" | "hoursPerDay" | "locality";
+
+/** Pilot city: common Pune areas as one-tap answers. The label is the value. */
+export const PUNE_AREAS = ["Kothrud", "Baner", "Wakad", "Hadapsar", "Viman Nagar", "Aundh", "Shivajinagar", "Pimpri-Chinchwad"];
 
 const CHIPS: Record<QuickField, QuickReply[]> = {
   premises: [
@@ -27,15 +30,17 @@ const CHIPS: Record<QuickField, QuickReply[]> = {
     { id: "h6", field: "hoursPerDay", value: 6 },
     { id: "h8", field: "hoursPerDay", value: 8 },
   ],
+  locality: PUNE_AREAS.map((a) => ({ id: a, field: "locality" as const, value: a })),
 };
 
-export function quickRepliesFor(field: string | null | undefined): QuickReply[] {
+export function quickRepliesFor(field: string | null | undefined, city?: string): QuickReply[] {
+  if (field === "locality" && !/pune|pimpri/i.test(city ?? "")) return [];
   return field && field in CHIPS ? CHIPS[field as QuickField] : [];
 }
 
 /** Finds a chip by id for a field; null if it is not one we offered (never trust client values). */
 export function findQuickReply(field: string, id: string): QuickReply | null {
-  return quickRepliesFor(field).find((q) => q.id === id) ?? null;
+  return quickRepliesFor(field, "Pune").find((q) => q.id === id) ?? null;
 }
 
 /** Applies a chip to the profile (code only). */
