@@ -3,12 +3,13 @@
 import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { Loader2, Wand2 } from "lucide-react";
-import { Button } from "@/components/ui";
+import { Button, GrowingWait } from "@/components/ui";
 import type { NameIdeas } from "@/lib/ai/extras";
 import { generateNames } from "../actions";
 
 export function NameIdeasCard({ planId, initial }: { planId: string; initial: NameIdeas | null }) {
   const t = useTranslations("marketing.names");
+  const tc = useTranslations("common.wait");
   const [ideas, setIdeas] = useState(initial);
   const [failed, setFailed] = useState(false);
   const [pending, start] = useTransition();
@@ -50,6 +51,7 @@ export function NameIdeasCard({ planId, initial }: { planId: string; initial: Na
         {pending ? <Loader2 className="size-5 animate-spin" aria-hidden /> : <Wand2 className="size-5" aria-hidden />}
         {ideas ? t("more") : t("make")}
       </Button>
+      {pending && <GrowingWait message={tc("thinking")} />}
       {ideas && <p className="text-center text-xs text-muted">{t("tapHint")}</p>}
       {failed && <p role="alert" className="text-sm text-danger">{t("failed")}</p>}
     </section>

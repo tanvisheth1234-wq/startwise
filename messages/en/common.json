@@ -91,5 +91,19 @@
     "listen": "Listen",
     "stop": "Stop"
   },
-  "items": "items"
+  "items": "items",
+  "wait": {
+    "tipLabel": "Tip",
+    "tips": [
+      "Ask 10 people before you spend big. Their answers are free market research.",
+      "Keep business money in a separate UPI or bank account from day one.",
+      "A good price covers your costs and still pays you for your time.",
+      "Your first customers are often neighbours, friends and WhatsApp groups.",
+      "Udyam registration is free and can help with loans later.",
+      "A clear photo in daylight sells better than an expensive camera.",
+      "Write down every order, even small ones. It shows a bank your business is real.",
+      "Small steps every day beat one big jump."
+    ],
+    "thinking": "Thinking about your business…"
+  }
 }

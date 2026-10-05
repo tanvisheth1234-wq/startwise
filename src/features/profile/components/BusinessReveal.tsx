@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import type { Lang } from "@/contracts/profile";
 import { ReadAloud } from "@/features/intake/ui";
 import { Check, Clock, Home, Loader2, MapPin, Pencil, Sparkles, Store, Users, Wallet } from "lucide-react";
-import { Button, FadeUp, Stagger, StaggerItem, cn } from "@/components/ui";
+import { Button, FadeUp, GrowingWait, Stagger, StaggerItem, cn } from "@/components/ui";
 import { motion } from "motion/react";
 import type { BusinessProfile } from "@/contracts/profile";
 import { confirmProfile, type ConfirmState } from "../actions";
@@ -54,7 +54,7 @@ export function BusinessReveal({ planId, profile }: { planId: string; profile: B
   ];
 
   return (
-    <div className="space-y-5">
+    <div className="mx-auto max-w-3xl space-y-5 lg:grid lg:max-w-5xl lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-10 lg:space-y-0 lg:py-6">
       <motion.section
         initial={{ opacity: 0, scale: 0.9, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -85,6 +85,7 @@ export function BusinessReveal({ planId, profile }: { planId: string; profile: B
         </div>
       </motion.section>
 
+      <div className="space-y-5">
       <FadeUp delay={0.85} className="rounded-3xl border-2 border-dashed border-sage/40 bg-sage-light/60 p-4">
         <p className="text-xs font-bold uppercase tracking-widest text-sage">{t("firstStepLabel")}</p>
         <p className="mt-1 font-display text-lg font-bold text-forest">{t("firstStep")}</p>
@@ -93,6 +94,7 @@ export function BusinessReveal({ planId, profile }: { planId: string; profile: B
       </FadeUp>
 
       <FadeUp delay={1.05}>
+      {pending && <GrowingWait overlay message={t("building")} />}
       <form action={action} className="space-y-3">
         {Object.entries(hiddenValues(profile)).map(([name, value]) => (
           <input key={name} type="hidden" name={name} value={value} />
@@ -112,6 +114,7 @@ export function BusinessReveal({ planId, profile }: { planId: string; profile: B
         </button>
       </form>
       </FadeUp>
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { CalendarPlus, Camera, Check, Copy, Handshake, Loader2, MessageCircle, PartyPopper, RefreshCw, Sparkles } from "lucide-react";
-import { Badge, Button, Celebrate, cn } from "@/components/ui";
+import { Badge, Button, Celebrate, GrowingWait, cn } from "@/components/ui";
 import { generateMarketing, markPosted, type CaptionLang, type MarketingState } from "../actions";
 import { googleCalendarUrl, nextSlot } from "../lib/calendar";
 
@@ -91,6 +91,7 @@ export function MarketingBuddy({ planId, initial, defaultLang }: { planId: strin
           {pending ? <Loader2 className="size-5 animate-spin" aria-hidden /> : <Sparkles className="size-5" aria-hidden />}
           {pending ? t("making") : t("make")}
         </Button>
+        {pending && <GrowingWait message={t("making")} className="text-left" />}
         {failed && <p role="alert" className="text-sm text-danger">{t("failed")}</p>}
       </section>
     );
@@ -207,6 +208,7 @@ export function MarketingBuddy({ planId, initial, defaultLang }: { planId: strin
           {pending ? <Loader2 className="size-5 animate-spin" aria-hidden /> : <RefreshCw className="size-5" aria-hidden />}
           {pending ? t("making") : t("remake")}
         </Button>
+        {pending && <GrowingWait message={t("making")} />}
         {failed && <p role="alert" className="text-sm text-danger">{t("failed")}</p>}
       </section>
       <Badge tone="grey">{t("aiNote")}</Badge>

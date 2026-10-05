@@ -16,3 +16,4 @@ export { Logo } from "./Logo";
 export { Celebrate } from "./Celebrate";
 export { FadeUp, GrowX, MotionRoot, PopIn, Stagger, StaggerItem, Tappable } from "./motion";
 export { GrowingPlant, type PlantBranch } from "./GrowingPlant";
+export { GrowingWait } from "./GrowingWait";

@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Loader2, RefreshCw, Save, Sparkles } from "lucide-react";
-import { Badge, Button, Card, Skeleton } from "@/components/ui";
+import { Badge, Button, Card, GrowingWait } from "@/components/ui";
 import type { DraftError } from "../hooks/useDraftSection";
 
 export function SectionShell({
@@ -55,10 +55,7 @@ export function SectionShell({
       )}
 
       {!hasContent && busy && (
-        <div className="space-y-2" aria-busy>
-          <p className="flex items-center gap-2 text-sm text-muted"><Loader2 className="size-4 animate-spin" aria-hidden />{t("drafting")}</p>
-          <Skeleton className="h-12 w-full" /><Skeleton className="h-12 w-full" /><Skeleton className="h-12 w-3/4" />
-        </div>
+        <GrowingWait message={t("drafting")} />
       )}
       {!hasContent && !busy && emptyAction}
       {hasContent && children}

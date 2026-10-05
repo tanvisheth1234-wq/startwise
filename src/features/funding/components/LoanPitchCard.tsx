@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { Check, Copy, Landmark, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui";
+import { Button, GrowingWait } from "@/components/ui";
 import type { LoanPitch } from "@/contracts/sections";
 import { makeLoanPitch } from "../actions";
 
@@ -66,6 +66,7 @@ export function LoanPitchCard({ planId, initial }: { planId: string; initial: Lo
         {pending && <Loader2 className="size-5 animate-spin" aria-hidden />}
         {pending ? t("making") : pitch ? t("remake") : t("make")}
       </Button>
+      {pending && <GrowingWait message={t("making")} />}
       {error && <p role="alert" className="text-sm text-danger">{error}</p>}
     </section>
   );
