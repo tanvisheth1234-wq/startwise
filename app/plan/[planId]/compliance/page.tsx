@@ -5,6 +5,7 @@ import { GuidanceFooter } from "@/components/ui";
 import { Lang } from "@/contracts/profile";
 import { compliance } from "@/features/compliance/api";
 import { LicenceCard } from "@/features/compliance/components/LicenceCard";
+import { roadmap } from "@/features/roadmap/api";
 import { RULES } from "@/knowledge/data";
 import { requirePlan } from "@/lib/auth";
 
@@ -14,7 +15,12 @@ export default async function CompliancePage({ params }: { params: Promise<{ pla
   const parsed = Lang.safeParse(await getLocale());
   const lang = parsed.success ? parsed.data : plan.language;
   const t = await getTranslations("compliance");
-  const items = await compliance.getChecklist(planId, lang);
+  const [items, tasks] = await Promise.all([compliance.getChecklist(planId, lang), roadmap.getRoadmap(planId, lang).catch(() => [])]);
+  // Each needed licence is also a task on her plan; ticking it here grows the Papers leaf.
+  const taskFor = (ruleKey: string) => {
+    const task = tasks.find((x) => x.key === `rule:${ruleKey}`);
+    return task ? { id: task.id, done: task.status === "done" } : undefined;
+  };
   const shown = new Set(items.map((i) => i.ruleKey));
   // "Do I need it?": the big ones we checked and left out, so the founder sees why.
   const type = plan.profile?.businessType ?? "other";
@@ -32,7 +38,7 @@ export default async function CompliancePage({ params }: { params: Promise<{ pla
 
       <ol className="stagger space-y-3">
         {items.map((item, i) => (
-          <LicenceCard key={item.ruleKey} planId={planId} item={item} index={i} />
+          <LicenceCard key={item.ruleKey} planId={planId} item={item} index={i} task={taskFor(item.ruleKey)} />
         ))}
       </ol>
 

@@ -263,7 +263,7 @@ export const RULES: RuleRecord[] = [
   },
   {
     key: "packaged_food_labels",
-    name: "Labels on packed products",
+    name: "FSSAI Labelling & Display rules",
     plainName: { en: "Labels on packed products", hi: "पैक किए सामान पर लेबल", mr: "पॅक केलेल्या वस्तूंवर लेबल" },
     authority: "FSSAI / Legal Metrology",
     appliesTo: cond({ businessTypes: ["home_food", "online_reselling"] }),

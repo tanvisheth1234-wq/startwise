@@ -5,15 +5,16 @@ import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { Lang } from "@/contracts/profile";
 import { ReadAloud } from "@/features/intake/ui";
-import { CalendarClock, Check, ChevronDown, ExternalLink, FileCheck2, Flag, IndianRupee, Lightbulb } from "lucide-react";
-import { Badge, cn } from "@/components/ui";
+import { CalendarClock, Check, CheckCircle2, ChevronDown, ExternalLink, FileCheck2, Flag, IndianRupee, Lightbulb } from "lucide-react";
+import { Badge, Celebrate, cn } from "@/components/ui";
+import { setTaskStatus } from "@/features/roadmap/actions";
 import type { ChecklistItem } from "@/contracts/compliance";
 import { flagOutdated } from "../actions";
 
 /** Not legally required, but worth doing (e.g. Udyam opens MSME loans and schemes). */
 const OPTIONAL = new Set(["udyam_registration"]);
 
-export function LicenceCard({ planId, item, index }: { planId: string; item: ChecklistItem; index: number }) {
+export function LicenceCard({ planId, item, index, task }: { planId: string; item: ChecklistItem; index: number; task?: { id: string; done: boolean } }) {
   const t = useTranslations("compliance");
   const lang = useLocale() as Lang;
   const [open, setOpen] = useState(index === 0);
@@ -21,11 +22,23 @@ export function LicenceCard({ planId, item, index }: { planId: string; item: Che
   const [flagged, setFlagged] = useState(false);
   const [, start] = useTransition();
   const verified = item.status === "verified";
+  const [got, setGot] = useState(Boolean(task?.done));
+  const [cheer, setCheer] = useState(0);
+  const toggleGot = () => {
+    if (!task) return;
+    const next = !got;
+    setGot(next);
+    if (next) setCheer((n) => n + 1);
+    start(() => setTaskStatus(planId, task.id, next ? "done" : "pending"));
+  };
 
   return (
-    <li className="overflow-hidden rounded-3xl border border-line/70 bg-white shadow-soft">
+    <li className={cn("overflow-hidden rounded-3xl border bg-white shadow-soft", got ? "border-sage/50" : "border-line/70")}>
+      <Celebrate fire={cheer} message={t("gotItCheer", { name: item.name })} />
       <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="flex w-full items-start gap-3 p-4 text-left">
-        <span className="grid size-10 shrink-0 place-items-center rounded-2xl bg-sky-light font-display text-lg font-extrabold text-sky">{index + 1}</span>
+        <span className={cn("grid size-10 shrink-0 place-items-center rounded-2xl font-display text-lg font-extrabold", got ? "bg-sage text-white" : "bg-sky-light text-sky")}>
+          {got ? <Check className="size-5" aria-hidden /> : index + 1}
+        </span>
         <span className="min-w-0 flex-1">
           <span className="block font-display text-lg font-bold leading-snug text-forest">{item.name}</span>
           <span className="mt-1 flex flex-wrap gap-1.5">
@@ -94,6 +107,24 @@ export function LicenceCard({ planId, item, index }: { planId: string; item: Che
             {t("openOfficial")}
             <ExternalLink className="size-4" aria-hidden />
           </a>
+
+          {task && (
+            <button
+              type="button"
+              onClick={toggleGot}
+              aria-pressed={got}
+              className={cn(
+                "flex min-h-12 w-full flex-col items-center justify-center rounded-2xl border-2 px-4 font-semibold transition-colors",
+                got ? "border-sage bg-sage-light text-sage" : "border-sage/40 bg-white text-sage hover:bg-sage-light",
+              )}
+            >
+              <span className="flex items-center gap-2">
+                <CheckCircle2 className="size-5" aria-hidden />
+                {got ? t("gotItDone") : t("gotIt")}
+              </span>
+              {got && <span className="text-xs font-normal text-muted">{t("gotItUndo")}</span>}
+            </button>
+          )}
 
           <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
             <span className={cn("inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-semibold", verified ? "bg-sage-light text-sage" : "bg-sun-light text-[#8a5a00]")}>

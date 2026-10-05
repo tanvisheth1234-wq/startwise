@@ -15,5 +15,9 @@
   "flag": "This looks outdated",
   "flagged": "Thanks! We'll re-check it.",
   "notNeededTitle": "Not needed for you right now",
-  "recommended": "Recommended"
+  "recommended": "Recommended",
+  "gotIt": "I've got this",
+  "gotItDone": "Done: you have this",
+  "gotItUndo": "Tap again if not yet",
+  "gotItCheer": "Papers step done for {name}!"
 }
