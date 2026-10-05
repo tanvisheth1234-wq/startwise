@@ -3,8 +3,9 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { PlanNav, type PlanNavItem } from "@/components/ui/PlanNav";
-import { MODULES } from "@/features/registry";
 import { requirePlan } from "@/lib/auth";
+import { TalkToStartWise } from "@/features/talk/components/TalkToStartWise";
+import { itemWord } from "@/features/money/server/store";
 
 export default async function PlanLayout({
   children,
@@ -16,6 +17,7 @@ export default async function PlanLayout({
   const { planId } = await params;
   const plan = await requirePlan(planId); // 404 if missing or not yours
   const t = await getTranslations("common");
+  const tt = await getTranslations("talk");
   const pathname = (await headers()).get("x-pathname") ?? "";
   const base = `/plan/${plan.id}`;
 
@@ -24,24 +26,19 @@ export default async function PlanLayout({
     redirect(`${base}/profile`);
   }
 
+  // Five doors only; everything else is one tap away on the home screen.
   const nav: PlanNavItem[] = [
     { href: base, label: t("nav.dashboard"), icon: "House", exact: true },
-    ...MODULES.map((m) => ({
-      href: `${base}/${m.route}`,
-      label: t(m.labelKey.replace(/^common\./, "") as "nav.validate"),
-      icon: m.icon,
-    })),
+    { href: `${base}/roadmap`, label: t("nav.tasks"), icon: "ListChecks" },
+    { href: `${base}/notebook`, label: t("nav.notebook"), icon: "BookHeart" },
+    { href: `${base}/marketing`, label: t("nav.grow"), icon: "Megaphone" },
   ];
 
   return (
-    <div className="pb-24 print:pb-0">
-      <div className="border-b border-line bg-white print:hidden">
-        <div className="mx-auto flex max-w-3xl items-center gap-2 px-4 py-2">
-          <h1 className="truncate text-base font-semibold text-forest">{plan.title}</h1>
-        </div>
-      </div>
+    <div className="pb-40 print:pb-0">
       <main className="mx-auto max-w-3xl px-4 py-4">{children}</main>
-      {plan.status !== "draft" && <PlanNav items={nav} label={plan.title} />}
+      {plan.status !== "draft" && <PlanNav items={nav} label={plan.title} talkLabel={tt("button")} />}
+      {plan.status !== "draft" && <TalkToStartWise planId={plan.id} item={await itemWord(plan.id, plan.profile?.businessType ?? "other", plan.language)} />}
     </div>
   );
 }
