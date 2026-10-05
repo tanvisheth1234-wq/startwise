@@ -39,17 +39,17 @@ export function LanguagePicker({ name, loggedIn = false }: { name?: string; logg
   return (
     <div className="relative">
       <Blobs />
-      <div className="relative grid grid-cols-[minmax(0,1fr)] items-center gap-10 py-6 lg:min-h-[78dvh] lg:grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)] lg:gap-10">
-        <div className="flex min-w-0 flex-col items-center gap-5 text-center lg:items-start lg:gap-6 lg:text-left">
+      <div className="relative grid grid-cols-[minmax(0,1fr)] items-center gap-10 py-6 lg:min-h-[calc(100dvh-7.5rem)] lg:grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)] lg:gap-10 lg:py-2">
+        <div className="flex min-w-0 flex-col items-center gap-5 text-center lg:items-start lg:gap-4 lg:text-left">
           <div className="flex flex-col items-center gap-4 lg:flex-row lg:items-center lg:gap-6">
           {/* The plant grows first thing: StartWise waters her idea and every branch is a step we take together. */}
-          <GrowingPlant mode="intro" branches={GROWTH} bloom={BLOOM} labelSize={21} className="-mb-2 w-[230px] shrink-0 sm:w-[270px] lg:mb-0 lg:w-[290px]" />
+          <GrowingPlant mode="intro" branches={GROWTH} bloom={BLOOM} labelSize={21} className="-mb-3 w-[200px] shrink-0 sm:w-[270px] lg:mb-0 lg:w-[290px] [@media(min-width:1024px)_and_(max-height:720px)]:w-[230px]" />
 
           <div className="space-y-3">
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ ...SPRING, delay: 0.15 }} className="text-5xl font-extrabold leading-[1.05] text-forest lg:text-6xl">
               {loggedIn ? `Welcome${name ? `, ${name}` : ""}.` : "Namaste."}
             </motion.h1>
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...SPRING, delay: 0.3 }} className="font-display text-2xl font-bold text-coral-600 lg:text-3xl">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...SPRING, delay: 0.3 }} className="font-display text-2xl font-bold text-coral-600">
               {loggedIn ? (
                 "Let's start your first idea."
               ) : (
@@ -74,7 +74,7 @@ export function LanguagePicker({ name, loggedIn = false }: { name?: string; logg
                 </>
               )}
             </motion.p>
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.6 }} className="mx-auto max-w-md text-lg leading-relaxed text-ink lg:mx-0">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.6 }} className="mx-auto hidden max-w-md text-lg leading-relaxed text-ink sm:block lg:mx-0">
               Tell me your business idea in your own words, even if it&apos;s just a small thought. We&apos;ll talk it through together, and step by step I&apos;ll help you turn it into a real business.
             </motion.p>
           </div>
@@ -82,18 +82,18 @@ export function LanguagePicker({ name, loggedIn = false }: { name?: string; logg
 
           <IdeaRiver />
 
-          <div className="w-full max-w-sm space-y-3">
+          <div className="w-full max-w-md space-y-3 lg:max-w-none">
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="font-display text-xl font-bold text-forest">
               Which language do you prefer?
             </motion.p>
-            <ul className="space-y-3">
+            <ul className="grid grid-cols-3 gap-2 sm:gap-3">
               {OPTIONS.map((o, i) => (
                 <motion.li key={o.lang} initial={{ opacity: 0, x: -60 }} animate={{ opacity: 1, x: 0 }} transition={{ ...SPRING, delay: 0.85 + i * 0.12 }}>
                   <motion.button
                     type="button"
                     lang={o.lang}
                     disabled={pending}
-                    whileHover={{ scale: 1.03, x: 6 }}
+                    whileHover={{ scale: 1.03, y: -3 }}
                     whileTap={{ scale: 0.96 }}
                     onClick={() =>
                       start(async () => {
@@ -101,10 +101,10 @@ export function LanguagePicker({ name, loggedIn = false }: { name?: string; logg
                         router.push("/new");
                       })
                     }
-                    className="group flex min-h-16 w-full items-center justify-between rounded-3xl border-2 border-line bg-white/90 px-6 shadow-soft backdrop-blur transition-colors hover:border-coral hover:bg-white disabled:opacity-60"
+                    className="group flex min-h-16 w-full items-center justify-center rounded-3xl border-2 border-line bg-white/90 px-2 sm:justify-between sm:px-5 shadow-soft backdrop-blur transition-colors hover:border-coral hover:bg-white disabled:opacity-60"
                   >
-                    <span className="font-display text-2xl font-extrabold text-forest">{o.label}</span>
-                    <span className="flex items-center gap-2 text-lg text-muted">
+                    <span className="font-display text-xl font-extrabold text-forest sm:text-2xl">{o.label}</span>
+                    <span className="hidden items-center gap-2 text-base text-muted sm:flex">
                       {o.hello}
                       <ArrowRight className="size-5 -translate-x-1 text-coral opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" aria-hidden />
                     </span>
@@ -121,28 +121,8 @@ export function LanguagePicker({ name, loggedIn = false }: { name?: string; logg
           )}
         </div>
 
-        <LiveChatPreview className="hidden lg:block" />
+        <LiveChatPreview className="hidden lg:block [@media(max-height:720px)]:-my-12 [@media(max-height:720px)]:scale-[0.82]" />
       </div>
-
-      <section className="relative pb-6 pt-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={SPRING}
-          className="mx-auto max-w-2xl space-y-4 text-center"
-        >
-          <p className="font-display text-sm font-bold uppercase tracking-[0.2em] text-coral-600">How it works</p>
-          <h2 className="text-4xl font-extrabold leading-tight text-forest lg:text-5xl">
-            Your idea is a seed.
-            <br />
-            <span className="text-coral-600">We help it grow.</span>
-          </h2>
-          <p className="mx-auto max-w-xl text-lg leading-relaxed text-ink">
-            Each branch is a step we take together: test it with real people for 7 days, set a price that makes a profit, sort out the right papers, find schemes and funding, tell people about it, and keep track of your orders. Until your first customer blooms.
-          </p>
-        </motion.div>
-      </section>
     </div>
   );
 }
@@ -155,7 +135,7 @@ function IdeaRiver() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.6 }}
-      className="relative w-full max-w-md overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]"
+      className="relative w-full max-w-md overflow-hidden lg:max-w-[min(100%,46rem)] [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]"
       aria-hidden
     >
       <motion.div className="flex w-max gap-2" animate={{ x: ["0%", "-50%"] }} transition={{ duration: 40, ease: "linear", repeat: Infinity }}>
