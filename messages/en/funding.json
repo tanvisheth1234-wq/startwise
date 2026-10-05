@@ -1,1 +1,35 @@
-{}
+{
+  "title": "Can I get money help?",
+  "subtitle": "Government loans and schemes that fit your plan. We explain why each one showed up.",
+  "needLoan": "Your plan may need about {amount} more than your budget. These can help.",
+  "noLoan": "Your budget looks enough to start. These are good to know as you grow.",
+  "questions": {
+    "intro": "Two optional questions help us match better. We never ask for caste, ID or bank details.",
+    "woman": "Is the founder a woman?",
+    "age": "Founder's age",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "forWomen": "For women founders",
+  "goodMatch": "Good match",
+  "mayMatch": "May match",
+  "why": "Why this?",
+  "documents": "{count, plural, one {{count} paper usually asked} other {{count} papers usually asked}}",
+  "official": "Open official page",
+  "checkLocally": "Eligibility is guidance only. The bank or office decides.",
+  "none": "No schemes match right now. Try changing your budget or answers above.",
+  "pitch": {
+    "title": "Your bank loan pitch",
+    "subtitle": "A short pitch built from your own numbers, to read out at the bank.",
+    "make": "Write my loan pitch",
+    "remake": "Write it again",
+    "making": "Writing your pitch…",
+    "copy": "Copy pitch",
+    "copied": "Copied",
+    "note": "Numbers are your estimates from the Money Lab. Approval is the bank's decision.",
+    "errors": {
+      "noMoney": "Fill in your costs in the Money Lab first.",
+      "ai": "Couldn't write it just now. Please try again in a minute."
+    }
+  }
+}
