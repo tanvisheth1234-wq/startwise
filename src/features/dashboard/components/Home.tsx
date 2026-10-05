@@ -2,10 +2,10 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import {
-  BadgeIndianRupee, BookHeart, ClipboardList, Drama, FileDown, Calculator, FileText, Flag, FlaskConical, HandCoins, MapPinned, Megaphone, PartyPopper,
+  BadgeIndianRupee, BookHeart, ClipboardList, Drama, FileDown, Calculator, FileText, FlaskConical, HandCoins, MapPinned, Megaphone,
   Rocket, Store, Users, type LucideIcon,
 } from "lucide-react";
-import { GrowX, Stagger, StaggerItem, cn } from "@/components/ui";
+import { GrowingPlant, cn, type PlantBranch } from "@/components/ui";
 import type { Lang } from "@/contracts/profile";
 import type { RoadmapTask } from "@/contracts/roadmap";
 import { taskHref } from "@/features/roadmap/api";
@@ -38,40 +38,21 @@ export async function JourneyPath({ planId, lang }: Props) {
   const priced = m.ok && m.value !== null && (m.value.marginPerUnit ?? 0) > 0 && list.some((x) => x.key === "prepare.costs" && x.status === "done");
   const all = stations(planId, list, go, priced);
   const current = all.findIndex((s) => !s.done);
+  // Her business as a plant: each step is a branch, the first sale is the flower.
+  const parts: PlantBranch[] = all.map((s, i) => ({
+    key: s.key,
+    label: t(`stations.${s.key}`),
+    href: s.href,
+    state: s.done ? "done" : i === current ? "current" : "todo",
+  }));
 
   return (
     <section className="rounded-3xl border border-line/70 bg-white/80 p-4 shadow-soft">
-      <div className="mb-3 flex items-baseline justify-between">
+      <div className="flex items-baseline justify-between">
         <h2 className="font-display text-lg font-bold text-forest">{t("title")}</h2>
         <span className="text-xs font-semibold text-muted">{t("progress", { done: all.filter((s) => s.done).length, total: all.length })}</span>
       </div>
-      <Stagger as="ol" delay={0.2} gap={0.08} className="relative flex items-start justify-between">
-        <span className="absolute left-6 right-6 top-6 border-t-[3px] border-dashed border-line" aria-hidden />
-        <span className="absolute left-6 right-6 top-6 h-[3px]" aria-hidden>
-          <GrowX to={(current === -1 ? all.length - 1 : current) / (all.length - 1)} delay={0.35} className="block h-full rounded-full bg-gradient-to-r from-sage to-coral" />
-        </span>
-        {all.map((s, i) => {
-          const Icon = s.done ? PartyPopper : i === all.length - 1 ? Flag : s.icon;
-          const isCurrent = i === current;
-          return (
-            <StaggerItem as="li" key={s.key} className="relative z-10 flex w-16 flex-col items-center gap-1 text-center">
-              <Link
-                href={s.href}
-                aria-current={isCurrent ? "step" : undefined}
-                className={cn(
-                  "grid size-12 place-items-center rounded-full border-[3px] transition-transform hover:scale-105",
-                  s.done ? "border-sage bg-sage text-white" : isCurrent ? "animate-breathe border-coral bg-gradient-to-br from-sun to-coral text-white" : "border-line bg-white text-muted",
-                )}
-              >
-                <Icon className="size-5" aria-hidden />
-              </Link>
-              <span className={cn("text-[11px] font-bold leading-tight", isCurrent ? "text-coral-600" : s.done ? "text-sage" : "text-muted")}>
-                {t(`stations.${s.key}`)}
-              </span>
-            </StaggerItem>
-          );
-        })}
-      </Stagger>
+      <GrowingPlant mode="progress" branches={parts.slice(0, -1)} bloom={parts[parts.length - 1]} className="mx-auto -mb-3 -mt-2 w-full max-w-[290px]" />
     </section>
   );
 }
