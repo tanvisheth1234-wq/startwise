@@ -10,8 +10,11 @@
     "funding": "फंडिंग",
     "roadmap": "रोडमैप",
     "firstCustomers": "ग्राहक",
-    "launchPack": "लॉन्च पैक",
-    "profile": "प्रोफ़ाइल"
+    "launchPack": "पैक",
+    "profile": "प्रोफ़ाइल",
+    "tasks": "काम",
+    "notebook": "नोटबुक",
+    "grow": "बढ़ाएँ"
   },
   "screens": {
     "start": "शुरुआत",
@@ -35,7 +38,9 @@
     "logout": "लॉग आउट",
     "account": "खाता",
     "language": "भाषा",
-    "home": "StartWise होम"
+    "home": "StartWise होम",
+    "save": "प्लान सेव करें",
+    "notebook": "नोटबुक"
   },
   "languages": {
     "en": "English",
@@ -81,5 +86,10 @@
     "officialLink": "आधिकारिक लिंक",
     "required": "ज़रूरी",
     "optional": "वैकल्पिक"
-  }
+  },
+  "readAloud": {
+    "listen": "सुनिए",
+    "stop": "रोकें"
+  },
+  "items": "चीज़ें"
 }

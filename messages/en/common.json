@@ -10,8 +10,11 @@
     "funding": "Funding",
     "roadmap": "Roadmap",
     "firstCustomers": "Customers",
-    "launchPack": "Launch Pack",
-    "profile": "Profile"
+    "launchPack": "Pack",
+    "profile": "Profile",
+    "tasks": "Tasks",
+    "notebook": "Notebook",
+    "grow": "Grow"
   },
   "screens": {
     "start": "Start",
@@ -35,7 +38,9 @@
     "logout": "Log out",
     "account": "Account",
     "language": "Language",
-    "home": "StartWise home"
+    "home": "StartWise home",
+    "save": "Save my plan",
+    "notebook": "Notebook"
   },
   "languages": {
     "en": "English",
@@ -81,5 +86,10 @@
     "officialLink": "Official link",
     "required": "Required",
     "optional": "Optional"
-  }
+  },
+  "readAloud": {
+    "listen": "Listen",
+    "stop": "Stop"
+  },
+  "items": "items"
 }

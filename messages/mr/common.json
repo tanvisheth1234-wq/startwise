@@ -10,8 +10,11 @@
     "funding": "निधी",
     "roadmap": "रोडमॅप",
     "firstCustomers": "ग्राहक",
-    "launchPack": "लॉन्च पॅक",
-    "profile": "प्रोफाइल"
+    "launchPack": "पॅक",
+    "profile": "प्रोफाइल",
+    "tasks": "कामं",
+    "notebook": "वही",
+    "grow": "वाढवा"
   },
   "screens": {
     "start": "सुरुवात",
@@ -35,7 +38,9 @@
     "logout": "लॉग आउट",
     "account": "खाते",
     "language": "भाषा",
-    "home": "StartWise होम"
+    "home": "StartWise होम",
+    "save": "प्लॅन जतन करा",
+    "notebook": "वही"
   },
   "languages": {
     "en": "English",
@@ -81,5 +86,10 @@
     "officialLink": "अधिकृत लिंक",
     "required": "आवश्यक",
     "optional": "पर्यायी"
-  }
+  },
+  "readAloud": {
+    "listen": "ऐका",
+    "stop": "थांबवा"
+  },
+  "items": "वस्तू"
 }
