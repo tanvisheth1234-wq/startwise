@@ -21,7 +21,7 @@ const optionalBool = z.preprocess((v) => (v === "true" ? true : v === "false" ? 
 
 export const ProfileForm = z.object({
   stage: z.enum(["new_idea", "existing"], { error: "required" }),
-  businessType: z.enum(["home_food", "tailoring_boutique", "online_reselling"], { error: "supportedType" }),
+  businessType: z.enum(["home_food", "tailoring_boutique", "online_reselling", "other"], { error: "supportedType" }),
   product: text(120).pipe(z.string().min(1, "required")),
   city: text(60).pipe(z.string().min(1, "required")),
   locality: optionalText(80),

@@ -22,11 +22,16 @@ describe("profile card form", () => {
     expect(r.errors).toMatchObject({ budgetInr: "nonNegative", hoursPerDay: "hoursRange", product: "required" });
   });
 
-  it("rejects text in number fields and an unsupported business type", () => {
-    const r = parseProfileForm({ ...base, budgetInr: "lots", businessType: "other" }, "en");
+  it("rejects text in number fields and an unknown business type", () => {
+    const r = parseProfileForm({ ...base, budgetInr: "lots", businessType: "spaceship" }, "en");
     expect(r.ok).toBe(false);
     if (r.ok) return;
     expect(r.errors).toMatchObject({ budgetInr: "number", businessType: "supportedType" });
+  });
+
+  it("accepts any kind of business (tuition, candles…) as 'other'", () => {
+    const r = parseProfileForm({ ...base, businessType: "other", product: "maths tuition" }, "en");
+    expect(r.ok).toBe(true);
   });
 
   it("switching home → shop is a valid edit", () => {
