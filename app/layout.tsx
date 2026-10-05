@@ -5,7 +5,7 @@ import Link from "next/link";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { CircleUserRound, LogOut } from "lucide-react";
-import { LanguageSwitch } from "@/components/ui";
+import { LanguageSwitch, MotionRoot } from "@/components/ui";
 import { Logo } from "@/components/ui/Logo";
 import { getUser } from "@/lib/auth";
 import { signOut } from "@/lib/auth/actions";
@@ -37,6 +37,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} translate="no" className={`${latin.variable} ${devanagari.variable} ${baloo.variable}`}>
       <body className="min-h-dvh antialiased">
         <NextIntlClientProvider>
+          <MotionRoot>
           <header className="sticky top-0 z-30 border-b border-line/60 bg-cream/85 backdrop-blur-md print:hidden">
             <div className="mx-auto flex max-w-3xl items-center gap-2 px-3 py-2">
               <Link href="/" aria-label={t("header.home")} className="flex min-h-11 items-center gap-2">
@@ -65,6 +66,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
           </header>
           {children}
+        </MotionRoot>
         </NextIntlClientProvider>
       </body>
     </html>
