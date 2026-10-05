@@ -24,7 +24,18 @@ export async function loadResults(planId: string): Promise<DayResult[]> {
 }
 
 export async function sprintState(planId: string, lang: Lang): Promise<SprintState> {
-  const section = await getSection<TestPlan>(planId, "test_plan", lang);
+  // Her plan is saved in the language she made it in; if she has switched language since, use the
+  // one that is actually running so the GO line and start date always match what she set.
+  let section = await getSection<TestPlan>(planId, "test_plan", lang);
+  if (!section?.content.startDate) {
+    for (const other of (["en", "hi", "mr"] as const).filter((l) => l !== lang)) {
+      const s = await getSection<TestPlan>(planId, "test_plan", other);
+      if (s?.content.startDate) {
+        section = s;
+        break;
+      }
+    }
+  }
   const startDate = section?.content.startDate ?? null;
   const targets = section?.content.targets ?? { ...DEFAULT_TARGETS };
   const results = await loadResults(planId);

@@ -31,6 +31,7 @@ export const TestPlan = z.object({
     experiment: Experiment,
     action: z.string(),
     costInr: z.number().int().nonnegative(),
+    done: z.boolean().optional(), // ticked off by the founder during the sprint
   })),
   targets: z.object({ enquiries: z.number().int().nonnegative(), orders: z.number().int().nonnegative() }),
   startDate: z.string().nullable().optional(), // ISO date, set when the sprint starts

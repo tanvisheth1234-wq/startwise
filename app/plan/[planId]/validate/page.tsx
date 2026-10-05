@@ -6,7 +6,7 @@ import type { Assumptions, RiskSnapshot, Templates, TestPlan } from "@/contracts
 import { SprintTracker } from "@/features/validate/components/SprintTracker";
 import { ValidateView } from "@/features/validate/components/ValidateView";
 import { sprintState } from "@/features/validate/server/results";
-import { getSection } from "@/features/validate/server/sections";
+import { getSection, getSectionAnyLang } from "@/features/validate/server/sections";
 import { requirePlan } from "@/lib/auth";
 
 export default async function ValidatePage({ params }: { params: Promise<{ planId: string }> }) {
@@ -15,14 +15,24 @@ export default async function ValidatePage({ params }: { params: Promise<{ planI
   const parsed = Lang.safeParse(await getLocale());
   const lang = parsed.success ? parsed.data : plan.language;
   const t = await getTranslations("validate");
+  const ts = await getTranslations("dashboard.share");
 
   const [sprint, assumptions, risk, testPlan, templates] = await Promise.all([
-    sprintState(plan.id, plan.language),
-    getSection<Assumptions>(plan.id, "assumptions", lang),
-    getSection<RiskSnapshot>(plan.id, "risk", lang),
-    getSection<TestPlan>(plan.id, "test_plan", lang),
-    getSection<Templates>(plan.id, "templates", lang),
+    sprintState(plan.id, lang), // same language as the plan shown below, so the GO line matches
+    getSectionAnyLang<Assumptions>(plan.id, "assumptions", lang).then((x) => x?.section ?? null),
+    getSectionAnyLang<RiskSnapshot>(plan.id, "risk", lang).then((x) => x?.section ?? null),
+    getSectionAnyLang<TestPlan>(plan.id, "test_plan", lang).then((x) => x?.section ?? null),
+    getSectionAnyLang<Templates>(plan.id, "templates", lang).then((x) => x?.section ?? null),
   ]);
+  // For the "Help me do this" status picture / flyer.
+  const founder = await getSection<{ name: string }>(plan.id, "founder", "en").catch(() => null);
+  const raw = plan.profile?.product || plan.title;
+  const poster = {
+    product: raw.charAt(0).toUpperCase() + raw.slice(1),
+    by: founder?.content.name ? ts("by", { name: founder.content.name }) : "",
+    cta: ts("cta"),
+    made: ts("made"),
+  };
 
   return (
     <div className="space-y-4">
@@ -32,7 +42,7 @@ export default async function ValidatePage({ params }: { params: Promise<{ planI
       </div>
       <SprintTracker key={sprint.startDate ?? "not-started"} planId={plan.id} initial={sprint} />
       {/* key: a language switch shows that language's drafts */}
-      <ValidateView key={lang} planId={plan.id} initial={{ assumptions, risk, testPlan, templates }} />
+      <ValidateView key={lang} planId={plan.id} initial={{ assumptions, risk, testPlan, templates }} poster={poster} />
       <GuidanceFooter />
     </div>
   );

@@ -9,6 +9,7 @@ import { AssumptionsSection } from "./AssumptionsSection";
 import { RiskSection } from "./RiskSection";
 import { TemplatesSection } from "./TemplatesSection";
 import { TestPlanSection } from "./TestPlanSection";
+import type { PosterInfo } from "./DayHelp";
 
 export type ValidateInitial = {
   assumptions: Section<Assumptions> | null;
@@ -17,7 +18,7 @@ export type ValidateInitial = {
   templates: Section<Templates> | null;
 };
 
-export function ValidateView({ planId, initial }: { planId: string; initial: ValidateInitial }) {
+export function ValidateView({ planId, initial, poster }: { planId: string; initial: ValidateInitial; poster: PosterInfo }) {
   // Drafts run one after another (assumptions → risk) to stay inside the AI rate limit.
   const [assumptionsReady, setAssumptionsReady] = useState(Boolean(initial.assumptions));
   const onReady = useCallback(() => setAssumptionsReady(true), []);
@@ -26,7 +27,7 @@ export function ValidateView({ planId, initial }: { planId: string; initial: Val
   // The action first (test + messages); the thinking behind it stays one tap away.
   return (
     <div className="space-y-4">
-      <TestPlanSection planId={planId} initial={initial.testPlan} ready={assumptionsReady} />
+      <TestPlanSection planId={planId} initial={initial.testPlan} ready={assumptionsReady} templates={initial.templates?.content ?? null} poster={poster} />
       <TemplatesSection planId={planId} initial={initial.templates} ready={assumptionsReady} />
       <details className="group rounded-3xl border border-line/70 bg-white/80 shadow-soft">
         <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-4 font-display text-lg font-bold text-forest">

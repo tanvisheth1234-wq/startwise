@@ -6,7 +6,7 @@ import { DRAFT_SCHEMAS, type Assumptions, type TestPlan } from "@/contracts/sect
 import { requirePlan, requireUser } from "@/lib/auth";
 import { ai } from "@/lib/ai";
 import { hasSevenDays, normalise, scaleToCap, SPRINT_CAP_INR, todayInIndia, totalCost, withDefaultTargets } from "./lib/testPlan";
-import { getSection, saveSection, type Section } from "./server/sections";
+import { getSection, getSectionAnyLang, saveSection, type Section } from "./server/sections";
 
 export type ValidateKind = "assumptions" | "risk" | "test_plan" | "templates";
 const KINDS: ValidateKind[] = ["assumptions", "risk", "test_plan", "templates"];
@@ -85,11 +85,26 @@ export async function saveSectionEdit(planId: string, kind: ValidateKind, conten
     if (!hasSevenDays(tp)) return { ok: false, error: "invalid" };
     if (totalCost(tp) > SPRINT_CAP_INR) return { ok: false, error: "overCap" };
     // The start date is set only by startSprint, never by an edit.
-    const current = await getSection<TestPlan>(plan.id, "test_plan", lang);
-    data = { ...tp, startDate: current?.content.startDate ?? null };
+    const current = await getSectionAnyLang<TestPlan>(plan.id, "test_plan", lang);
+    data = { ...tp, startDate: current?.section.content.startDate ?? null };
+    const at = current?.lang ?? lang;
+    await saveSection(plan.id, kind, at, data, true, user.id);
+    return { ok: true, section: (await getSection(plan.id, kind, at))! };
   }
   await saveSection(plan.id, kind, lang, data, true, user.id);
   return { ok: true, section: (await getSection(plan.id, kind, lang))! };
+}
+
+/** Tick a day of the running sprint done (or not). Keeps everything else as it is. */
+export async function markDay(planId: string, day: number, done: boolean): Promise<DraftResult> {
+  const user = await requireUser();
+  const plan = await requirePlan(planId);
+  const lang = await langFor(plan.language);
+  const found = await getSectionAnyLang<TestPlan>(plan.id, "test_plan", lang);
+  if (!found) return { ok: false, error: "invalid" };
+  const days = found.section.content.days.map((d) => (d.day === day ? { ...d, done } : d));
+  await saveSection(plan.id, "test_plan", found.lang, { ...found.section.content, days }, true, user.id);
+  return { ok: true, section: (await getSection(plan.id, "test_plan", found.lang))! };
 }
 
 /** Start sprint: saves the plan (as edited) with today's date as startDate. */
@@ -101,7 +116,8 @@ export async function startSprint(planId: string, content: unknown): Promise<Dra
   const lang = await langFor(plan.language);
   const tp = saved.section.content as TestPlan;
   const today = todayInIndia();
-  await saveSection(plan.id, "test_plan", lang, { ...tp, startDate: tp.startDate ?? today }, true, user.id);
-  return { ok: true, section: (await getSection(plan.id, "test_plan", lang))! };
+  const at = (await getSectionAnyLang<TestPlan>(plan.id, "test_plan", lang))?.lang ?? lang;
+  await saveSection(plan.id, "test_plan", at, { ...tp, startDate: tp.startDate ?? today }, true, user.id);
+  return { ok: true, section: (await getSection(plan.id, "test_plan", at))! };
 }
 

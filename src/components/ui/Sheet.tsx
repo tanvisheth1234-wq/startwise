@@ -42,7 +42,8 @@ export function Sheet({
       )}
     >
       <div className="flex items-center justify-between border-b border-line px-4 py-2">
-        <h2 className="text-lg font-bold text-forest">{title}</h2>
+        {/* Focus lands on the title when the sheet opens, not on the close button. */}
+        <h2 tabIndex={-1} autoFocus className="text-lg font-bold text-forest focus:outline-none">{title}</h2>
         <button type="button" onClick={onClose} aria-label={closeLabel} className="grid min-h-11 min-w-11 place-items-center rounded-lg hover:bg-mint">
           <X className="size-5" aria-hidden />
         </button>

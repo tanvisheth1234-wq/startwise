@@ -28,18 +28,7 @@ export function ShareCard({ data, label, savedLabel, fileName }: { data: ShareCa
   const share = async () => {
     setBusy(true);
     try {
-      const blob = await drawCard(data);
-      const file = new File([blob], `${fileName}.png`, { type: "image/png" });
-      if (navigator.canShare?.({ files: [file] })) {
-        await navigator.share({ files: [file], text: data.text }).catch(() => {});
-      } else {
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = file.name;
-        a.click();
-        URL.revokeObjectURL(a.href);
-        setSaved(true);
-      }
+      if (!(await shareCardImage(data, fileName))) setSaved(true);
     } finally {
       setBusy(false);
     }
@@ -66,8 +55,24 @@ export function ShareCard({ data, label, savedLabel, fileName }: { data: ShareCa
   );
 }
 
+/** Draw the card, then open the phone's share sheet; on a laptop it downloads. Returns true if shared. */
+export async function shareCardImage(data: ShareCardData, fileName: string): Promise<boolean> {
+  const blob = await drawCard(data);
+  const file = new File([blob], `${fileName}.png`, { type: "image/png" });
+  if (navigator.canShare?.({ files: [file] })) {
+    await navigator.share({ files: [file], text: data.text }).catch(() => {});
+    return true;
+  }
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = file.name;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  return false;
+}
+
 /** Paint the card on a canvas with the app's own fonts and return it as a PNG. */
-async function drawCard(d: ShareCardData): Promise<Blob> {
+export async function drawCard(d: ShareCardData): Promise<Blob> {
   const family = getComputedStyle(document.documentElement).getPropertyValue("--font-baloo").trim() || "sans-serif";
   const all = [d.soon, d.product, d.by, d.cta, d.made, ...d.facts.flatMap((f) => [f.label, f.value])].join(" ");
   await Promise.all([document.fonts.load(`800 60px ${family}`, all), document.fonts.load(`500 40px ${family}`, all)]).catch(() => {});

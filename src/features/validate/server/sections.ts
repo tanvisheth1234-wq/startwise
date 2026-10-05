@@ -25,3 +25,16 @@ export async function saveSection(planId: string, kind: string, lang: Lang, cont
       set: { content, editedByUser, updatedAt: new Date(), updatedBy: userId },
     });
 }
+
+
+/**
+ * A section in the language she is using now, or else the copy she made in another language
+ * (so switching language never hides her plan or makes her start again). Returns where it lives.
+ */
+export async function getSectionAnyLang<T>(planId: string, kind: string, preferred: Lang): Promise<{ section: Section<T>; lang: Lang } | null> {
+  for (const lang of [preferred, ...(["en", "hi", "mr"] as const).filter((l) => l !== preferred)]) {
+    const section = await getSection<T>(planId, kind, lang);
+    if (section) return { section, lang };
+  }
+  return null;
+}
