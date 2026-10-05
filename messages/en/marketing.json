@@ -1,0 +1,95 @@
+{
+  "title": "Grow your business",
+  "subtitle": "Your marketing buddy plans what to post, when, and with what words.",
+  "emptyTitle": "Let's plan your week of posts",
+  "emptyBody": "I'll write captions for WhatsApp status and Instagram, pick good times, and suggest local tie-ups.",
+  "captionLang": "Captions in",
+  "langs": {
+    "english": "English",
+    "hinglish": "Hinglish",
+    "hindi": "हिन्दी",
+    "marathi": "मराठी"
+  },
+  "make": "Plan my week",
+  "making": "Planning your week…",
+  "remake": "Plan a fresh week",
+  "newWeek": "Want new ideas?",
+  "failed": "Couldn't plan just now. Please try again in a minute.",
+  "thisWeek": "This week's posts",
+  "postedCount": "{done}/{total} posted",
+  "postedYay": "Posted! 📣",
+  "markPosted": "Mark as posted",
+  "copy": "Copy",
+  "copied": "Copied",
+  "share": "WhatsApp",
+  "send": "Send",
+  "remind": "Remind me",
+  "days": {
+    "Mon": "Mon",
+    "Tue": "Tue",
+    "Wed": "Wed",
+    "Thu": "Thu",
+    "Fri": "Fri",
+    "Sat": "Sat",
+    "Sun": "Sun"
+  },
+  "channels": {
+    "whatsapp_status": "WhatsApp status",
+    "whatsapp_broadcast": "WhatsApp broadcast",
+    "instagram_post": "Instagram post",
+    "instagram_story": "Instagram story",
+    "instagram_reel": "Instagram reel"
+  },
+  "partnersTitle": "Partnership ideas near you",
+  "aiNote": "AI draft: edit captions to sound like you",
+  "names": {
+    "title": "Need a name?",
+    "subtitle": "Brand names and taglines that fit your business.",
+    "make": "Suggest names",
+    "more": "Show me more",
+    "tapHint": "Tap a name to put it on your price card",
+    "failed": "Couldn't suggest names just now. Please try again."
+  },
+  "card": {
+    "title": "Your WhatsApp price card",
+    "subtitle": "A pretty card for your status or catalogue. Edit the words and share.",
+    "preview": "Price card preview",
+    "defaultLine": "Homemade with love",
+    "orderLine": "Order on WhatsApp 💬",
+    "brand": "Business name (optional)",
+    "product": "Product",
+    "price": "Price",
+    "line": "Short line",
+    "download": "Download",
+    "share": "Share",
+    "themes": {
+      "sunset": "Sunset",
+      "cream": "Cream",
+      "mint": "Mint"
+    }
+  },
+  "photo": {
+    "title": "Snap your product",
+    "subtitle": "Take a photo of what you sell. I'll name it, write the caption, check the price against your costs, and make a price card with your photo.",
+    "snap": "Take or choose a photo",
+    "privacy": "Product photos only: no faces or documents. We don't store your photo.",
+    "yourPhoto": "Your product photo",
+    "looking": "Looking at your photo…",
+    "found": "Here's your product",
+    "yourPrice": "Your price",
+    "costIs": "costs you {cost}",
+    "localPrice": "Usual in Pune",
+    "suggested": "Suggested range",
+    "estimate": "estimate",
+    "copy": "Copy caption",
+    "copied": "Copied",
+    "tipsTitle": "Make the photo even better",
+    "toCard": "Put my photo on the price card",
+    "another": "Try another photo",
+    "errors": {
+      "notImage": "That file didn't work. Please choose a JPG or PNG photo.",
+      "notProduct": "I couldn't see a product there. Please photograph what you sell (no faces or documents).",
+      "ai": "Couldn't look at the photo just now. Please try again in a minute."
+    }
+  }
+}
