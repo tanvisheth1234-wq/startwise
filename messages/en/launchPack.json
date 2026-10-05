@@ -1,1 +1,53 @@
-{}
+{
+  "title": "Your Launch Pack",
+  "subtitle": "Your whole plan in one document: share it with family, a mentor or the bank.",
+  "download": "Download PDF",
+  "downloadHint": "Opens a print page. Choose \"Save as PDF\".",
+  "cover": {
+    "kicker": "Launch Pack",
+    "made": "Prepared on {date}"
+  },
+  "sections": {
+    "profile": "Your business",
+    "feasibility": "Is the idea tested?",
+    "licences": "Papers and licences",
+    "money": "Money plan (estimates)",
+    "funding": "Money help you may get",
+    "roadmap": "Your roadmap and task sheet",
+    "starter": "Business plan starter",
+    "sources": "Sources"
+  },
+  "test": {
+    "go": "Tested: GO. {orders} orders and {enquiries} enquiries in the 7-day test.",
+    "running": "Test running: {orders} orders and {enquiries} enquiries so far.",
+    "notStarted": "The 7-day test has not started yet."
+  },
+  "risks": "Main risks to watch",
+  "day": "Day {n}",
+  "papers": "Papers",
+  "verified": "Verified on {date}",
+  "checkLocally": "Confirm on the official site",
+  "money": {
+    "startup": "To start",
+    "monthly": "Every month",
+    "breakEven": "Break-even (items/month)",
+    "line": "Price {price} · cost per item {cost} · you keep {margin} per item.",
+    "kind": {
+      "one_time": "one-time",
+      "monthly": "monthly",
+      "per_unit": "per item"
+    },
+    "estimate": "All numbers are estimates the founder can change."
+  },
+  "starter": {
+    "offer": "What we offer",
+    "offerText": "Fresh {product}, made {where} in {area}.",
+    "customer": "Who buys",
+    "customerDefault": "Families, offices and parties nearby",
+    "price": "Price and volume",
+    "priceText": "Around {price} per item; we cover our costs from {units} items a month.",
+    "channels": "How we sell",
+    "channelsText": "WhatsApp Business catalogue and status, Instagram, word of mouth from first customers, and local tie-ups."
+  },
+  "disclaimer": "Guidance, not legal advice. Fees, limits and eligibility can change: always confirm on the official portal. No approval of any licence, scheme or loan is guaranteed."
+}
