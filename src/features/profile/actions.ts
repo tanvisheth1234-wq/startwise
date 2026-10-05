@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "@/db/client";
 import { plans } from "@/db/schema";
+import { ensureMoneyDefaults } from "@/features/money/server/store";
 import { roadmap } from "@/features/roadmap/api";
 import { requirePlan, requireUser } from "@/lib/auth";
 import { formDataToValues, parseProfileForm, type FieldErrors } from "./lib/form";
@@ -28,7 +29,7 @@ export async function confirmProfile(planId: string, _prev: ConfirmState, formDa
       profile,
       stage: profile.stage,
       status: "confirmed",
-      title: `${profile.product} · ${profile.city}`.slice(0, 120),
+      title: profile.product.slice(0, 120),
       updatedAt: new Date(),
       updatedBy: user.id,
     })
@@ -37,6 +38,7 @@ export async function confirmProfile(planId: string, _prev: ConfirmState, formDa
   try {
     // T2 builds the tasks and checklist from the confirmed profile (idempotent: safe to call again after edits).
     await roadmap.onProfileConfirmed(plan.id);
+    await ensureMoneyDefaults(plan.id, profile, plan.language, user.id);
   } catch {
     return { failed: true, values };
   }

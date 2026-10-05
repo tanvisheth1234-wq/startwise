@@ -10,7 +10,7 @@ import type { FieldError } from "../lib/form";
 
 type Field = keyof BusinessProfile;
 
-const inputClass = "min-h-11 w-full rounded-xl border bg-white px-3 text-base";
+const inputClass = "min-h-11 w-full rounded-2xl border-2 bg-white px-3 text-base focus:border-coral/60 focus:outline-none";
 
 export function ProfileCard({ planId, profile, confirmed }: { planId: string; profile: BusinessProfile; confirmed: boolean }) {
   const t = useTranslations("profile");
@@ -20,16 +20,17 @@ export function ProfileCard({ planId, profile, confirmed }: { planId: string; pr
   const missing = new Set<string>(profile.missingFields);
   if (!profile.product) missing.add("product");
   if (!profile.city) missing.add("city");
-  if (profile.businessType === "other") missing.add("businessType");
 
   const row = (field: Field, control: ReactNode, hint?: string) => {
     const error = state.errors?.[field] as FieldError | undefined;
+    // Only the essentials are highlighted; everything else is a calm "optional".
+    const essential = field === "product" || field === "city" || field === "businessType";
     const isMissing = missing.has(field) && !error;
     return (
-      <div className={cn("space-y-1 rounded-xl p-2", isMissing && "bg-gold-light/25 ring-1 ring-gold/50")}>
+      <div className={cn("space-y-1 rounded-2xl p-2", isMissing && essential && "bg-sun-light/70 ring-1 ring-sun")}>
         <label htmlFor={field} className="flex items-center justify-between gap-2 text-sm font-semibold text-forest">
           <span>{t(`fields.${field}`)}</span>
-          {isMissing && <span className="text-xs font-semibold text-[#6e5328]">{t("addThis")}</span>}
+          {isMissing && !essential && <span className="text-xs font-medium text-muted">{t("addThis")}</span>}
         </label>
         {control}
         {hint && !error && <p className="text-xs text-muted">{hint}</p>}
@@ -56,9 +57,9 @@ export function ProfileCard({ planId, profile, confirmed }: { planId: string; pr
       {options.map((o) => (
         <label
           key={o.value}
-          className="flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-line bg-white px-3 text-sm font-medium has-[:checked]:border-teal has-[:checked]:bg-mint has-[:checked]:text-forest"
+          className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border-2 border-line bg-white px-4 text-sm font-semibold has-[:checked]:border-coral has-[:checked]:bg-mint has-[:checked]:text-coral-600"
         >
-          <input type="radio" name={field} value={o.value} defaultChecked={current === o.value} className="accent-teal" />
+          <input type="radio" name={field} value={o.value} defaultChecked={current === o.value} className="accent-coral" />
           {o.label}
         </label>
       ))}
@@ -73,11 +74,12 @@ export function ProfileCard({ planId, profile, confirmed }: { planId: string; pr
           { value: "existing", label: t("stage.existing") },
         ], v("stage", profile.stage)))}
         {row("businessType", (
-          <select {...aria("businessType")} defaultValue={v("businessType", profile.businessType === "other" ? "" : profile.businessType)}>
+          <select {...aria("businessType")} defaultValue={v("businessType", profile.businessType)}>
             <option value="" disabled>{t("choose")}</option>
             <option value="home_food">{t("types.home_food")}</option>
             <option value="tailoring_boutique">{t("types.tailoring_boutique")}</option>
             <option value="online_reselling">{t("types.online_reselling")}</option>
+            <option value="other">{t("types.other")}</option>
           </select>
         ))}
         {row("product", <input {...aria("product")} defaultValue={v("product", profile.product)} maxLength={120} />)}

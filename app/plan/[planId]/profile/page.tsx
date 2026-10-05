@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { MessageCircle } from "lucide-react";
 import { mergeProfile } from "@/lib/ai/profile";
 import { requirePlan } from "@/lib/auth";
+import { BusinessReveal } from "@/features/profile/components/BusinessReveal";
 import { ProfileCard } from "@/features/profile/components/ProfileCard";
 
 export default async function ProfilePage({ params }: { params: Promise<{ planId: string }> }) {
@@ -11,6 +12,9 @@ export default async function ProfilePage({ params }: { params: Promise<{ planId
   const t = await getTranslations("profile");
   const profile = plan.profile ?? mergeProfile(undefined, {}, plan.language);
   const confirmed = plan.status === "confirmed";
+
+  // New plan: the friendly "here's your business" reveal. Later edits: the full card.
+  if (!confirmed) return <BusinessReveal planId={plan.id} profile={profile} />;
 
   return (
     <div className="space-y-4">

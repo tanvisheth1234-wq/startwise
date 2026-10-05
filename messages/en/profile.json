@@ -3,7 +3,7 @@
   "subtitle": "Check each detail. Tap any value to change it. Highlighted ones are still missing.",
   "subtitleEdit": "Change any detail and save. Your plan updates to match.",
   "youSaid": "You said:",
-  "addThis": "Please add",
+  "addThis": "Optional",
   "choose": "Choose one",
   "yes": "Yes",
   "no": "No",
@@ -37,9 +37,10 @@
     "shop": "From a shop"
   },
   "types": {
-    "home_food": "Home food",
+    "home_food": "Food business",
     "tailoring_boutique": "Tailoring / boutique",
-    "online_reselling": "Online reselling"
+    "online_reselling": "Online reselling",
+    "other": "Something else"
   },
   "errors": {
     "required": "Please fill this in.",
@@ -48,5 +49,27 @@
     "hoursRange": "Please enter between 0 and 24 hours.",
     "tooLong": "This is too long.",
     "supportedType": "Please choose the closest type."
+  },
+  "reveal": {
+    "eyebrow": "Here's your business",
+    "worksFrom": "Works from",
+    "where": "Where",
+    "forWhom": "Who will buy",
+    "budget": "Starting budget",
+    "upTo": "About {amount}",
+    "hours": "Time you can give",
+    "hoursValue": "{count, plural, one {{count} hour a day} other {{count} hours a day}}",
+    "notSure": "Not sure yet: that's okay",
+    "defaultCustomer": {
+      "home_food": "Families, offices and parties nearby",
+      "tailoring_boutique": "Women in your area who want a perfect fit",
+      "online_reselling": "Shoppers on WhatsApp and Instagram",
+      "other": "People near you"
+    },
+    "firstStepLabel": "Your first step",
+    "firstStep": "Test your idea with 10 people this week",
+    "firstStepWhy": "Before spending big, we'll check that people actually want to buy. I'll give you ready-to-send messages.",
+    "building": "Building your plan…",
+    "change": "Change something"
   }
 }
