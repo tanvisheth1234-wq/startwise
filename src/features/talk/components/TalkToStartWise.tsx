@@ -5,7 +5,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowRight, AudioLines, Check, Loader2, Mic, Square, X } from "lucide-react";
+import { ArrowRight, AudioLines, Check, Copy, Loader2, MessageCircle, Mic, Square, X } from "lucide-react";
 import { cn } from "@/components/ui";
 import type { Lang } from "@/contracts/profile";
 import { useSpeech } from "@/features/intake/hooks/useSpeech";
@@ -75,16 +75,20 @@ export function TalkToStartWise({ planId, item }: { planId: string; item: string
   };
 
   const tc = useTranslations("common");
+  const [copied, setCopied] = useState<number | null>(null);
   const suggestions = [t("s1"), t("s2"), t("s3"), t("s4", { item: item ?? tc("items") })];
   // Opened from the round Talk button in the middle of the bottom bar (no floating button over content).
   useEffect(() => {
-    const onOpen = () => {
+    // An idea card can open Talk with a question already asked: new CustomEvent("sw:talk", { detail: { ask } }).
+    const onOpen = (e: Event) => {
       setOpen(true);
       setThread((th) => (th.length === 0 ? [{ role: "assistant", text: t("hello") }] : th));
+      const ask = (e as CustomEvent<{ ask?: string } | undefined>).detail?.ask;
+      if (ask) void send(ask);
     };
     window.addEventListener("sw:talk", onOpen);
     return () => window.removeEventListener("sw:talk", onOpen);
-  }, [t]);
+  }, [t, send]);
 
   return (
     <>
@@ -113,6 +117,19 @@ export function TalkToStartWise({ planId, item }: { planId: string; item: string
               <div key={i} className={cn("flex animate-rise", m.role === "user" ? "justify-end" : "justify-start")}>
                 <div className={cn("max-w-[85%] space-y-2 rounded-3xl px-4 py-3", m.role === "user" ? "rounded-br-md bg-white/15" : "rounded-bl-md bg-white text-ink")}>
                   <p className={cn(m.role === "assistant" && "font-display text-lg leading-snug")}>{m.text}</p>
+                  {/* Anything StartWise writes can go straight to WhatsApp (thank-you notes, offers…). */}
+                  {m.role === "assistant" && i > 0 && (
+                    <div className="flex gap-3 text-xs font-semibold text-muted">
+                      <button type="button" onClick={() => void navigator.clipboard?.writeText(m.text).then(() => setCopied(i))} className="flex min-h-8 items-center gap-1 hover:text-forest">
+                        {copied === i ? <Check className="size-3.5" aria-hidden /> : <Copy className="size-3.5" aria-hidden />}
+                        {copied === i ? tc("actions.copied") : tc("actions.copy")}
+                      </button>
+                      <a href={`https://wa.me/?text=${encodeURIComponent(m.text)}`} target="_blank" rel="noopener noreferrer" className="flex min-h-8 items-center gap-1 hover:text-forest">
+                        <MessageCircle className="size-3.5" aria-hidden />
+                        WhatsApp
+                      </a>
+                    </div>
+                  )}
                   {m.did?.includes("task") && <p className="flex items-center gap-1 text-xs font-bold text-sage"><Check className="size-3.5" aria-hidden />{t("addedTask")}</p>}
                   {m.did?.includes("diary") && <p className="flex items-center gap-1 text-xs font-bold text-sage"><Check className="size-3.5" aria-hidden />{t("logged")}</p>}
                   {m.open && (
