@@ -1,7 +1,7 @@
 {
   "login": {
-    "title": "Welcome to StartWise",
-    "subtitle": "Log in to save your plan and come back to it any time.",
+    "title": "Log in",
+    "subtitle": "Welcome back! Log in to open your plan.",
     "signInTab": "Log in",
     "signUpTab": "Create account",
     "email": "Email",
@@ -19,6 +19,39 @@
       "weak": "Please choose a stronger password (at least 8 characters).",
       "unknown": "Something went wrong. Please try again.",
       "link": "That link did not work or has expired. Please log in again."
-    }
+    },
+    "saveTitle": "Save your plan",
+    "saveSubtitle": "Your plan is ready to be made! Log in or sign up so it's saved safely and you can open it on any phone.",
+    "google": "Continue with Google",
+    "googleFailed": "Google sign-in isn't ready yet. Please use email for now.",
+    "orEmail": "or use email",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "signUpLink": "Sign up",
+    "signInLink": "Log in"
+  },
+  "page": {
+    "title": "Your account",
+    "guest": "You're using StartWise as a guest. Your plan is saved on this phone only.",
+    "signedInAs": "Signed in as {email}",
+    "saveCta": "Save my plan with an account",
+    "plans": "Your plans",
+    "noPlans": "No plans yet.",
+    "draft": "Draft",
+    "active": "Active",
+    "deletePlan": "Delete {title}",
+    "confirmDeletePlan": "Delete this plan and everything in it?",
+    "language": "Language",
+    "privacyTitle": "Your privacy",
+    "privacy1": "We only keep what your plan needs: your idea, numbers, notes and tasks.",
+    "privacy2": "We never ask for Aadhaar, PAN, bank details or photos, and never send them to the AI.",
+    "privacy3": "You can delete everything, any time.",
+    "deleteAll": "Delete all my data",
+    "deleteAllTitle": "Delete everything?",
+    "deleteAllBody": "This removes all your plans, notes, tasks and your account. It can't be undone.",
+    "typeDelete": "Type DELETE to confirm",
+    "typeDeleteError": "Please type DELETE exactly.",
+    "deleteForever": "Delete forever",
+    "close": "Close"
   }
 }
