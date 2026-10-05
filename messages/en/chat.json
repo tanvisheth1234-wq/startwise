@@ -25,5 +25,7 @@
   "shapeIdea": "Your idea",
   "shapeWaiting": "Listening…",
   "shapeReady": "I have everything I need. Your plan is ready to make.",
-  "shapeCount": "{done} of {total} things I need"
+  "shapeCount": "{done} of {total} things I need",
+  "errorRetry": "Sorry, that took too long on my side.",
+  "tryAgain": "Try again"
 }

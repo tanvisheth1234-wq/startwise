@@ -25,5 +25,7 @@
   "shapeIdea": "तुमची कल्पना",
   "shapeWaiting": "ऐकतेय…",
   "shapeReady": "मला सगळं मिळालं. आता तुमचा प्लॅन तयार करता येईल.",
-  "shapeCount": "आवश्यक {total} पैकी {done} गोष्टी"
+  "shapeCount": "आवश्यक {total} पैकी {done} गोष्टी",
+  "errorRetry": "माफ करा, माझ्याकडून उशीर झाला.",
+  "tryAgain": "पुन्हा प्रयत्न करा"
 }

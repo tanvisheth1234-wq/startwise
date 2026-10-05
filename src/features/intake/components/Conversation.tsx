@@ -41,13 +41,16 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
   const speaker = useSpeaker(lang);
   const endRef = useRef<HTMLDivElement>(null);
   const listening = speech.status === "listening" || speech.status === "recording";
+  const last = messages[messages.length - 1];
+  const lastSaid = (step === "idea" || step === "chat") && last?.role === "user" ? last.text : "";
 
   const bot = useCallback(async (reply: string, speakIt: boolean) => {
     setMessages((m) => [...m, { role: "bot", text: reply }]);
     if (speakIt) await speaker.speak(reply);
   }, [speaker]);
 
-  const send = useCallback(async (raw: string) => {
+  // again: resend her last message after a failed reply, without adding it to the chat twice.
+  const send = useCallback(async (raw: string, again = false) => {
     const said = raw.trim();
     if (!said || busy) return;
     setText("");
@@ -63,8 +66,8 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
     }
     if (step === "voice") return; // answered with the two buttons
     if (step === "idea" || step === "chat") {
-      const intro = messages;
-      setMessages((m) => [...m, { role: "user", text: said }]);
+      const intro = again ? messages.slice(0, -1) : messages;
+      if (!again) setMessages((m) => [...m, { role: "user", text: said }]);
       setBusy(true);
       const r = planId ? await continueConversation(planId, said) : await startConversation(name, voice, intro, said);
       setBusy(false);
@@ -167,7 +170,16 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
             </p>
           </motion.li>
         )}
-        {error && <li className="rounded-2xl bg-sun-light p-3 text-sm">{t("error")}</li>}
+        {error && (
+          <li className="flex flex-wrap items-center justify-between gap-2 rounded-2xl bg-sun-light p-3 text-sm">
+            <span>{lastSaid ? t("errorRetry") : t("error")}</span>
+            {lastSaid && (
+              <button type="button" onClick={() => void send(lastSaid, true)} className="min-h-10 rounded-full bg-coral px-4 font-semibold text-white">
+                {t("tryAgain")}
+              </button>
+            )}
+          </li>
+        )}
         {notesSaved > 0 && (
           <li className="flex justify-center">
             <span className="flex items-center gap-1.5 rounded-full bg-sun-light px-3 py-1 text-xs font-semibold text-[#8a5a00]">

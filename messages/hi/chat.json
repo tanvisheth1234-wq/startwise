@@ -25,5 +25,7 @@
   "shapeIdea": "आपका आइडिया",
   "shapeWaiting": "सुन रही हूँ…",
   "shapeReady": "मुझे सब कुछ मिल गया। अब आपका प्लान बन सकता है।",
-  "shapeCount": "ज़रूरी {total} में से {done} बातें"
+  "shapeCount": "ज़रूरी {total} में से {done} बातें",
+  "errorRetry": "माफ़ कीजिए, मेरी तरफ़ से देर हो गई।",
+  "tryAgain": "फिर से कोशिश करें"
 }
