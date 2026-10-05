@@ -11,7 +11,8 @@ import type { Lang } from "@/contracts/profile";
 import { useSpeaker } from "@/features/talk/hooks/useSpeaker";
 import { useSpeech } from "../hooks/useSpeech";
 import { PUNE_AREAS } from "../lib/quickReplies";
-import { continueConversation, finishConversation, startConversation, type Asking, type ConversationState } from "../conversation";
+import { continueConversation, finishConversation, startConversation, type Asking, type ConversationState, type Known } from "../conversation";
+import { TakingShape } from "./TakingShape";
 import type { ChatMessage } from "../server/chat";
 
 type Step = "name" | "voice" | "idea" | "chat";
@@ -30,6 +31,7 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
   const [ready, setReady] = useState(initial?.state.ready ?? false);
   const [asking, setAsking] = useState<Asking>(initial?.state.asking ?? null);
   const [city, setCity] = useState(initial?.state.city ?? "");
+  const [known, setKnown] = useState<Known | null>(initial?.state.known ?? null);
   const [notesSaved, setNotesSaved] = useState(0);
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
@@ -79,6 +81,7 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
       setReady(r.state.ready);
       setAsking(r.state.asking);
       setCity(r.state.city);
+      setKnown(r.state.known);
       if (r.state.savedNotes) setNotesSaved((n) => n + r.state.savedNotes);
       await bot(r.state.messages[r.state.messages.length - 1].text, voice === "speak");
     }
@@ -119,7 +122,8 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
     : [];
 
   return (
-    <div className="flex min-h-[calc(100dvh-4.5rem)] flex-col">
+    <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-10">
+    <div className="flex min-h-[calc(100dvh-4.5rem)] min-w-0 flex-col">
       <div className="flex items-center justify-between py-2">
         <p className="font-display text-lg font-bold text-forest">{name ? t("titleNamed", { name }) : t("title")}</p>
         {step !== "name" && step !== "voice" && (
@@ -188,7 +192,7 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
       )}
 
       {ready && step === "chat" && !busy && (
-        <motion.div initial={{ opacity: 0, scale: 0.9, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 240, damping: 18 }} className="space-y-2 pb-3">
+        <motion.div initial={{ opacity: 0, scale: 0.9, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 240, damping: 18 }} className="space-y-2 pb-3 lg:hidden">
           <motion.button
             type="button"
             onClick={makePlan}
@@ -251,6 +255,10 @@ export function Conversation({ initial, knownName }: { initial: { state: Convers
         </div>
       )}
       <div ref={endRef} />
+    </div>
+    <div className="hidden lg:block">
+      <TakingShape known={known} ready={ready && step === "chat"} building={building} onMake={makePlan} makeLabel={t("makePlan")} />
+    </div>
     </div>
   );
 }

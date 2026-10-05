@@ -113,7 +113,7 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
               )}
             </g>
 
-            <motion.text
+            {b.label && <motion.text
               x={end.x + side * 18}
               y={end.y - 20}
               textAnchor="middle"
@@ -129,7 +129,7 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
               transition={{ duration: 0.4, delay: branchDelay(i) + 0.5 }}
             >
               {!intro && b.state === "done" ? `✓ ${b.label}` : b.label}
-            </motion.text>
+            </motion.text>}
           </g>
         );
       })}
@@ -162,7 +162,7 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
             transition={bloom.state === "current" ? { duration: 1.8, repeat: Infinity } : { delay: bloomDelay }}
           />
         )}
-        <motion.text
+        {bloom.label && <motion.text
           x={X}
           y={TOP - 30}
           textAnchor="middle"
@@ -178,7 +178,7 @@ export function GrowingPlant({ branches, bloom, mode, labelSize, className }: { 
           transition={{ delay: bloomDelay + 0.3 }}
         >
           {bloom.label}
-        </motion.text>
+        </motion.text>}
       </g>
 
       {/* pot */}

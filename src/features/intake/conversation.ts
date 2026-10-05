@@ -18,6 +18,7 @@ import { ExtractedProfile } from "@/lib/ai/schemas";
 import { getSection, saveSection } from "@/features/validate/server/sections";
 import type { Notebook } from "@/features/notebook/actions";
 import { loadChat, saveChat, type ChatMessage } from "./server/chat";
+import { asYours } from "./lib/pointOfView";
 
 export type Asking = "premises" | "locality" | "budgetInr" | null;
 export type ConversationState = {
@@ -27,7 +28,19 @@ export type ConversationState = {
   asking: Asking;
   city: string;
   savedNotes: number;
+  /** What we've understood so far, for the "taking shape" card beside the chat. */
+  known: Known;
 };
+export type Known = Pick<BusinessProfile, "product" | "businessType" | "city" | "locality" | "premises" | "targetCustomer" | "budgetInr">;
+const knownOf = (p: BusinessProfile): Known => ({
+  product: p.product,
+  businessType: p.businessType,
+  city: p.city,
+  locality: p.locality,
+  premises: p.premises,
+  targetCustomer: p.targetCustomer,
+  budgetInr: p.budgetInr,
+});
 type Result = { ok: true; state: ConversationState } | { ok: false; error: "empty" | "ai" };
 
 /** What must be known before offering to make the plan, in the order we'd ask. */
@@ -105,6 +118,8 @@ KNOWN SO FAR:\n${json({ product: previous.product, businessType: previous.busine
 
   // Once we know WHAT her business is, later details (dishes, designs, prices) must not rename it.
   const extracted = previous.product ? { ...turn.extracted, product: null, businessType: previous.businessType === "other" ? turn.extracted.businessType : null } : turn.extracted;
+  // The card talks to her, so "my society" becomes "your society".
+  if (extracted.targetCustomer) extracted.targetCustomer = asYours(extracted.targetCustomer, lang);
   const profile = mergeProfile(previous, extracted, lang);
   const ready = missingEssentials(profile).length === 0;
   const messages: ChatMessage[] = [...chat.messages, { role: "user", text: said }, { role: "bot", text: turn.reply }];
@@ -121,7 +136,7 @@ KNOWN SO FAR:\n${json({ product: previous.product, businessType: previous.busine
   }
 
   const asking: Asking = ready || turn.asking === "none" ? null : turn.asking;
-  return { ok: true, state: { planId: plan.id, messages, ready, asking, city: profile.city, savedNotes } };
+  return { ok: true, state: { planId: plan.id, messages, ready, asking, city: profile.city, savedNotes, known: knownOf(profile) } };
 }
 
 /** First message about the idea: creates her (draft) plan and remembers her name and voice choice. */
@@ -161,7 +176,7 @@ export async function loadConversation(planId: string): Promise<{ state: Convers
   const [chat, founder] = await Promise.all([loadChat(planId, plan.language), getSection<{ name: string; voice: "speak" | "text" }>(planId, "founder", "en")]);
   const profile = plan.profile ?? mergeProfile(undefined, {}, plan.language);
   return {
-    state: { planId, messages: chat.messages, ready: missingEssentials(profile).length === 0, asking: null, city: profile.city, savedNotes: 0 },
+    state: { planId, messages: chat.messages, ready: missingEssentials(profile).length === 0, asking: null, city: profile.city, savedNotes: 0, known: knownOf(profile) },
     name: founder?.content.name ?? "",
     voice: founder?.content.voice ?? null,
   };

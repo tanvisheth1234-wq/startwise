@@ -15,7 +15,7 @@ export default async function NewPlanPage({ searchParams }: { searchParams: Prom
   }
 
   return (
-    <main className="mx-auto max-w-md px-4">
+    <main className="mx-auto max-w-md px-4 lg:max-w-6xl lg:px-8">
       <Conversation initial={initial} knownName={user.isGuest ? undefined : user.name} />
     </main>
   );

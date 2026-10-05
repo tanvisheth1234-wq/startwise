@@ -19,5 +19,11 @@
   "speaking": "Speaking",
   "silent": "Text only",
   "voiceOn": "Turn on spoken replies",
-  "voiceOff": "Turn off spoken replies"
+  "voiceOff": "Turn off spoken replies",
+  "shapeTitle": "Your business, taking shape",
+  "shapeSub": "I'm noting it down as we talk.",
+  "shapeIdea": "Your idea",
+  "shapeWaiting": "Listening…",
+  "shapeReady": "I have everything I need. Your plan is ready to make.",
+  "shapeCount": "{done} of {total} things I need"
 }
