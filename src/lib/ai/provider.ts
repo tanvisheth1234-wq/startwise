@@ -38,12 +38,19 @@ export class AiProviderError extends Error {
 const LANG_NAME: Record<Lang, string> = { en: "English", hi: "Hindi", mr: "Marathi" };
 
 async function postJson(url: string, body: unknown, headers: Record<string, string>, timeoutMs: number) {
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "content-type": "application/json", ...headers },
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(timeoutMs),
-  });
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      method: "POST",
+      headers: { "content-type": "application/json", ...headers },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(timeoutMs),
+    });
+  } catch (e) {
+    // A slow model or a dropped connection: report it like an outage so the next model is tried.
+    const timedOut = e instanceof Error && (e.name === "TimeoutError" || e.name === "AbortError");
+    throw new AiProviderError(timedOut ? "AI provider timed out" : `AI provider unreachable: ${e instanceof Error ? e.message : e}`, timedOut ? 504 : 503);
+  }
   if (!res.ok) {
     const detail = (await res.text()).slice(0, 300);
     throw new AiProviderError(`AI provider error ${res.status}: ${detail}`, res.status);
@@ -110,6 +117,8 @@ function gemini(cfg: ProviderConfig): Provider {
       } catch (e) {
         lastError = e;
         if (!(e instanceof AiProviderError && isRetryable(e.status))) throw e;
+        // A timeout is the model being slow, not the key: go straight to the next model.
+        if (e.status === 504) throw e;
       }
     }
     throw lastError;
