@@ -21,6 +21,16 @@ const ASK_WOMAN: Record<Lang, string> = {
   mr: "खात्रीसाठी सांगा की संस्थापक महिला आहेत का.",
 };
 
+
+/** Who gives the scheme, in her language (official scheme names stay as they are). */
+const PROVIDER: Record<string, Record<"en" | "hi" | "mr", string>> = {
+  "Banks, NBFCs and MFIs under MUDRA": { en: "Banks, NBFCs and MFIs under MUDRA", hi: "MUDRA के तहत बैंक, NBFC और MFI", mr: "MUDRA अंतर्गत बँका, NBFC आणि MFI" },
+  "CGTMSE through banks": { en: "CGTMSE through banks", hi: "बैंकों के ज़रिए CGTMSE", mr: "बँकांमार्फत CGTMSE" },
+  "Directorate of Industries, Maharashtra": { en: "Directorate of Industries, Maharashtra", hi: "उद्योग निदेशालय, महाराष्ट्र", mr: "उद्योग संचालनालय, महाराष्ट्र" },
+  "Government of Maharashtra": { en: "Government of Maharashtra", hi: "महाराष्ट्र सरकार", mr: "महाराष्ट्र शासन" },
+  "KVIC through banks": { en: "KVIC through banks", hi: "बैंकों के ज़रिए KVIC", mr: "बँकांमार्फत KVIC" },
+  "Scheduled commercial banks": { en: "Scheduled commercial banks", hi: "अनुसूचित वाणिज्यिक बैंक", mr: "अनुसूचित व्यापारी बँका" },
+};
 export type MatchContext = { profile: BusinessProfile; answers: FundingAnswers; investmentInr: number | null };
 
 /** Pure: one scheme against one founder. null = not shown. */
@@ -54,7 +64,7 @@ export function judgeScheme(s: SchemeRecord, ctx: MatchContext, lang: Lang): Sch
   if (s.key === "pmegp" && answers.founderIsWoman) why += WOMEN_NOTE[lang];
 
   return {
-    schemeKey: s.key, applies: maybe ? "maybe" : "yes", name: s.name, provider: s.provider, benefit: s.benefit[lang],
+    schemeKey: s.key, applies: maybe ? "maybe" : "yes", name: s.name, provider: PROVIDER[s.provider]?.[lang] ?? s.provider, benefit: s.benefit[lang],
     whyMatched: why, documents: s.documents.map((d) => d[lang]), womenFocused: s.womenFocused,
     officialUrl: s.officialUrl, source: sourceRef(s.sourceKey),
   };
