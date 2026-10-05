@@ -1,1 +1,19 @@
-{}
+{
+  "title": "Who else sells nearby?",
+  "subtitle": "A quick look at similar shops around you and the usual prices.",
+  "loading": "Looking at the map around you…",
+  "you": "You are here",
+  "count": "{count, plural, =0 {No similar shops found near {area}} one {{count} similar shop near {area}} other {{count} similar shops near {area}}}",
+  "busy": "Lots of choice nearby, so stand out with something special: what only you offer.",
+  "some": "A few others nearby: there's demand, and room for a fresh, home-made option.",
+  "few": "Very few visible shops: a good gap, if people around you want it. Your 7-day test will tell.",
+  "note": "Visible businesses on OpenStreetMap only. Home sellers like you are often not on the map.",
+  "errors": {
+    "noArea": "Add your city and area on your profile to see the map.",
+    "failed": "Couldn't load the map just now. Please try again later.",
+    "noKind": "I couldn't match your business to a type of shop on the map yet. Your 7-day test is the best way to see local demand."
+  },
+  "pricesTitle": "Usual prices in Pune",
+  "estimate": "Estimate",
+  "pricesNote": "Rough ranges from typical local listings. Check 3 sellers near you before fixing your price."
+}
